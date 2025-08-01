@@ -1,32 +1,35 @@
 # pod_info.py
 
 import os
-import re
-import json
 
 class PodInfo:
     def __init__(self, name, status, namespace_path):
         self.name = name
         self.status = status
         self.namespace_path = namespace_path
-        self.details = []
+        self.errors = {}
         self.logs = []
 
-    def add_detail(self, detail):
-        self.details.append(detail)
+    def add_error(self, filename, error):
+        if filename not in self.errors:
+            self.errors[filename] = []
+        self.errors[filename].append(error)
+        
     
     def print_info(self):
         print("-" * 20)
         print(f"Pod Name: {self.name}")
         print(f"Status: {self.status}")
         print("Details:")
-        if self.details:
-            for detail in self.details:
-                detail.print_errors()
+        if self.errors:
+            for filename, errors in self.errors.items():
+                print(f"\nErrors in {filename}:")
+                for error in errors:
+                    print(f"  - {error}")
         else:
             print("No additional details available.")
         
-        print("Logs:")
+        print("\nLogs:")
         self.get_log_files()
 
         if self.logs:
@@ -47,19 +50,3 @@ class PodInfo:
         for log_file in self.logs:
             print(f"- {log_file}")
     
-
-class PodInfoDetail:
-    def __init__(self, source_file_path):
-        self.source_file_path = source_file_path
-        self.errors = []
-    
-    def add_error(self, error):
-        self.errors.append(error)
-    
-    def print_errors(self):
-        if self.errors:
-            print(f"Errors in {self.source_file_path}:")
-            for error in self.errors:
-                print(f"- {error}")
-        else:
-            print(f"No errors found in {self.source_file_path}.")

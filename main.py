@@ -6,7 +6,7 @@ sys.dont_write_bytecode = True
 import os
 import json
 
-from pod_info import PodInfo, PodInfoDetail
+from pod_info import PodInfo
 
 K8S_ERROR = ["Error"]
 K8S_RUNNING_NO_PODS = ["0/", "Running"]
@@ -15,9 +15,14 @@ K8S_CRASHED = ["CrashLoopBackOff"]
 
 CONF = "conf.json"
 
+YES_LIST = ['yes', 'y', 'Y', 'Yes', '', 'YES']
+
+EVENT_ERROR = ["Warning"]
+
 # Function to check if a line contains all specified error strings listed in the constants
 def contains_all_errors(line, error_strings):
     return all(error in line for error in error_strings)
+
 
 def main():
     # Check if conf.json exists using the relataive path to where this script is located
@@ -36,8 +41,8 @@ def main():
     # Show the saved path if it exists and ask if the user wants to use it
     if saved_k8s_file_path:
         print(f"Saved path to get-k8s-info output: {saved_k8s_file_path}")
-        use_saved_path = input("Do you want to use this saved path? (yes/no): ").strip().lower()
-        if use_saved_path != 'yes':
+        use_saved_path = input("Do you want to use this saved path? (yes - default/no): ").strip().lower()
+        if use_saved_path not in YES_LIST:
             saved_k8s_file_path = ""
             k8s_file_path = input(f"Please enter the path to the get-k8s-info output file: ")
             conf_data['saved_k8s_file_path'] = k8s_file_path
@@ -111,11 +116,31 @@ def main():
             pod_status = f"{line.split()[1]} {line.split()[2]}"
             pod_info = PodInfo(pod_name, pod_status, namespace_path)
 
-            pod_detail = PodInfoDetail(namespace_path)
-            pod_detail.add_error(line.strip())
-            pod_info.add_detail(pod_detail)
-
+            pod_info.add_error(get_pods_output, line.strip())
             pods_with_errors.append(pod_info)
+
+    
+    # Read the kubectl describe pods command output
+    describe_pods_output = os.path.join(namespace_path, 'describe', 'pods.txt')
+    if not os.path.exists(describe_pods_output):
+        print(f"The file {describe_pods_output} does not exist.")
+    else:
+        with open(describe_pods_output, 'r') as describe_pods_output_file:
+            describe_pods_output_lines = describe_pods_output_file.readlines()
+        # Check each line in the describe pods content and check if it contains the pod name in pods_with_errors
+        pods_with_errors_name_list = [pod.name for pod in pods_with_errors]
+
+        for line in describe_pods_output_lines:
+            if line.startswith('Name:'):
+                current_pod_name = line.split()[1]
+
+            if current_pod_name in pods_with_errors_name_list and line.strip().startswith(tuple(EVENT_ERROR)):
+                for pod in pods_with_errors:
+                    if pod.name == current_pod_name:
+                        pod.add_error(describe_pods_output, line.strip())
+                        break
+                
+
 
     # Print the pods with errors
     if pods_with_errors:
