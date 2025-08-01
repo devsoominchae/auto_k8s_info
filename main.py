@@ -19,6 +19,41 @@ CONF = "conf.json"
 def contains_all_errors(line, error_strings):
     return all(error in line for error in error_strings)
 
+
+def log_file_collection(namespace_path, pods_with_errors):
+    
+    logs_dir = os.path.join(namespace_path, "logs")
+ 
+    if not os.path.exists(logs_dir):
+        print(f"No logs folder found at {logs_dir}")
+        return   
+    
+    for pod in pods_with_errors:
+        print(f"\n=== Logs for pod: {pod.name} ===")
+        found_logs = False
+        
+        for file_name in os.listdir(logs_dir):
+        #find all the log files, as there could be several under 1 pod
+            if file_name.startswith(pod.name):
+                found_logs = True
+                #combine with prior path to get exact path of each log file
+                log_file_path = os.path.join(logs_dir, file_name)
+                #Just for testing, will remove this printing below
+                #TODO creation of actual function to find error msgs.
+                print(f"\n--- Reading: {file_name} ---")
+                
+                with open(log_file_path, "r", encoding="utf-8", errors="ignore") as log_file:
+                    for i, line in enumerate(log_file):
+                        if i < 5:
+                            print(line.strip())
+                        else:
+                            print("")
+                            break
+
+    if not found_logs:
+        print(f"No log files found for pod {pod.name}")                        
+
+
 def main():
     # Check if conf.json exists using the relataive path to where this script is located
     if not os.path.exists(CONF):
@@ -123,6 +158,7 @@ def main():
         for pod in pods_with_errors:
             pod.print_info()
 
+        log_file_collection(namespace_path, pods_with_errors)
     else:
         print("No pods with errors found.")
 
@@ -130,3 +166,4 @@ def main():
 # Test the main function
 if __name__ == "__main__":
     main()
+    
