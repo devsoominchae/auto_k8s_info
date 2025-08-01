@@ -1,5 +1,8 @@
 # main.py
 
+import sys
+sys.dont_write_bytecode = True
+
 import os
 import json
 
@@ -30,17 +33,30 @@ def main():
             conf_data = json.load(conf_file)
             saved_k8s_file_path = conf_data.get('saved_k8s_file_path', None)
 
-    # Get user input to specify the path to the get-k8s-info output
-    k8s_file_path = input(f"Please enter the path to the get-k8s-info output file: {saved_k8s_file_path}")
+    # Show the saved path if it exists and ask if the user wants to use it
+    if saved_k8s_file_path:
+        print(f"Saved path to get-k8s-info output: {saved_k8s_file_path}")
+        use_saved_path = input("Do you want to use this saved path? (yes/no): ").strip().lower()
+        if use_saved_path != 'yes':
+            saved_k8s_file_path = ""
+            k8s_file_path = input(f"Please enter the path to the get-k8s-info output file: ")
+            conf_data['saved_k8s_file_path'] = k8s_file_path
+        
+            # Replace the saved_k8s_file_path in conf.json
+            with open(CONF, 'w', encoding='utf-8') as f:
+                json.dump(conf_data, f, indent=2)
+        else:
+            k8s_file_path = saved_k8s_file_path
+            print(f"Using saved path: {k8s_file_path}")
 
-    # If the user did not provide a path, use the saved path from conf.json
-    if not k8s_file_path:
-        k8s_file_path = saved_k8s_file_path
+    else:
+        # Get user input to specify the path to the get-k8s-info output
+        k8s_file_path = input(f"Please enter the path to the get-k8s-info output file: ")
+        conf_data['saved_k8s_file_path'] = k8s_file_path
 
-    # If the user provided a path, save it to conf.json
-    if k8s_file_path:
-        with open(CONF, 'w') as conf_file:
-            json.dump({'saved_k8s_file_path': k8s_file_path}, conf_file)
+        # Replace the saved_k8s_file_path in conf.json
+        with open(CONF, 'w', encoding='utf-8') as f:
+            json.dump(conf_data, f, indent=2)
 
     # List the folders under kubernetes folder and let user select one
     print("Available folders under kubernetes:")
@@ -73,27 +89,29 @@ def main():
     
     print(f"You selected: {selected_folder}\n")
 
+    namespace_path = os.path.join(kubernetes_path, selected_folder)
+
     # Read the content of kubectl get pods command output
-    pods_file_path = os.path.join(kubernetes_path, selected_folder, 'get','pods.txt')
-    if not os.path.exists(pods_file_path):
-        print(f"The file {pods_file_path} does not exist.")
+    get_pods_output = os.path.join(namespace_path, 'get','pods.txt')
+    if not os.path.exists(get_pods_output):
+        print(f"The file {get_pods_output} does not exist.")
         return
     
-    with open(pods_file_path, 'r') as pods_file:
-        pods_content_lines = pods_file.readlines()
+    with open(get_pods_output, 'r') as get_pods_output_file:
+        get_pods_output_lines = get_pods_output_file.readlines()
     
     # Check each line in the pods content and save the pod names if it contains all strings in K8S_ERROR, K8S_RUNNING_NO_PODS, K8S_INIT_HANG, K8S_CRASHED
     pods_with_errors = []
-    for line in pods_content_lines:
+    for line in get_pods_output_lines:
         if (contains_all_errors(line, K8S_ERROR) or
             contains_all_errors(line, K8S_RUNNING_NO_PODS) or
             contains_all_errors(line, K8S_INIT_HANG) or
             contains_all_errors(line, K8S_CRASHED)):
             pod_name = line.split()[0]
             pod_status = f"{line.split()[1]} {line.split()[2]}"
-            pod_info = PodInfo(pod_name, pod_status, os.path.join(kubernetes_path, selected_folder))
+            pod_info = PodInfo(pod_name, pod_status, namespace_path)
 
-            pod_detail = PodInfoDetail(pods_file_path)
+            pod_detail = PodInfoDetail(namespace_path)
             pod_detail.add_error(line.strip())
             pod_info.add_detail(pod_detail)
 
@@ -104,14 +122,9 @@ def main():
         print("Pods with errors:")
         for pod in pods_with_errors:
             pod.print_info()
-            # List the files that start with the pod name in the selected folder
-            pod_logs_files_path = os.path.join(kubernetes_path, selected_folder, 'logs')
 
     else:
         print("No pods with errors found.")
-
-    
-    
 
 
 # Test the main function

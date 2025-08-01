@@ -1,11 +1,14 @@
 # pod_info.py
+
 import os
+import re
+import json
 
 class PodInfo:
-    def __init__(self, name, status, pods_file_path):
+    def __init__(self, name, status, namespace_path):
         self.name = name
         self.status = status
-        self.pods_file_path = pods_file_path
+        self.namespace_path = namespace_path
         self.details = []
         self.logs = []
 
@@ -33,7 +36,7 @@ class PodInfo:
         print("-" * 20)
     
     def get_log_files(self):
-        self.pod_logs_files_path = os.path.join(self.pods_file_path, 'logs')
+        self.pod_logs_files_path = os.path.join(self.namespace_path, 'logs')
         if os.path.exists(self.pod_logs_files_path):
             self.logs = [f for f in os.listdir(self.pod_logs_files_path) if f.startswith(self.name)]
         else:
