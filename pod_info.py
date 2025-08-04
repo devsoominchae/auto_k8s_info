@@ -9,13 +9,20 @@ class PodInfo:
         self.namespace_path = namespace_path
         self.errors = {}
         self.logs = []
+        self.logged_categories = set() 
 
     def add_error(self, filename, error):
         if filename not in self.errors:
             self.errors[filename] = []
         self.errors[filename].append(error)
         
-    
+    def add_error_once(self, filename, category, line):
+            #Removes duplicate when outputting to json file
+            if category in self.logged_categories:
+                return
+            self.add_error(filename, f"[{category}] {line.strip()}")
+            self.logged_categories.add(category)
+            
     def print_info(self):
         print("-" * 20)
         print(f"Pod Name: {self.name}")

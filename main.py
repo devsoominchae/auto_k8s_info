@@ -1,17 +1,13 @@
 # main.py
 
-<<<<<<< HEAD
 
 import sys
 sys.dont_write_bytecode = True
 
-=======
->>>>>>> f2154376c812fef52f8aba72f01a9ad371ffa3b4
 import os
 import json
 
 from pod_info import PodInfo
-import re
 
 
 with open('conf.json', 'r', encoding='utf-8') as f:
@@ -35,7 +31,6 @@ def line_matches_error_patterns(line, error_patterns, mode='any'):
 def contains_all_errors(line, error_strings):
     return all(error in line for error in error_strings)
 
-
 def log_file_collection(namespace_path, pods_with_errors):
     logs_dir = os.path.join(namespace_path, "logs")
 
@@ -43,87 +38,29 @@ def log_file_collection(namespace_path, pods_with_errors):
         print(f"No logs folder found at {logs_dir}")
         return
 
-<<<<<<< HEAD
-    #Initial Dictionary - will populate constantly
-    LOG_ERROR_PATTERNS = {
-        "CAS Control Issues": [
-            "no ready CAS servers",
-            "cas-control is not ready"
-        ],
-        "Start Sequencer Warnings": [
-            "SKIP_INIT_BLOCK",
-            "bypassing sequencing",
-            "exit code 0"
-        ],
-        "Readiness Check Failures": [
-            "check \"sas-endpoints-ready\" failed",
-            "no available addresses",
-            "endpoints have no available addresses",
-            "0 available addresses",
-            "failed readiness check"
-        ],
-        "CAS Services Unavailable": [
-            "sas-cas-access-management",
-            "sas-cas-formats",
-            "sas-cas-management",
-            "sas-cas-proxy",
-            "sas-cas-row-sets",
-            "sas-cas-server-default",
-            "sas-microanalytic-score"
-        ],
-        "Telemetry Warnings": [
-            "OpenTelemetry support not installed",
-            "noop Open Telemetry MeterProvider",
-            "no metrics will be collected"
-        ],
-        "Stalled Init Warnings": [
-            "Waiting for",
-            "POD(s) to Complete"
-        ],
-        "Authentication Failures": [
-            "Unauthorized",
-            "authentication failed",
-            "access denied",
-            "invalid credentials",
-            "token expired"
-        ]
-}
-
-=======
->>>>>>> f2154376c812fef52f8aba72f01a9ad371ffa3b4
     for pod in pods_with_errors:
         print(f"\n=== Checking logs for pod: {pod.name} ===")
         found_logs = False
 
         for file_name in os.listdir(logs_dir):
-            if file_name.startswith(pod.name): 
-                found_logs = True
-                log_file_path = os.path.join(logs_dir, file_name)
+            if not file_name.startswith(pod.name):
+                continue
 
-                print(f"Processing log file: {file_name}")
+            found_logs = True
+            log_file_path = os.path.join(logs_dir, file_name)
+            print(f"Processing log file: {file_name}")
 
-                with open(log_file_path, "r", encoding="utf-8", errors="ignore") as log_file:
-                    seen_categories = set()
-
-                    for line in log_file:
-<<<<<<< HEAD
-                        for category, patterns in LOG_ERROR_PATTERNS.items():
-                            if category in seen_categories:
-                                continue  # already seen this category for this pod
-
-                            if any(p in line for p in patterns):
-                                pod.add_error(file_name, f"[{category}] {line.strip()}")
-                                seen_categories.add(category)
-=======
-                        matched, category = line_matches_error_patterns(line, conf['log_error_patterns'])
-                        if matched:
-                            pod.add_error(file_name, f"[{category}] {line.strip()}")
->>>>>>> f2154376c812fef52f8aba72f01a9ad371ffa3b4
+            with open(log_file_path, "r", encoding="utf-8", errors="ignore") as log_file:
+                for line in log_file:
+                    for category, patterns in conf['log_error_patterns'].items():
+                        if category in pod.logged_categories:
+                            continue
+                        if any(p in line for p in patterns):
+                            pod.add_error_once(file_name, category, line)
+                            break  # stop on first matched category per line
 
         if not found_logs:
             print(f"No log files found for pod {pod.name}")
-            
-        
 
 def main():
     # Check if cache.json exists using the relataive path to where this script is located
