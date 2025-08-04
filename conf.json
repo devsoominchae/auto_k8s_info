@@ -1,0 +1,22 @@
+{
+    "cache" : "cache.json",
+    "cache_default" : {
+        "saved_k8s_file_path": ""
+    },
+    "yes_list" : ["yes", "y", "Y", "Yes", "", "YES"],
+    "describe_pods_error_patterns" : {
+        "Warning" : ["Warning"]
+    },
+    "get_pods_error_patterns" : {
+        "Error": ["Error"],
+        "Running No Pods": ["0/", "Running"],
+        "Hanged in Init": ["Init:"],
+        "Crashed": ["CrashLoopBackOff"]
+    },
+    "log_error_patterns" : {
+        "Memory Issues": ["OutOfMemory","MemoryError"],
+        "Connection Issues": ["Connection refused", "Connection timed out"],
+        "File Issues": ["FileNotFoundError", "Permission denied", "IOError"],
+        "Crash": ["Segmentation fault", "core dumped", "panic"]
+    }
+}
