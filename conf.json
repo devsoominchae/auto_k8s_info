@@ -1,7 +1,7 @@
 {
     "cache" : "cache.json",
     "cache_default" : {
-        "saved_k8s_file_path": ""
+        "saved_case_info_dir": ""
     },
     "yes_list" : ["yes", "y", "Y", "Yes", "", "YES"],
     "describe_pods_error_patterns" : {
