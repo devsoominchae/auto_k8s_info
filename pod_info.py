@@ -41,7 +41,7 @@ class PodInfo:
     def get_log_files(self):
         self.pod_logs_files_path = os.path.join(self.namespace_path, 'logs')
         if os.path.exists(self.pod_logs_files_path):
-            self.logs = [f for f in os.listdir(self.pod_logs_files_path) if f.startswith(self.name)]
+            self.logs = [os.path.join(self.pod_logs_files_path, f) for f in os.listdir(self.pod_logs_files_path) if f.startswith(self.name)]
         else:
             print(f"No logs directory found for {self.name} at {self.pod_logs_files_path}.")
     

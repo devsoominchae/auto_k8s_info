@@ -4,6 +4,7 @@
         "saved_case_info_dir": ""
     },
     "yes_list" : ["yes", "y", "Y", "Yes", "", "YES"],
+    "invalid_windows_path_chars": ["<", ">", "\"", "/", "|", "?", "*"],
     "describe_pods_error_patterns" : {
         "Warning" : ["Warning"]
     },
