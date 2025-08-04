@@ -1,23 +1,27 @@
 # main.py
 
-import sys
-sys.dont_write_bytecode = True
-
 import os
 import json
 
 from pod_info import PodInfo
 
-K8S_ERROR = ["Error"]
-K8S_RUNNING_NO_PODS = ["0/", "Running"]
-K8S_INIT_HANG = ["Init:"]
-K8S_CRASHED = ["CrashLoopBackOff"]
 
-CONF = "conf.json"
+with open('conf.json', 'r', encoding='utf-8') as f:
+    conf = json.load(f)
 
-YES_LIST = ['yes', 'y', 'Y', 'Yes', '', 'YES']
+def line_matches_error_patterns(line, error_patterns, mode='any'):
+    result = False, None
+    for category, patterns in error_patterns.items():
+        if mode == 'any':
+            if any(p in line for p in patterns):
+                result = True, category
+                break
+        elif mode == 'all':
+            if all(p in line for p in patterns):
+                result = True, category
+                break
 
-EVENT_ERROR = ["Warning"]
+    return result
 
 # Function to check if a line contains all specified error strings listed in the constants
 def contains_all_errors(line, error_strings):
@@ -30,14 +34,6 @@ def log_file_collection(namespace_path, pods_with_errors):
     if not os.path.exists(logs_dir):
         print(f"No logs folder found at {logs_dir}")
         return
-
-    #Initial Dictionary - will populate
-    LOG_ERROR_PATTERNS = {
-        "Memory Issues": ["OutOfMemory","MemoryError"],
-        "Connection Issues": ["Connection refused", "Connection timed out",],
-        "File Issues": ["FileNotFoundError", "Permission denied", "IOError"],
-        "Crash": ["Segmentation fault", "core dumped", "panic"]
-    }
 
     for pod in pods_with_errors:
         print(f"\n=== Checking logs for pod: {pod.name} ===")
@@ -52,10 +48,9 @@ def log_file_collection(namespace_path, pods_with_errors):
 
                 with open(log_file_path, "r", encoding="utf-8", errors="ignore") as log_file:
                     for line in log_file:
-                        # Check line against dictionary to see if it qualifies as an error
-                        for category, patterns in LOG_ERROR_PATTERNS.items():
-                            if any(p in line for p in patterns):
-                                pod.add_error(file_name, f"[{category}] {line.strip()}")
+                        matched, category = line_matches_error_patterns(line, conf['log_error_patterns'])
+                        if matched:
+                            pod.add_error(file_name, f"[{category}] {line.strip()}")
 
         if not found_logs:
             print(f"No log files found for pod {pod.name}")
@@ -64,15 +59,18 @@ def log_file_collection(namespace_path, pods_with_errors):
 
 def main():
     # Check if conf.json exists using the relataive path to where this script is located
-    if not os.path.exists(CONF):
-        print(f"{CONF} does not exist. Please create it with the required configurations.")
+    if not os.path.exists(conf["cache"]):
+        print(f'{conf["cache"]} does not exist. Creating a new one.')        
+
+        with open('cache.json', 'w', encoding='utf-8') as f:
+            json.dump(conf["cache_default"], f, indent=2)
         return
 
     saved_k8s_file_path = ""
 
     # Load saved_k8s_file_path from conf.json if it exists
-    if os.path.exists(CONF):
-        with open(CONF, 'r') as conf_file:
+    if os.path.exists(conf["cache"]):
+        with open(conf["cache"], 'r') as conf_file:
             conf_data = json.load(conf_file)
             saved_k8s_file_path = conf_data.get('saved_k8s_file_path', None)
 
@@ -80,13 +78,13 @@ def main():
     if saved_k8s_file_path:
         print(f"Saved path to get-k8s-info output: {saved_k8s_file_path}")
         use_saved_path = input("Do you want to use this saved path? (yes - default/no): ").strip().lower()
-        if use_saved_path not in YES_LIST:
+        if use_saved_path not in conf["yes_list"]:
             saved_k8s_file_path = ""
             k8s_file_path = input(f"Please enter the path to the get-k8s-info output file: ")
             conf_data['saved_k8s_file_path'] = k8s_file_path
         
-            # Replace the saved_k8s_file_path in conf.json
-            with open(CONF, 'w', encoding='utf-8') as f:
+            # Replace the saved_k8s_file_path in cache.json
+            with open(conf["cache"], 'w', encoding='utf-8') as f:
                 json.dump(conf_data, f, indent=2)
         else:
             k8s_file_path = saved_k8s_file_path
@@ -98,7 +96,7 @@ def main():
         conf_data['saved_k8s_file_path'] = k8s_file_path
 
         # Replace the saved_k8s_file_path in conf.json
-        with open(CONF, 'w', encoding='utf-8') as f:
+        with open(conf["cache"], 'w', encoding='utf-8') as f:
             json.dump(conf_data, f, indent=2)
 
     # List the folders under kubernetes folder and let user select one
@@ -145,16 +143,14 @@ def main():
     
     # Check each line in the pods content and save the pod names if it contains all strings in K8S_ERROR, K8S_RUNNING_NO_PODS, K8S_INIT_HANG, K8S_CRASHED
     pods_with_errors = []
-    for line in get_pods_output_lines:
-        if (contains_all_errors(line, K8S_ERROR) or
-            contains_all_errors(line, K8S_RUNNING_NO_PODS) or
-            contains_all_errors(line, K8S_INIT_HANG) or
-            contains_all_errors(line, K8S_CRASHED)):
-            pod_name = line.split()[0]
-            pod_status = f"{line.split()[1]} {line.split()[2]}"
-            pod_info = PodInfo(pod_name, pod_status, namespace_path)
 
+    for line in get_pods_output_lines:
+        matched, category = line_matches_error_patterns(line, conf["get_pods_error_patterns"], "all")
+        if matched:
+            pod_name = line.split()[0]
+            pod_info = PodInfo(pod_name, category, namespace_path)
             pod_info.add_error(get_pods_output, line.strip())
+
             pods_with_errors.append(pod_info)
 
     
@@ -172,13 +168,13 @@ def main():
             if line.startswith('Name:'):
                 current_pod_name = line.split()[1]
 
-            if current_pod_name in pods_with_errors_name_list and line.strip().startswith(tuple(EVENT_ERROR)):
+            if current_pod_name in pods_with_errors_name_list and line_matches_error_patterns(line, conf["describe_pods_error_patterns"])[0]:
                 for pod in pods_with_errors:
                     if pod.name == current_pod_name:
                         pod.add_error(describe_pods_output, line.strip())
                         break
                 
-
+    log_file_collection(namespace_path, pods_with_errors)
 
     # Print the pods with errors
     #Code to print onto a json, without the clutter
@@ -186,8 +182,6 @@ def main():
         print("Pods with errors:")
         for pod in pods_with_errors:
             pod.print_info()
-
-        log_file_collection(namespace_path, pods_with_errors)
 
         all_errors_path = os.path.join(namespace_path, "all_errors.json")
         clean_errors_output = {}
