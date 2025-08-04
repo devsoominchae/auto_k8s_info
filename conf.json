@@ -14,9 +14,39 @@
         "Crashed": ["CrashLoopBackOff"]
     },
     "log_error_patterns" : {
-        "Memory Issues": ["OutOfMemory","MemoryError"],
-        "Connection Issues": ["Connection refused", "Connection timed out"],
-        "File Issues": ["FileNotFoundError", "Permission denied", "IOError"],
-        "Crash": ["Segmentation fault", "core dumped", "panic"]
+        "CAS Control Issues": [
+            "no ready CAS servers",
+            "cas-control is not ready"
+        ],
+        "Start Sequencer Warnings": [
+            "SKIP_INIT_BLOCK",
+            "bypassing sequencing",
+            "exit code 0"
+        ],
+        "Readiness Check Failures": [
+            "check \"sas-endpoints-ready\" failed",
+            "no available addresses",
+            "endpoints have no available addresses",
+            "0 available addresses",
+            "failed readiness check"
+        ],
+        "Telemetry Warnings": [
+            "OpenTelemetry support not installed",
+            "noop Open Telemetry MeterProvider",
+            "no metrics will be collected"
+        ],
+        "Stalled Init Warnings": [
+            "Waiting for",
+            "POD(s) to Complete"
+        ],
+        "Authentication Failures": [
+            "Unauthorized",
+            "authentication failed",
+            "access denied",
+            "invalid credentials",
+            "token expired"
+        ]
     }
 }
+
+
