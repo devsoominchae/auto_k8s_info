@@ -25,38 +25,42 @@ def contains_all_errors(line, error_strings):
 
 
 def log_file_collection(namespace_path, pods_with_errors):
-    
     logs_dir = os.path.join(namespace_path, "logs")
- 
+
     if not os.path.exists(logs_dir):
         print(f"No logs folder found at {logs_dir}")
-        return   
-    
+        return
+
+    #Initial Dictionary - will populate
+    LOG_ERROR_PATTERNS = {
+        "Memory Issues": ["OutOfMemory","MemoryError"],
+        "Connection Issues": ["Connection refused", "Connection timed out",],
+        "File Issues": ["FileNotFoundError", "Permission denied", "IOError"],
+        "Crash": ["Segmentation fault", "core dumped", "panic"]
+    }
+
     for pod in pods_with_errors:
-        print(f"\n=== Logs for pod: {pod.name} ===")
+        print(f"\n=== Checking logs for pod: {pod.name} ===")
         found_logs = False
-        
+
         for file_name in os.listdir(logs_dir):
-        #find all the log files, as there could be several under 1 pod
-            if file_name.startswith(pod.name):
+            if file_name.startswith(pod.name): 
                 found_logs = True
-                #combine with prior path to get exact path of each log file
                 log_file_path = os.path.join(logs_dir, file_name)
-                #Just for testing, will remove this printing below
-                #TODO creation of actual function to find error msgs.
-                print(f"\n--- Reading: {file_name} ---")
-                
+
+                print(f"Processing log file: {file_name}")
+
                 with open(log_file_path, "r", encoding="utf-8", errors="ignore") as log_file:
-                    for i, line in enumerate(log_file):
-                        if i < 5:
-                            print(line.strip())
-                        else:
-                            print("")
-                            break
+                    for line in log_file:
+                        # Check line against dictionary to see if it qualifies as an error
+                        for category, patterns in LOG_ERROR_PATTERNS.items():
+                            if any(p in line for p in patterns):
+                                pod.add_error(file_name, f"[{category}] {line.strip()}")
 
-    if not found_logs:
-        print(f"No log files found for pod {pod.name}")                        
-
+        if not found_logs:
+            print(f"No log files found for pod {pod.name}")
+            
+        
 
 def main():
     # Check if conf.json exists using the relataive path to where this script is located
@@ -177,14 +181,27 @@ def main():
 
 
     # Print the pods with errors
+    #Code to print onto a json, without the clutter
     if pods_with_errors:
         print("Pods with errors:")
         for pod in pods_with_errors:
             pod.print_info()
 
         log_file_collection(namespace_path, pods_with_errors)
-    else:
-        print("No pods with errors found.")
+
+        all_errors_path = os.path.join(namespace_path, "all_errors.json")
+        clean_errors_output = {}
+
+        for pod in pods_with_errors:
+            flat_errors = []  # a single list for this pod
+            for messages in pod.errors.values():  # loop through all error lists from all files
+                flat_errors.extend(messages)  # add them into one cleaned list
+            clean_errors_output[pod.name] = flat_errors  # store only pod name and messages
+
+        with open(all_errors_path, "w", encoding="utf-8") as f:
+            json.dump(clean_errors_output, f, indent=2)
+
+        print(f"\n Clean errors saved to: {all_errors_path}")
 
 
 # Test the main function
