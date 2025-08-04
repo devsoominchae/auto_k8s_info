@@ -1,10 +1,13 @@
 # main.py
 
+
+import sys
+sys.dont_write_bytecode = True
+
 import os
 import json
 
 from pod_info import PodInfo
-import re
 
 
 with open('conf.json', 'r', encoding='utf-8') as f:
@@ -34,7 +37,6 @@ def line_matches_error_patterns(line, error_patterns, mode='any'):
 def contains_all_errors(line, error_strings):
     return all(error in line for error in error_strings)
 
-
 def log_file_collection(namespace_path, pods_with_errors):
     logs_dir = os.path.join(namespace_path, "logs")
 
@@ -47,27 +49,24 @@ def log_file_collection(namespace_path, pods_with_errors):
         found_logs = False
 
         for file_name in os.listdir(logs_dir):
-            if file_name.startswith(pod.name): 
-                found_logs = True
-                log_file_path = os.path.join(logs_dir, file_name)
+            if not file_name.startswith(pod.name):
+                continue
 
-                print(f"Processing log file: {file_name}")
+            found_logs = True
+            log_file_path = os.path.join(logs_dir, file_name)
+            print(f"Processing log file: {file_name}")
 
-                with open(log_file_path, "r", encoding="utf-8", errors="ignore") as log_file:
-                    seen_categories = set()
-
-                    for line in log_file:
-                        matched, category = line_matches_error_patterns(line, conf['log_error_patterns'])
-                        if matched:
-                            if category not in seen_categories:
-                                seen_categories.add(category)
-                                pod.add_error(file_name, f"[{category}] {line.strip()}")
-
+            with open(log_file_path, "r", encoding="utf-8", errors="ignore") as log_file:
+                for line in log_file:
+                    for category, patterns in conf['log_error_patterns'].items():
+                        if category in pod.logged_categories:
+                            continue
+                        if any(p in line for p in patterns):
+                            pod.add_error_once(file_name, category, line)
+                            break  # stop on first matched category per line
 
         if not found_logs:
             print(f"No log files found for pod {pod.name}")
-            
-        
 
 def main():
     # Check if cache.json exists using the relataive path to where this script is located
