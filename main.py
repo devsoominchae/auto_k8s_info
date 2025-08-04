@@ -1,12 +1,5 @@
 # main.py
 
-<<<<<<< HEAD
-
-import sys
-sys.dont_write_bytecode = True
-
-=======
->>>>>>> f2154376c812fef52f8aba72f01a9ad371ffa3b4
 import os
 import json
 
@@ -16,6 +9,12 @@ import re
 
 with open('conf.json', 'r', encoding='utf-8') as f:
     conf = json.load(f)
+
+def remove_invalid_windows_chars(filename):
+    invalid_chars = conf['invalid_windows_path_chars']
+    for char in invalid_chars:
+        filename = filename.replace(char, '')
+    return filename
 
 def line_matches_error_patterns(line, error_patterns, mode='any'):
     result = False, None
@@ -43,54 +42,6 @@ def log_file_collection(namespace_path, pods_with_errors):
         print(f"No logs folder found at {logs_dir}")
         return
 
-<<<<<<< HEAD
-    #Initial Dictionary - will populate constantly
-    LOG_ERROR_PATTERNS = {
-        "CAS Control Issues": [
-            "no ready CAS servers",
-            "cas-control is not ready"
-        ],
-        "Start Sequencer Warnings": [
-            "SKIP_INIT_BLOCK",
-            "bypassing sequencing",
-            "exit code 0"
-        ],
-        "Readiness Check Failures": [
-            "check \"sas-endpoints-ready\" failed",
-            "no available addresses",
-            "endpoints have no available addresses",
-            "0 available addresses",
-            "failed readiness check"
-        ],
-        "CAS Services Unavailable": [
-            "sas-cas-access-management",
-            "sas-cas-formats",
-            "sas-cas-management",
-            "sas-cas-proxy",
-            "sas-cas-row-sets",
-            "sas-cas-server-default",
-            "sas-microanalytic-score"
-        ],
-        "Telemetry Warnings": [
-            "OpenTelemetry support not installed",
-            "noop Open Telemetry MeterProvider",
-            "no metrics will be collected"
-        ],
-        "Stalled Init Warnings": [
-            "Waiting for",
-            "POD(s) to Complete"
-        ],
-        "Authentication Failures": [
-            "Unauthorized",
-            "authentication failed",
-            "access denied",
-            "invalid credentials",
-            "token expired"
-        ]
-}
-
-=======
->>>>>>> f2154376c812fef52f8aba72f01a9ad371ffa3b4
     for pod in pods_with_errors:
         print(f"\n=== Checking logs for pod: {pod.name} ===")
         found_logs = False
@@ -106,19 +57,12 @@ def log_file_collection(namespace_path, pods_with_errors):
                     seen_categories = set()
 
                     for line in log_file:
-<<<<<<< HEAD
-                        for category, patterns in LOG_ERROR_PATTERNS.items():
-                            if category in seen_categories:
-                                continue  # already seen this category for this pod
-
-                            if any(p in line for p in patterns):
-                                pod.add_error(file_name, f"[{category}] {line.strip()}")
-                                seen_categories.add(category)
-=======
                         matched, category = line_matches_error_patterns(line, conf['log_error_patterns'])
                         if matched:
-                            pod.add_error(file_name, f"[{category}] {line.strip()}")
->>>>>>> f2154376c812fef52f8aba72f01a9ad371ffa3b4
+                            if category not in seen_categories:
+                                seen_categories.add(category)
+                                pod.add_error(file_name, f"[{category}] {line.strip()}")
+
 
         if not found_logs:
             print(f"No log files found for pod {pod.name}")
@@ -144,11 +88,11 @@ def main():
     # Show the saved path if it exists and ask if the user wants to use it
     if saved_case_info_dir:
         print(f"Saved path to get-k8s-info output: {saved_case_info_dir}")
-        use_saved_path = input("Do you want to use this saved path? (yes - default/no): ").strip().lower()
+        use_saved_path = remove_invalid_windows_chars(input("Do you want to use this saved path? (yes - default/no): ").strip().lower())
 
         if use_saved_path not in conf["yes_list"]:
             saved_case_info_dir = ""
-            case_info_dir = input(f"Please enter the path to the get-k8s-info output folder: ")
+            case_info_dir = remove_invalid_windows_chars(input(f"Please enter the path to the get-k8s-info output folder: ").strip())
             cache['saved_case_info_dir'] = case_info_dir
         
             # Replace the saved_case_info_dir in cache.json
@@ -160,7 +104,7 @@ def main():
 
     else:
         # Get user input to specify the path to the get-k8s-info output
-        case_info_dir = input(f"Please enter the path to the get-k8s-info output file: ")
+        case_info_dir = remove_invalid_windows_chars(input("Please enter the path to the get-k8s-info output file: ").strip())
         cache['saved_case_info_dir'] = case_info_dir
 
         # Replace the saved_case_info_dir in cache.json
