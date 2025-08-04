@@ -1,5 +1,6 @@
 # main.py
 
+
 import sys
 sys.dont_write_bytecode = True
 
@@ -7,6 +8,7 @@ import os
 import json
 
 from pod_info import PodInfo
+import re
 
 K8S_ERROR = ["Error"]
 K8S_RUNNING_NO_PODS = ["0/", "Running"]
@@ -31,13 +33,50 @@ def log_file_collection(namespace_path, pods_with_errors):
         print(f"No logs folder found at {logs_dir}")
         return
 
-    #Initial Dictionary - will populate
+    #Initial Dictionary - will populate constantly
     LOG_ERROR_PATTERNS = {
-        "Memory Issues": ["OutOfMemory","MemoryError"],
-        "Connection Issues": ["Connection refused", "Connection timed out",],
-        "File Issues": ["FileNotFoundError", "Permission denied", "IOError"],
-        "Crash": ["Segmentation fault", "core dumped", "panic"]
-    }
+        "CAS Control Issues": [
+            "no ready CAS servers",
+            "cas-control is not ready"
+        ],
+        "Start Sequencer Warnings": [
+            "SKIP_INIT_BLOCK",
+            "bypassing sequencing",
+            "exit code 0"
+        ],
+        "Readiness Check Failures": [
+            "check \"sas-endpoints-ready\" failed",
+            "no available addresses",
+            "endpoints have no available addresses",
+            "0 available addresses",
+            "failed readiness check"
+        ],
+        "CAS Services Unavailable": [
+            "sas-cas-access-management",
+            "sas-cas-formats",
+            "sas-cas-management",
+            "sas-cas-proxy",
+            "sas-cas-row-sets",
+            "sas-cas-server-default",
+            "sas-microanalytic-score"
+        ],
+        "Telemetry Warnings": [
+            "OpenTelemetry support not installed",
+            "noop Open Telemetry MeterProvider",
+            "no metrics will be collected"
+        ],
+        "Stalled Init Warnings": [
+            "Waiting for",
+            "POD(s) to Complete"
+        ],
+        "Authentication Failures": [
+            "Unauthorized",
+            "authentication failed",
+            "access denied",
+            "invalid credentials",
+            "token expired"
+        ]
+}
 
     for pod in pods_with_errors:
         print(f"\n=== Checking logs for pod: {pod.name} ===")
@@ -51,11 +90,16 @@ def log_file_collection(namespace_path, pods_with_errors):
                 print(f"Processing log file: {file_name}")
 
                 with open(log_file_path, "r", encoding="utf-8", errors="ignore") as log_file:
+                    seen_categories = set()
+
                     for line in log_file:
-                        # Check line against dictionary to see if it qualifies as an error
                         for category, patterns in LOG_ERROR_PATTERNS.items():
+                            if category in seen_categories:
+                                continue  # already seen this category for this pod
+
                             if any(p in line for p in patterns):
                                 pod.add_error(file_name, f"[{category}] {line.strip()}")
+                                seen_categories.add(category)
 
         if not found_logs:
             print(f"No log files found for pod {pod.name}")
