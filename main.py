@@ -58,53 +58,52 @@ def log_file_collection(namespace_path, pods_with_errors):
         
 
 def main():
-    # Check if conf.json exists using the relataive path to where this script is located
+    # Check if cache.json exists using the relataive path to where this script is located
     if not os.path.exists(conf["cache"]):
         print(f'{conf["cache"]} does not exist. Creating a new one.')        
 
         with open('cache.json', 'w', encoding='utf-8') as f:
             json.dump(conf["cache_default"], f, indent=2)
-        return
 
-    saved_k8s_file_path = ""
+    saved_case_info_dir = ""
 
-    # Load saved_k8s_file_path from conf.json if it exists
+    # Load saved_case_info_dir from cache.json if it exists
     if os.path.exists(conf["cache"]):
-        with open(conf["cache"], 'r') as conf_file:
-            conf_data = json.load(conf_file)
-            saved_k8s_file_path = conf_data.get('saved_k8s_file_path', None)
+        with open(conf["cache"], 'r') as cache_file:
+            cache = json.load(cache_file)
+            saved_case_info_dir = cache['saved_case_info_dir']
 
     # Show the saved path if it exists and ask if the user wants to use it
-    if saved_k8s_file_path:
-        print(f"Saved path to get-k8s-info output: {saved_k8s_file_path}")
+    if saved_case_info_dir:
+        print(f"Saved path to get-k8s-info output: {saved_case_info_dir}")
         use_saved_path = input("Do you want to use this saved path? (yes - default/no): ").strip().lower()
+
         if use_saved_path not in conf["yes_list"]:
-            saved_k8s_file_path = ""
-            k8s_file_path = input(f"Please enter the path to the get-k8s-info output file: ")
-            conf_data['saved_k8s_file_path'] = k8s_file_path
+            saved_case_info_dir = ""
+            case_info_dir = input(f"Please enter the path to the get-k8s-info output folder: ")
+            cache['saved_case_info_dir'] = case_info_dir
         
-            # Replace the saved_k8s_file_path in cache.json
+            # Replace the saved_case_info_dir in cache.json
             with open(conf["cache"], 'w', encoding='utf-8') as f:
-                json.dump(conf_data, f, indent=2)
+                json.dump(cache, f, indent=2)
         else:
-            k8s_file_path = saved_k8s_file_path
-            print(f"Using saved path: {k8s_file_path}")
+            case_info_dir = saved_case_info_dir
+            print(f"Using saved path: {case_info_dir}")
 
     else:
         # Get user input to specify the path to the get-k8s-info output
-        k8s_file_path = input(f"Please enter the path to the get-k8s-info output file: ")
-        conf_data['saved_k8s_file_path'] = k8s_file_path
+        case_info_dir = input(f"Please enter the path to the get-k8s-info output file: ")
+        cache['saved_case_info_dir'] = case_info_dir
 
-        # Replace the saved_k8s_file_path in conf.json
+        # Replace the saved_case_info_dir in cache.json
         with open(conf["cache"], 'w', encoding='utf-8') as f:
-            json.dump(conf_data, f, indent=2)
+            json.dump(cache, f, indent=2)
 
     # List the folders under kubernetes folder and let user select one
-    print("Available folders under kubernetes:")
-    kubernetes_path = os.path.join(k8s_file_path, 'kubernetes')
+    kubernetes_path = os.path.join(case_info_dir, 'kubernetes')
 
     if not os.path.exists(kubernetes_path):
-        print("The 'kubernetes' folder does not exist.")
+        print(f"The 'kubernetes' folder does not exist under {case_info_dir}.")
         return
     
     folders = [f for f in os.listdir(kubernetes_path) if os.path.isdir(os.path.join(kubernetes_path, f))]
@@ -113,6 +112,7 @@ def main():
         print("No folders found under 'kubernetes'.")
         return
     
+    print("Available folders under kubernetes:")
     for idx, folder in enumerate(folders):
         print(f"{idx + 1}: {folder}")
 
