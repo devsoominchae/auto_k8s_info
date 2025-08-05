@@ -32,4 +32,4 @@ Sample output
     Please select a folder by number: 6
     You selected: viya-dev-ns
 
-You can check the sample txt output in the output folder.
+You can check the sample txt output auto_k8s_mis-viya_20250805_161819.txt
