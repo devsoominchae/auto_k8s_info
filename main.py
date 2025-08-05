@@ -1,15 +1,17 @@
 # main.py
-
 import os
 import json
 
+# Custom imports
 from pod_info import PodInfo
-
+from logging_conf import logging
 
 with open('conf.json', 'r', encoding='utf-8') as f:
     conf = json.load(f)
 
-def remove_invalid_windows_chars(filename):
+
+
+def remove_invalid_windows_path_chars(filename):
     invalid_chars = conf['invalid_windows_path_chars']
     for char in invalid_chars:
         filename = filename.replace(char, '')
@@ -66,16 +68,15 @@ def log_file_collection(namespace_path, pods_with_errors):
 
 def main():
     # Check if cache.json exists using the relataive path to where this script is located
+    logging.info("START")
+    saved_case_info_dir = ""
     if not os.path.exists(conf["cache"]):
         print(f'{conf["cache"]} does not exist. Creating a new one.')        
+        logging.info(f'{conf["cache"]} does not exist. Creating a new one.')        
 
         with open('cache.json', 'w', encoding='utf-8') as f:
             json.dump(conf["cache_default"], f, indent=2)
-
-    saved_case_info_dir = ""
-
-    # Load saved_case_info_dir from cache.json if it exists
-    if os.path.exists(conf["cache"]):
+    else:
         with open(conf["cache"], 'r') as cache_file:
             cache = json.load(cache_file)
             saved_case_info_dir = cache['saved_case_info_dir']
@@ -83,11 +84,13 @@ def main():
     # Show the saved path if it exists and ask if the user wants to use it
     if saved_case_info_dir:
         print(f"Saved path to get-k8s-info output: {saved_case_info_dir}")
-        use_saved_path = remove_invalid_windows_chars(input("Do you want to use this saved path? (yes - default/no): ").strip().lower())
+        logging.info(f"Saved path to get-k8s-info output: {saved_case_info_dir}")
+        use_saved_path = remove_invalid_windows_path_chars(input("Do you want to use this saved path? (yes - default/no): ").strip().lower())
 
         if use_saved_path not in conf["yes_list"]:
+            logging.info("Not using saved path")
             saved_case_info_dir = ""
-            case_info_dir = remove_invalid_windows_chars(input(f"Please enter the path to the get-k8s-info output folder: ").strip())
+            case_info_dir = remove_invalid_windows_path_chars(input(f"Please enter the path to the get-k8s-info output folder: ").strip())
             cache['saved_case_info_dir'] = case_info_dir
         
             # Replace the saved_case_info_dir in cache.json
@@ -96,27 +99,38 @@ def main():
         else:
             case_info_dir = saved_case_info_dir
             print(f"Using saved path: {case_info_dir}")
+            logging.info(f"Using saved path: {case_info_dir}")
 
     else:
         # Get user input to specify the path to the get-k8s-info output
-        case_info_dir = remove_invalid_windows_chars(input("Please enter the path to the get-k8s-info output file: ").strip())
+        logging.info("No saved path found. Asking user for input.")
+        case_info_dir = remove_invalid_windows_path_chars(input("Please enter the path to the get-k8s-info output file: ").strip())
+        logging.info(f"User provided path: {case_info_dir}")
         cache['saved_case_info_dir'] = case_info_dir
 
         # Replace the saved_case_info_dir in cache.json
         with open(conf["cache"], 'w', encoding='utf-8') as f:
             json.dump(cache, f, indent=2)
+    
+    # Check if the provided path exists
+    if not os.path.exists(case_info_dir):
+        print(f"The provided path {case_info_dir} does not exist.")
+        logging.error(f"The provided path {case_info_dir} does not exist. Exiting the program.")
+        return
 
     # List the folders under kubernetes folder and let user select one
     kubernetes_path = os.path.join(case_info_dir, 'kubernetes')
 
     if not os.path.exists(kubernetes_path):
         print(f"The 'kubernetes' folder does not exist under {case_info_dir}.")
+        logging.error(f"The 'kubernetes' folder does not exist under {case_info_dir}. Exiting the program.")
         return
     
     folders = [f for f in os.listdir(kubernetes_path) if os.path.isdir(os.path.join(kubernetes_path, f))]
 
     if not folders:
         print("No folders found under 'kubernetes'.")
+        logging.error("No folders found under 'kubernetes'. Exiting the program.")
         return
     
     print("Available folders under kubernetes:")
@@ -138,11 +152,13 @@ def main():
     print(f"You selected: {selected_folder}\n")
 
     namespace_path = os.path.join(kubernetes_path, selected_folder)
+    logging.info(f"Processing logs on {namespace_path}")
 
     # Read the content of kubectl get pods command output
     get_pods_output = os.path.join(namespace_path, 'get','pods.txt')
     if not os.path.exists(get_pods_output):
         print(f"The file {get_pods_output} does not exist.")
+        logging.error(f"The file {get_pods_output} does not exist. Exiting the program.")
         return
     
     with open(get_pods_output, 'r') as get_pods_output_file:
@@ -160,11 +176,13 @@ def main():
 
             pods_with_errors.append(pod_info)
 
+
     
     # Read the kubectl describe pods command output
     describe_pods_output = os.path.join(namespace_path, 'describe', 'pods.txt')
     if not os.path.exists(describe_pods_output):
         print(f"The file {describe_pods_output} does not exist.")
+        logging.warning(f"The file {describe_pods_output} does not exist. Skipping error checks in describe pods output.")
     else:
         with open(describe_pods_output, 'r') as describe_pods_output_file:
             describe_pods_output_lines = describe_pods_output_file.readlines()
@@ -185,8 +203,10 @@ def main():
 
     if pods_with_errors:
         print("\nPods with issues:")
+        logging.info(f"Found {len(pods_with_errors)} pods with issues:")
         for pod in pods_with_errors:
             print(f"- {pod.get_pod_name()}")
+            logging.info(f"- {pod.get_pod_name()}")
 
     # Print the pods with errors
     #Code to print onto a json, without the clutter
