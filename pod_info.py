@@ -30,7 +30,7 @@ class PodInfo:
         print("Details:")
         if self.errors:
             for filename, errors in self.errors.items():
-                print(f"\nErrors in {filename}:")
+                print(f"\nIssues in {filename}:")
                 for error in errors:
                     print(f"  - {error}")
         else:
@@ -51,6 +51,12 @@ class PodInfo:
             self.logs = [os.path.join(self.pod_logs_files_path, f) for f in os.listdir(self.pod_logs_files_path) if f.startswith(self.name)]
         else:
             print(f"No logs directory found for {self.name} at {self.pod_logs_files_path}.")
+    
+    def print_pod_name(self):
+        print(self.name)
+    
+    def get_pod_name(self):
+        return self.name
     
     def print_logs(self):
         print(f"Log files for {self.name}:")
