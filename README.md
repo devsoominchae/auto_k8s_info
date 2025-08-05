@@ -1,4 +1,5 @@
-### The purpose of this project is to automate situation appraisal procedures of the get-k8s-info.sh output provided by SAS.
+### Automate k8s troubleshooting 
+The purpose of this project is to automate situation appraisal procedure of the get-k8s-info.sh output provided by SAS.
 
 ### TODO
 1. Read kubectl get pods output and analyze pods in abnormal state
