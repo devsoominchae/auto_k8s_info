@@ -40,13 +40,14 @@ def log_file_collection(namespace_path, pods_with_errors):
 
     for pod in pods_with_errors:
         print(f"\n=== Checking logs for pod: {pod.name} ===")
-        found_logs = False
 
-        for file_name in os.listdir(logs_dir):
-            if not file_name.startswith(pod.name):
-                continue
+        pod.get_log_files()  # populate pod.logs
 
-            found_logs = True
+        if not pod.logs:
+            print(f"No log files found for pod {pod.name}")
+            continue
+
+        for file_name in pod.logs:
             log_file_path = os.path.join(logs_dir, file_name)
             print(f"Processing log file: {file_name}")
 
@@ -57,10 +58,8 @@ def log_file_collection(namespace_path, pods_with_errors):
                             continue
                         if any(p in line for p in patterns):
                             pod.add_error_once(file_name, category, line)
-                            break  # stop on first matched category per line
+                            break  # stop at first matching category per line
 
-        if not found_logs:
-            print(f"No log files found for pod {pod.name}")
 
 def main():
     # Check if cache.json exists using the relataive path to where this script is located
