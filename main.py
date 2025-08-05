@@ -1,9 +1,5 @@
 # main.py
 
-
-import sys
-sys.dont_write_bytecode = True
-
 import os
 import json
 
@@ -187,10 +183,15 @@ def main():
                 
     log_file_collection(namespace_path, pods_with_errors)
 
+    if pods_with_errors:
+        print("\nPods with issues:")
+        for pod in pods_with_errors:
+            print(f"- {pod.get_pod_name()}")
+
     # Print the pods with errors
     #Code to print onto a json, without the clutter
     if pods_with_errors:
-        print("Pods with errors:")
+        print("\nDetails on pods with issues:")
         for pod in pods_with_errors:
             pod.print_info()
 
