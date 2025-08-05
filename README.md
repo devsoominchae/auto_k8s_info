@@ -31,3 +31,5 @@ Sample output
     7: viya-test-ns
     Please select a folder by number: 6
     You selected: viya-dev-ns
+
+You can check the sample txt output in the output folder.
