@@ -2,6 +2,10 @@
 
 import os
 
+# Custom imports
+from logging_conf import logging
+from printer import Printer
+
 class PodInfo:
     def __init__(self, name, status, namespace_path):
         self.name = name
@@ -9,41 +13,40 @@ class PodInfo:
         self.namespace_path = namespace_path
         self.errors = {}
         self.logs = []
-        self.logged_categories = set() 
+        self.logged_categories = set()
+        self.printer = Printer(os.path.basename(namespace_path), mode="both")
 
     def add_error(self, filename, error):
         if filename not in self.errors:
             self.errors[filename] = []
         self.errors[filename].append(error)
+        logging.info(f"Error in {filename}: {error}")
+
         
-    def add_error_once(self, filename, category, line):
+    def add_error_once(self, filename, category, line): # TODO: Discuss if there is a better name for this function
             #Removes duplicate when outputting to json file
             if category in self.logged_categories:
                 return
             self.add_error(filename, f"[{category}] {line.strip()}")
             self.logged_categories.add(category)
+            logging.info(f"Error in {filename} [{category}]: {line.strip()}")
             
     def print_info(self):
-        print("-" * 20)
-        print(f"Pod Name: {self.name}")
-        print(f"Status: {self.status}")
-        print("Details:")
+        self.printer.print_message("-" * 20)
+        self.printer.print_message(f"Pod Name: {self.name}")
+        self.printer.print_message(f"Status: {self.status}")
+        self.printer.print_message("Details:")
         if self.errors:
             for filename, errors in self.errors.items():
-                print(f"\nIssues in {filename}:")
+                self.printer.print_message(f"\nIssues in {filename}:")
                 for error in errors:
-                    print(f"  - {error}")
+                    self.printer.print_message(f"  - {error}")
         else:
-            print("No additional details available.")
+            self.printer.print_message("No additional details available.")
         
-        print("\nLogs:")
         self.get_log_files()
 
-        if self.logs:
-            self.print_logs()
-        else:
-            print("No log files available.")
-        print("-" * 20)
+        self.printer.print_message("-" * 20)
     
     def get_log_files(self):
         self.pod_logs_files_path = os.path.join(self.namespace_path, 'logs')
@@ -59,7 +62,7 @@ class PodInfo:
         return self.name
     
     def print_logs(self):
-        print(f"Log files for {self.name}:")
+        self.printer.print_message(f"Log files for {self.name}:")
         for log_file in self.logs:
-            print(f"- {log_file}")
+            self.printer.print_message(f"- {log_file}")
     
