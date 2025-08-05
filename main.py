@@ -10,7 +10,6 @@ with open('conf.json', 'r', encoding='utf-8') as f:
     conf = json.load(f)
 
 
-
 def remove_invalid_windows_path_chars(filename):
     invalid_chars = conf['invalid_windows_path_chars']
     for char in invalid_chars:
@@ -171,7 +170,8 @@ def main():
         matched, category = line_matches_error_patterns(line, conf["get_pods_error_patterns"], "all")
         if matched:
             pod_name = line.split()[0]
-            pod_info = PodInfo(pod_name, category, namespace_path)
+            pod_node = line.split()[6]
+            pod_info = PodInfo(pod_name, category, pod_node, namespace_path)
             pod_info.add_error(get_pods_output, line.strip())
 
             pods_with_errors.append(pod_info)
