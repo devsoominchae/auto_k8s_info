@@ -7,9 +7,10 @@ from logging_conf import logging
 from printer import Printer
 
 class PodInfo:
-    def __init__(self, name, status, namespace_path):
+    def __init__(self, name, status, node, namespace_path):
         self.name = name
         self.status = status
+        self.node = node
         self.namespace_path = namespace_path
         self.errors = {}
         self.logs = []
@@ -35,6 +36,7 @@ class PodInfo:
         self.printer.print_message("-" * 20)
         self.printer.print_message(f"Pod Name: {self.name}")
         self.printer.print_message(f"Status: {self.status}")
+        self.printer.print_message(f"Node: {self.node}")
         self.printer.print_message("Details:")
         if self.errors:
             for filename, errors in self.errors.items():
