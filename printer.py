@@ -22,7 +22,7 @@ class Printer:
         
         if not os.path.exists(conf['output_folder']):
             os.makedirs(conf['output_folder'])
-        self.file_path = os.path.join(conf['output_folder'], self.file_path)
+        self.file_path = os.path.join(conf['output_folder'], self.file_path) if mode in ["file", "both"] else None
 
         logging.info(f"Printer file path set to: {self.file_path}")
     
@@ -31,16 +31,17 @@ class Printer:
             with open(self.file_path, 'a', encoding='utf-8') as file:
                 file.write(message + '\n')
     
-    def print_message(self, message):
-        match self.mode:
-            case "console":
-                print(message)
-                self.write_to_file(message)
-            case "file":
-                self.write_to_file(message)
-            case "both":
-                print(message)
-                self.write_to_file(message)
+    def print_message(self, message, print_level=1):
+        if conf['print_level'] >= print_level:
+            match self.mode:
+                case "console":
+                    print(message)
+                    self.write_to_file(message)
+                case "file":
+                    self.write_to_file(message)
+                case "both":
+                    print(message)
+                    self.write_to_file(message)
 
 
         

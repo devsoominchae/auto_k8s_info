@@ -4,6 +4,7 @@ import json
 import re
 
 # Custom imports
+from printer import Printer
 from pod_info import PodInfo
 from logging_conf import logging
 
@@ -33,22 +34,24 @@ def line_matches_error_patterns(line, error_patterns, mode='any'):
 # Collect log file errors for each pod
 # If a log line matches a pattern, we parse it and store only unique messages ignoring timestamp
 def log_file_collection(namespace_path, pods_with_errors):
+    printer = Printer(os.path.basename(namespace_path), mode="console")
     logs_dir = os.path.join(namespace_path, "logs")
     if not os.path.exists(logs_dir):
-        print(f"No logs folder found at {logs_dir}")
+        printer.print_message(f"No logs folder found at {logs_dir}")
+        logging.warning(f"No logs folder found at {logs_dir}. Skipping log file collection.")
         return
 
     for pod in pods_with_errors:
-        print(f"\n=== Checking logs for pod: {pod.name} ===")
+        printer.print_message(f"\n=== Checking logs for pod: {pod.name} ===", print_level=2)
         pod.get_log_files()
 
         if not pod.logs:
-            print(f"No log files found for pod {pod.name}")
+            printer.print_message(f"No log files found for pod {pod.name}")
             continue
 
         for file_name in pod.logs:
             log_file_path = os.path.join(logs_dir, file_name)
-            print(f"Processing log file: {file_name}")
+            printer.print_message(f"Processing log file: {file_name}", print_level=2)
 
             with open(log_file_path, "r", encoding="utf-8", errors="ignore") as log_file:
                 for line in log_file:
@@ -155,7 +158,7 @@ def main():
             pod_info = PodInfo(pod_name, category, pod_node, namespace_path)
             pod_info.add_error(get_pods_output, line.strip())
             pods_with_errors.append(pod_info)
-        else:
+        elif not matched and pod_name != "NAME":
             pod_info = PodInfo(pod_name, "No Issues", pod_node, namespace_path)
             pods_without_errors.append(pod_info)
 

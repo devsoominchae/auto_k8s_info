@@ -8,6 +8,7 @@
     "level": "INFO",
     "format": "%(asctime)s %(levelname)s %(message)s"
   },
+  "print_level" : 1,
   "yes_list": [
     "yes",
     "y",
@@ -61,11 +62,6 @@
       "endpoints have no available addresses",
       "0 available addresses",
       "failed readiness check"
-    ],
-    "Telemetry Warnings": [
-      "OpenTelemetry support not installed",
-      "noop Open Telemetry MeterProvider",
-      "no metrics will be collected"
     ],
     "Stalled Init Warnings": [
       "Waiting for",
