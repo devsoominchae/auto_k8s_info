@@ -6,6 +6,16 @@ The purpose of this project is to automate situation appraisal procedure of the 
 2. Find status of other components that are related to the abnormal pod (PVC, Secret, Deployment etc.)
 3. Find any other pod logs that contain errors
 
+### DONE
+1. Read kubectl get pods output and analyze pods in abnormal state
+   - Error
+   - 0/1     Running
+   - CrashLoopBackOff
+   - 0/2     Init:2/4
+2. Read the logs of the pods that are in an abnormal state
+3. Analyze the logs and organize errors or warnings that might be the cause of the issue
+4. Search for other related issues that causes the pod to be inoperable
+
 ### Testing
 First you will need an unzipped sample get-k8s-info.sh output. 
 ######
