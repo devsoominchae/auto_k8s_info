@@ -1,4 +1,5 @@
-### The purpose of this project is to automate situation appraisal procedures of the get-k8s-info.sh output provided by SAS.
+### Automate k8s troubleshooting 
+The purpose of this project is to automate situation appraisal procedure of the get-k8s-info.sh output provided by SAS.
 
 ### TODO
 1. Read kubectl get pods output and analyze pods in abnormal state
@@ -30,3 +31,5 @@ Sample output
     7: viya-test-ns
     Please select a folder by number: 6
     You selected: viya-dev-ns
+
+You can check the sample txt output auto_k8s_mis-viya_20250805_161819.txt
