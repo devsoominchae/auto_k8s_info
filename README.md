@@ -5,6 +5,7 @@ The purpose of this project is to automate situation appraisal procedure of the 
 1. Search for other related issues that causes the pod to be inoperable
 2. Find status of other components that are related to the abnormal pod (PVC, Secret, Deployment etc.)
 3. Find any other pod logs that contain errors
+4. Store error patterns on a database and find it in the logs
 
 ### DONE
 1. Read kubectl get pods output and analyze pods in abnormal state
