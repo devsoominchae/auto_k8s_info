@@ -65,12 +65,11 @@ def main():
         print(f'{conf["cache"]} does not exist. Creating a new one.')        
         logging.info(f'{conf["cache"]} does not exist. Creating a new one.')        
 
-        with open('cache.json', 'w', encoding='utf-8') as f:
+        with open(conf["cache"], 'w', encoding='utf-8') as f:
             json.dump(conf["cache_default"], f, indent=2)
-    else:
-        with open(conf["cache"], 'r') as cache_file:
-            cache = json.load(cache_file)
-            saved_case_info_dir = cache['saved_case_info_dir']
+    with open(conf["cache"], 'r') as cache_file:
+        cache = json.load(cache_file)
+        saved_case_info_dir = cache['saved_case_info_dir']
 
     if saved_case_info_dir:
         print(f"Saved path to get-k8s-info output: {saved_case_info_dir}")
@@ -139,16 +138,26 @@ def main():
     with open(get_pods_output, 'r') as get_pods_output_file:
         get_pods_output_lines = get_pods_output_file.readlines()
 
+    if 'NODE' in get_pods_output_lines[0]:
+        node_name_index = get_pods_output_lines[0].split().index('NODE')
+    else:
+        print("The 'NODE' column is not present in the get pods output. Defaulting to 'unknown'.")
+        logging.warning("The 'NODE' column is not present in the get pods output. Defaulting to 'unknown'.")
+
     pods_with_errors = []
+    pods_without_errors = []
+
     for line in get_pods_output_lines:
         matched, category = line_matches_error_patterns(line, conf["get_pods_error_patterns"], "all")
+        pod_name = line.split()[0]
+        pod_node = line.split()[node_name_index] if node_name_index != -1 else "unknown"
         if matched:
-            pod_name = line.split()[0]
-            pod_node = line.split()[6]
             pod_info = PodInfo(pod_name, category, pod_node, namespace_path)
             pod_info.add_error(get_pods_output, line.strip())
             pods_with_errors.append(pod_info)
-
+        else:
+            pod_info = PodInfo(pod_name, "No Issues", pod_node, namespace_path)
+            pods_without_errors.append(pod_info)
 
     
     # Read the kubectl describe pods command output
@@ -201,6 +210,14 @@ def main():
             json.dump(clean_errors_output, f, indent=2)
 
         print(f"\n Clean errors saved to: {all_errors_path}")
+    
+    log_file_collection(namespace_path, pods_without_errors)
+
+    if pods_without_errors:
+        print("\nPods without issues:")
+        for pod in pods_without_errors:
+            if pod.errors:
+                pod.print_info()
 
 if __name__ == "__main__":
     main()
