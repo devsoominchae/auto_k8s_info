@@ -1,0 +1,45 @@
+--------------------
+Pod Name: prepull-ds-wmzfhblu-d9pcg
+Status: Hanged in Init
+Node: ntlhql5415-it-mis-k8s-sas-viya-prd-worker06-compute02
+Details:
+
+Issues in C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya\get\pods.txt:
+  - prepull-ds-wmzfhblu-d9pcg                                         0/1     Init:0/1      0             16m     <none>           ntlhql5415-it-mis-k8s-sas-viya-prd-worker06-compute02   <none>           <none>
+
+Issues in C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya\describe\pods.txt:
+  - Warning  FailedCreatePodSandBox  16m                 kubelet            Failed to create pod sandbox: rpc error: code = Unknown desc = [failed to set up sandbox container "b76aaccd576583c3e13b9a91fa5c3ca64254d78fcd30d16209cb261c9e4b2f95" network for pod "prepull-ds-wmzfhblu-d9pcg": networkPlugin cni failed to set up pod "prepull-ds-wmzfhblu-d9pcg_mis-viya" network: Multus: [mis-viya/prepull-ds-wmzfhblu-d9pcg]: error getting pod: Unauthorized, failed to clean up sandbox container "b76aaccd576583c3e13b9a91fa5c3ca64254d78fcd30d16209cb261c9e4b2f95" network for pod "prepull-ds-wmzfhblu-d9pcg": networkPlugin cni failed to teardown pod "prepull-ds-wmzfhblu-d9pcg_mis-viya" network: Multus: [mis-viya/prepull-ds-wmzfhblu-d9pcg]: error getting pod: Unauthorized]
+--------------------
+--------------------
+Pod Name: prepull-ds-wmzfhblu-g5br2
+Status: Hanged in Init
+Node: ntlhql5416-it-mis-k8s-sas-viya-prd-worker07-compute03
+Details:
+
+Issues in C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya\get\pods.txt:
+  - prepull-ds-wmzfhblu-g5br2                                         0/1     Init:0/1      0             16m     <none>           ntlhql5416-it-mis-k8s-sas-viya-prd-worker07-compute03   <none>           <none>
+
+Issues in C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya\describe\pods.txt:
+  - Warning  FailedCreatePodSandBox  16m                 kubelet            Failed to create pod sandbox: rpc error: code = Unknown desc = [failed to set up sandbox container "ccc1da42fd7b51438be1fea8de682ce6651eade70ef0d72e39efc4b9ce7c006d" network for pod "prepull-ds-wmzfhblu-g5br2": networkPlugin cni failed to set up pod "prepull-ds-wmzfhblu-g5br2_mis-viya" network: Multus: [mis-viya/prepull-ds-wmzfhblu-g5br2]: error getting pod: Unauthorized, failed to clean up sandbox container "ccc1da42fd7b51438be1fea8de682ce6651eade70ef0d72e39efc4b9ce7c006d" network for pod "prepull-ds-wmzfhblu-g5br2": networkPlugin cni failed to teardown pod "prepull-ds-wmzfhblu-g5br2_mis-viya" network: Multus: [mis-viya/prepull-ds-wmzfhblu-g5br2]: error getting pod: Unauthorized]
+--------------------
+--------------------
+Pod Name: prepull-ds-wmzfhblu-tltck
+Status: Hanged in Init
+Node: ntlhql5417-it-mis-k8s-sas-viya-prd-worker08-compute04
+Details:
+
+Issues in C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya\get\pods.txt:
+  - prepull-ds-wmzfhblu-tltck                                         0/1     Init:0/1      0             16m     <none>           ntlhql5417-it-mis-k8s-sas-viya-prd-worker08-compute04   <none>           <none>
+
+Issues in C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya\describe\pods.txt:
+  - Warning  FailedCreatePodSandBox  16m                 kubelet            Failed to create pod sandbox: rpc error: code = Unknown desc = [failed to set up sandbox container "2ae33f4b360ec11da38ecb034b2ff83c13b73e0f4281e5253048d801f41c5554" network for pod "prepull-ds-wmzfhblu-tltck": networkPlugin cni failed to set up pod "prepull-ds-wmzfhblu-tltck_mis-viya" network: Multus: [mis-viya/prepull-ds-wmzfhblu-tltck]: error getting pod: Unauthorized, failed to clean up sandbox container "2ae33f4b360ec11da38ecb034b2ff83c13b73e0f4281e5253048d801f41c5554" network for pod "prepull-ds-wmzfhblu-tltck": networkPlugin cni failed to teardown pod "prepull-ds-wmzfhblu-tltck_mis-viya" network: Multus: [mis-viya/prepull-ds-wmzfhblu-tltck]: error getting pod: Unauthorized]
+--------------------
+--------------------
+Pod Name: sas-jobflow-scheduler-5912f32c-dd22-4e00-80a1-9ca440b7fae582wvs
+Status: Hanged in Init
+Node: ntlhql5415-it-mis-k8s-sas-viya-prd-worker06-compute02
+Details:
+
+Issues in C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya\get\pods.txt:
+  - sas-jobflow-scheduler-5912f32c-dd22-4e00-80a1-9ca440b7fae582wvs   0/1     Init:0/3      0             23h     <none>           ntlhql5415-it-mis-k8s-sas-viya-prd-worker06-compute02   <none>           <none>
+--------------------

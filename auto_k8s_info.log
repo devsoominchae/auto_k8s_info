@@ -1,0 +1,1002 @@
+2025-08-05 14:33:06,717 INFO START
+2025-08-05 14:33:06,740 INFO Saved path to get-k8s-info output: C:\sample_data\CS0289415_20250804_120215
+2025-08-05 14:52:54,176 INFO START
+2025-08-05 14:52:54,201 INFO Saved path to get-k8s-info output: C:\sample_data\CS0289415_20250804_120215
+2025-08-05 14:53:00,828 INFO Using saved path: C:\sample_data\CS0289415_20250804_120215
+2025-08-05 14:53:02,013 INFO Processing logs on C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya
+2025-08-05 14:53:02,048 INFO Initializing Printer with namespace: prepull-ds-wmzfhblu-d9pcg and mode: both
+2025-08-05 14:53:02,048 INFO Error in C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya\get\pods.txt: prepull-ds-wmzfhblu-d9pcg                                         0/1     Init:0/1      0             16m     <none>           ntlhql5415-it-mis-k8s-sas-viya-prd-worker06-compute02   <none>           <none>
+2025-08-05 14:53:02,061 INFO Initializing Printer with namespace: prepull-ds-wmzfhblu-g5br2 and mode: both
+2025-08-05 14:53:02,061 INFO Error in C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya\get\pods.txt: prepull-ds-wmzfhblu-g5br2                                         0/1     Init:0/1      0             16m     <none>           ntlhql5416-it-mis-k8s-sas-viya-prd-worker07-compute03   <none>           <none>
+2025-08-05 14:53:02,061 INFO Initializing Printer with namespace: prepull-ds-wmzfhblu-tltck and mode: both
+2025-08-05 14:53:02,061 INFO Error in C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya\get\pods.txt: prepull-ds-wmzfhblu-tltck                                         0/1     Init:0/1      0             16m     <none>           ntlhql5417-it-mis-k8s-sas-viya-prd-worker08-compute04   <none>           <none>
+2025-08-05 14:53:02,061 INFO Initializing Printer with namespace: sas-jobflow-scheduler-5912f32c-dd22-4e00-80a1-9ca440b7fae582wvs and mode: both
+2025-08-05 14:53:02,061 INFO Error in C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya\get\pods.txt: sas-jobflow-scheduler-5912f32c-dd22-4e00-80a1-9ca440b7fae582wvs   0/1     Init:0/3      0             23h     <none>           ntlhql5415-it-mis-k8s-sas-viya-prd-worker06-compute02   <none>           <none>
+2025-08-05 14:53:02,114 INFO Error in C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya\describe\pods.txt: Warning  FailedCreatePodSandBox  16m                 kubelet            Failed to create pod sandbox: rpc error: code = Unknown desc = [failed to set up sandbox container "b76aaccd576583c3e13b9a91fa5c3ca64254d78fcd30d16209cb261c9e4b2f95" network for pod "prepull-ds-wmzfhblu-d9pcg": networkPlugin cni failed to set up pod "prepull-ds-wmzfhblu-d9pcg_mis-viya" network: Multus: [mis-viya/prepull-ds-wmzfhblu-d9pcg]: error getting pod: Unauthorized, failed to clean up sandbox container "b76aaccd576583c3e13b9a91fa5c3ca64254d78fcd30d16209cb261c9e4b2f95" network for pod "prepull-ds-wmzfhblu-d9pcg": networkPlugin cni failed to teardown pod "prepull-ds-wmzfhblu-d9pcg_mis-viya" network: Multus: [mis-viya/prepull-ds-wmzfhblu-d9pcg]: error getting pod: Unauthorized]
+2025-08-05 14:53:02,114 INFO Error in C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya\describe\pods.txt: Warning  FailedCreatePodSandBox  16m                 kubelet            Failed to create pod sandbox: rpc error: code = Unknown desc = [failed to set up sandbox container "ccc1da42fd7b51438be1fea8de682ce6651eade70ef0d72e39efc4b9ce7c006d" network for pod "prepull-ds-wmzfhblu-g5br2": networkPlugin cni failed to set up pod "prepull-ds-wmzfhblu-g5br2_mis-viya" network: Multus: [mis-viya/prepull-ds-wmzfhblu-g5br2]: error getting pod: Unauthorized, failed to clean up sandbox container "ccc1da42fd7b51438be1fea8de682ce6651eade70ef0d72e39efc4b9ce7c006d" network for pod "prepull-ds-wmzfhblu-g5br2": networkPlugin cni failed to teardown pod "prepull-ds-wmzfhblu-g5br2_mis-viya" network: Multus: [mis-viya/prepull-ds-wmzfhblu-g5br2]: error getting pod: Unauthorized]
+2025-08-05 14:53:02,114 INFO Error in C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya\describe\pods.txt: Warning  FailedCreatePodSandBox  16m                 kubelet            Failed to create pod sandbox: rpc error: code = Unknown desc = [failed to set up sandbox container "2ae33f4b360ec11da38ecb034b2ff83c13b73e0f4281e5253048d801f41c5554" network for pod "prepull-ds-wmzfhblu-tltck": networkPlugin cni failed to set up pod "prepull-ds-wmzfhblu-tltck_mis-viya" network: Multus: [mis-viya/prepull-ds-wmzfhblu-tltck]: error getting pod: Unauthorized, failed to clean up sandbox container "2ae33f4b360ec11da38ecb034b2ff83c13b73e0f4281e5253048d801f41c5554" network for pod "prepull-ds-wmzfhblu-tltck": networkPlugin cni failed to teardown pod "prepull-ds-wmzfhblu-tltck_mis-viya" network: Multus: [mis-viya/prepull-ds-wmzfhblu-tltck]: error getting pod: Unauthorized]
+2025-08-05 14:53:02,147 INFO Found 4 pods with issues:
+2025-08-05 14:53:02,148 INFO - prepull-ds-wmzfhblu-d9pcg
+2025-08-05 14:53:02,148 INFO - prepull-ds-wmzfhblu-g5br2
+2025-08-05 14:53:02,148 INFO - prepull-ds-wmzfhblu-tltck
+2025-08-05 14:53:02,148 INFO - sas-jobflow-scheduler-5912f32c-dd22-4e00-80a1-9ca440b7fae582wvs
+2025-08-05 14:56:24,547 INFO START
+2025-08-05 14:56:24,547 INFO Saved path to get-k8s-info output: C:\sample_data\CS0289415_20250804_120215
+2025-08-05 14:56:25,823 INFO Using saved path: C:\sample_data\CS0289415_20250804_120215
+2025-08-05 14:56:27,040 INFO Processing logs on C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya
+2025-08-05 14:56:27,040 INFO Initializing Printer with namespace: mis-viya and mode: both
+2025-08-05 14:56:27,040 INFO Error in C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya\get\pods.txt: prepull-ds-wmzfhblu-d9pcg                                         0/1     Init:0/1      0             16m     <none>           ntlhql5415-it-mis-k8s-sas-viya-prd-worker06-compute02   <none>           <none>
+2025-08-05 14:56:27,040 INFO Initializing Printer with namespace: mis-viya and mode: both
+2025-08-05 14:56:27,040 INFO Error in C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya\get\pods.txt: prepull-ds-wmzfhblu-g5br2                                         0/1     Init:0/1      0             16m     <none>           ntlhql5416-it-mis-k8s-sas-viya-prd-worker07-compute03   <none>           <none>
+2025-08-05 14:56:27,040 INFO Initializing Printer with namespace: mis-viya and mode: both
+2025-08-05 14:56:27,043 INFO Error in C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya\get\pods.txt: prepull-ds-wmzfhblu-tltck                                         0/1     Init:0/1      0             16m     <none>           ntlhql5417-it-mis-k8s-sas-viya-prd-worker08-compute04   <none>           <none>
+2025-08-05 14:56:27,043 INFO Initializing Printer with namespace: mis-viya and mode: both
+2025-08-05 14:56:27,043 INFO Error in C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya\get\pods.txt: sas-jobflow-scheduler-5912f32c-dd22-4e00-80a1-9ca440b7fae582wvs   0/1     Init:0/3      0             23h     <none>           ntlhql5415-it-mis-k8s-sas-viya-prd-worker06-compute02   <none>           <none>
+2025-08-05 14:56:27,078 INFO Error in C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya\describe\pods.txt: Warning  FailedCreatePodSandBox  16m                 kubelet            Failed to create pod sandbox: rpc error: code = Unknown desc = [failed to set up sandbox container "b76aaccd576583c3e13b9a91fa5c3ca64254d78fcd30d16209cb261c9e4b2f95" network for pod "prepull-ds-wmzfhblu-d9pcg": networkPlugin cni failed to set up pod "prepull-ds-wmzfhblu-d9pcg_mis-viya" network: Multus: [mis-viya/prepull-ds-wmzfhblu-d9pcg]: error getting pod: Unauthorized, failed to clean up sandbox container "b76aaccd576583c3e13b9a91fa5c3ca64254d78fcd30d16209cb261c9e4b2f95" network for pod "prepull-ds-wmzfhblu-d9pcg": networkPlugin cni failed to teardown pod "prepull-ds-wmzfhblu-d9pcg_mis-viya" network: Multus: [mis-viya/prepull-ds-wmzfhblu-d9pcg]: error getting pod: Unauthorized]
+2025-08-05 14:56:27,078 INFO Error in C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya\describe\pods.txt: Warning  FailedCreatePodSandBox  16m                 kubelet            Failed to create pod sandbox: rpc error: code = Unknown desc = [failed to set up sandbox container "ccc1da42fd7b51438be1fea8de682ce6651eade70ef0d72e39efc4b9ce7c006d" network for pod "prepull-ds-wmzfhblu-g5br2": networkPlugin cni failed to set up pod "prepull-ds-wmzfhblu-g5br2_mis-viya" network: Multus: [mis-viya/prepull-ds-wmzfhblu-g5br2]: error getting pod: Unauthorized, failed to clean up sandbox container "ccc1da42fd7b51438be1fea8de682ce6651eade70ef0d72e39efc4b9ce7c006d" network for pod "prepull-ds-wmzfhblu-g5br2": networkPlugin cni failed to teardown pod "prepull-ds-wmzfhblu-g5br2_mis-viya" network: Multus: [mis-viya/prepull-ds-wmzfhblu-g5br2]: error getting pod: Unauthorized]
+2025-08-05 14:56:27,078 INFO Error in C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya\describe\pods.txt: Warning  FailedCreatePodSandBox  16m                 kubelet            Failed to create pod sandbox: rpc error: code = Unknown desc = [failed to set up sandbox container "2ae33f4b360ec11da38ecb034b2ff83c13b73e0f4281e5253048d801f41c5554" network for pod "prepull-ds-wmzfhblu-tltck": networkPlugin cni failed to set up pod "prepull-ds-wmzfhblu-tltck_mis-viya" network: Multus: [mis-viya/prepull-ds-wmzfhblu-tltck]: error getting pod: Unauthorized, failed to clean up sandbox container "2ae33f4b360ec11da38ecb034b2ff83c13b73e0f4281e5253048d801f41c5554" network for pod "prepull-ds-wmzfhblu-tltck": networkPlugin cni failed to teardown pod "prepull-ds-wmzfhblu-tltck_mis-viya" network: Multus: [mis-viya/prepull-ds-wmzfhblu-tltck]: error getting pod: Unauthorized]
+2025-08-05 14:56:27,130 INFO Found 4 pods with issues:
+2025-08-05 14:56:27,132 INFO - prepull-ds-wmzfhblu-d9pcg
+2025-08-05 14:56:27,133 INFO - prepull-ds-wmzfhblu-g5br2
+2025-08-05 14:56:27,134 INFO - prepull-ds-wmzfhblu-tltck
+2025-08-05 14:56:27,134 INFO - sas-jobflow-scheduler-5912f32c-dd22-4e00-80a1-9ca440b7fae582wvs
+2025-08-05 14:58:02,596 INFO START
+2025-08-05 14:58:02,596 INFO Saved path to get-k8s-info output: C:\sample_data\CS0289415_20250804_120215
+2025-08-05 14:58:03,590 INFO Using saved path: C:\sample_data\CS0289415_20250804_120215
+2025-08-05 14:58:04,754 INFO Processing logs on C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya
+2025-08-05 14:58:04,754 INFO Initializing Printer with namespace: mis-viya and mode: both
+2025-08-05 14:58:04,763 INFO Error in C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya\get\pods.txt: prepull-ds-wmzfhblu-d9pcg                                         0/1     Init:0/1      0             16m     <none>           ntlhql5415-it-mis-k8s-sas-viya-prd-worker06-compute02   <none>           <none>
+2025-08-05 14:58:04,763 INFO Initializing Printer with namespace: mis-viya and mode: both
+2025-08-05 14:58:04,763 INFO Error in C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya\get\pods.txt: prepull-ds-wmzfhblu-g5br2                                         0/1     Init:0/1      0             16m     <none>           ntlhql5416-it-mis-k8s-sas-viya-prd-worker07-compute03   <none>           <none>
+2025-08-05 14:58:04,763 INFO Initializing Printer with namespace: mis-viya and mode: both
+2025-08-05 14:58:04,763 INFO Error in C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya\get\pods.txt: prepull-ds-wmzfhblu-tltck                                         0/1     Init:0/1      0             16m     <none>           ntlhql5417-it-mis-k8s-sas-viya-prd-worker08-compute04   <none>           <none>
+2025-08-05 14:58:04,765 INFO Initializing Printer with namespace: mis-viya and mode: both
+2025-08-05 14:58:04,765 INFO Error in C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya\get\pods.txt: sas-jobflow-scheduler-5912f32c-dd22-4e00-80a1-9ca440b7fae582wvs   0/1     Init:0/3      0             23h     <none>           ntlhql5415-it-mis-k8s-sas-viya-prd-worker06-compute02   <none>           <none>
+2025-08-05 14:58:04,794 INFO Error in C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya\describe\pods.txt: Warning  FailedCreatePodSandBox  16m                 kubelet            Failed to create pod sandbox: rpc error: code = Unknown desc = [failed to set up sandbox container "b76aaccd576583c3e13b9a91fa5c3ca64254d78fcd30d16209cb261c9e4b2f95" network for pod "prepull-ds-wmzfhblu-d9pcg": networkPlugin cni failed to set up pod "prepull-ds-wmzfhblu-d9pcg_mis-viya" network: Multus: [mis-viya/prepull-ds-wmzfhblu-d9pcg]: error getting pod: Unauthorized, failed to clean up sandbox container "b76aaccd576583c3e13b9a91fa5c3ca64254d78fcd30d16209cb261c9e4b2f95" network for pod "prepull-ds-wmzfhblu-d9pcg": networkPlugin cni failed to teardown pod "prepull-ds-wmzfhblu-d9pcg_mis-viya" network: Multus: [mis-viya/prepull-ds-wmzfhblu-d9pcg]: error getting pod: Unauthorized]
+2025-08-05 14:58:04,794 INFO Error in C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya\describe\pods.txt: Warning  FailedCreatePodSandBox  16m                 kubelet            Failed to create pod sandbox: rpc error: code = Unknown desc = [failed to set up sandbox container "ccc1da42fd7b51438be1fea8de682ce6651eade70ef0d72e39efc4b9ce7c006d" network for pod "prepull-ds-wmzfhblu-g5br2": networkPlugin cni failed to set up pod "prepull-ds-wmzfhblu-g5br2_mis-viya" network: Multus: [mis-viya/prepull-ds-wmzfhblu-g5br2]: error getting pod: Unauthorized, failed to clean up sandbox container "ccc1da42fd7b51438be1fea8de682ce6651eade70ef0d72e39efc4b9ce7c006d" network for pod "prepull-ds-wmzfhblu-g5br2": networkPlugin cni failed to teardown pod "prepull-ds-wmzfhblu-g5br2_mis-viya" network: Multus: [mis-viya/prepull-ds-wmzfhblu-g5br2]: error getting pod: Unauthorized]
+2025-08-05 14:58:04,794 INFO Error in C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya\describe\pods.txt: Warning  FailedCreatePodSandBox  16m                 kubelet            Failed to create pod sandbox: rpc error: code = Unknown desc = [failed to set up sandbox container "2ae33f4b360ec11da38ecb034b2ff83c13b73e0f4281e5253048d801f41c5554" network for pod "prepull-ds-wmzfhblu-tltck": networkPlugin cni failed to set up pod "prepull-ds-wmzfhblu-tltck_mis-viya" network: Multus: [mis-viya/prepull-ds-wmzfhblu-tltck]: error getting pod: Unauthorized, failed to clean up sandbox container "2ae33f4b360ec11da38ecb034b2ff83c13b73e0f4281e5253048d801f41c5554" network for pod "prepull-ds-wmzfhblu-tltck": networkPlugin cni failed to teardown pod "prepull-ds-wmzfhblu-tltck_mis-viya" network: Multus: [mis-viya/prepull-ds-wmzfhblu-tltck]: error getting pod: Unauthorized]
+2025-08-05 14:58:04,824 INFO Found 4 pods with issues:
+2025-08-05 14:58:04,824 INFO - prepull-ds-wmzfhblu-d9pcg
+2025-08-05 14:58:04,824 INFO - prepull-ds-wmzfhblu-g5br2
+2025-08-05 14:58:04,824 INFO - prepull-ds-wmzfhblu-tltck
+2025-08-05 14:58:04,824 INFO - sas-jobflow-scheduler-5912f32c-dd22-4e00-80a1-9ca440b7fae582wvs
+2025-08-05 15:31:47,937 INFO START
+2025-08-05 15:31:47,968 INFO Saved path to get-k8s-info output: C:\sample_data\CS0289415_20250804_120215
+2025-08-05 15:31:48,941 INFO Using saved path: C:\sample_data\CS0289415_20250804_120215
+2025-08-05 15:31:50,326 INFO Processing logs on C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya
+2025-08-05 15:31:50,370 INFO Initializing Printer with namespace: mis-viya and mode: both
+2025-08-05 15:31:50,377 INFO Error in C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya\get\pods.txt: prepull-ds-wmzfhblu-d9pcg                                         0/1     Init:0/1      0             16m     <none>           ntlhql5415-it-mis-k8s-sas-viya-prd-worker06-compute02   <none>           <none>
+2025-08-05 15:31:50,377 INFO Initializing Printer with namespace: mis-viya and mode: both
+2025-08-05 15:31:50,377 INFO Error in C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya\get\pods.txt: prepull-ds-wmzfhblu-g5br2                                         0/1     Init:0/1      0             16m     <none>           ntlhql5416-it-mis-k8s-sas-viya-prd-worker07-compute03   <none>           <none>
+2025-08-05 15:31:50,377 INFO Initializing Printer with namespace: mis-viya and mode: both
+2025-08-05 15:31:50,377 INFO Error in C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya\get\pods.txt: prepull-ds-wmzfhblu-tltck                                         0/1     Init:0/1      0             16m     <none>           ntlhql5417-it-mis-k8s-sas-viya-prd-worker08-compute04   <none>           <none>
+2025-08-05 15:31:50,377 INFO Initializing Printer with namespace: mis-viya and mode: both
+2025-08-05 15:31:50,377 INFO Error in C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya\get\pods.txt: sas-jobflow-scheduler-5912f32c-dd22-4e00-80a1-9ca440b7fae582wvs   0/1     Init:0/3      0             23h     <none>           ntlhql5415-it-mis-k8s-sas-viya-prd-worker06-compute02   <none>           <none>
+2025-08-05 15:31:50,446 INFO Error in C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya\describe\pods.txt: Warning  FailedCreatePodSandBox  16m                 kubelet            Failed to create pod sandbox: rpc error: code = Unknown desc = [failed to set up sandbox container "b76aaccd576583c3e13b9a91fa5c3ca64254d78fcd30d16209cb261c9e4b2f95" network for pod "prepull-ds-wmzfhblu-d9pcg": networkPlugin cni failed to set up pod "prepull-ds-wmzfhblu-d9pcg_mis-viya" network: Multus: [mis-viya/prepull-ds-wmzfhblu-d9pcg]: error getting pod: Unauthorized, failed to clean up sandbox container "b76aaccd576583c3e13b9a91fa5c3ca64254d78fcd30d16209cb261c9e4b2f95" network for pod "prepull-ds-wmzfhblu-d9pcg": networkPlugin cni failed to teardown pod "prepull-ds-wmzfhblu-d9pcg_mis-viya" network: Multus: [mis-viya/prepull-ds-wmzfhblu-d9pcg]: error getting pod: Unauthorized]
+2025-08-05 15:31:50,446 INFO Error in C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya\describe\pods.txt: Warning  FailedCreatePodSandBox  16m                 kubelet            Failed to create pod sandbox: rpc error: code = Unknown desc = [failed to set up sandbox container "ccc1da42fd7b51438be1fea8de682ce6651eade70ef0d72e39efc4b9ce7c006d" network for pod "prepull-ds-wmzfhblu-g5br2": networkPlugin cni failed to set up pod "prepull-ds-wmzfhblu-g5br2_mis-viya" network: Multus: [mis-viya/prepull-ds-wmzfhblu-g5br2]: error getting pod: Unauthorized, failed to clean up sandbox container "ccc1da42fd7b51438be1fea8de682ce6651eade70ef0d72e39efc4b9ce7c006d" network for pod "prepull-ds-wmzfhblu-g5br2": networkPlugin cni failed to teardown pod "prepull-ds-wmzfhblu-g5br2_mis-viya" network: Multus: [mis-viya/prepull-ds-wmzfhblu-g5br2]: error getting pod: Unauthorized]
+2025-08-05 15:31:50,446 INFO Error in C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya\describe\pods.txt: Warning  FailedCreatePodSandBox  16m                 kubelet            Failed to create pod sandbox: rpc error: code = Unknown desc = [failed to set up sandbox container "2ae33f4b360ec11da38ecb034b2ff83c13b73e0f4281e5253048d801f41c5554" network for pod "prepull-ds-wmzfhblu-tltck": networkPlugin cni failed to set up pod "prepull-ds-wmzfhblu-tltck_mis-viya" network: Multus: [mis-viya/prepull-ds-wmzfhblu-tltck]: error getting pod: Unauthorized, failed to clean up sandbox container "2ae33f4b360ec11da38ecb034b2ff83c13b73e0f4281e5253048d801f41c5554" network for pod "prepull-ds-wmzfhblu-tltck": networkPlugin cni failed to teardown pod "prepull-ds-wmzfhblu-tltck_mis-viya" network: Multus: [mis-viya/prepull-ds-wmzfhblu-tltck]: error getting pod: Unauthorized]
+2025-08-05 15:31:50,475 INFO Found 4 pods with issues:
+2025-08-05 15:31:50,475 INFO - prepull-ds-wmzfhblu-d9pcg
+2025-08-05 15:31:50,476 INFO - prepull-ds-wmzfhblu-g5br2
+2025-08-05 15:31:50,476 INFO - prepull-ds-wmzfhblu-tltck
+2025-08-05 15:31:50,476 INFO - sas-jobflow-scheduler-5912f32c-dd22-4e00-80a1-9ca440b7fae582wvs
+2025-08-05 15:58:44,294 INFO START
+2025-08-05 15:58:44,326 INFO Saved path to get-k8s-info output: C:\sample_data\CS0289415_20250804_120215
+2025-08-05 15:58:45,484 INFO Using saved path: C:\sample_data\CS0289415_20250804_120215
+2025-08-05 15:58:46,253 INFO Processing logs on C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya
+2025-08-05 15:58:46,253 INFO Initializing Printer with namespace: mis-viya and mode: both
+2025-08-05 15:58:46,262 INFO Error in C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya\get\pods.txt: prepull-ds-wmzfhblu-d9pcg                                         0/1     Init:0/1      0             16m     <none>           ntlhql5415-it-mis-k8s-sas-viya-prd-worker06-compute02   <none>           <none>
+2025-08-05 15:58:46,262 INFO Initializing Printer with namespace: mis-viya and mode: both
+2025-08-05 15:58:46,262 INFO Error in C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya\get\pods.txt: prepull-ds-wmzfhblu-g5br2                                         0/1     Init:0/1      0             16m     <none>           ntlhql5416-it-mis-k8s-sas-viya-prd-worker07-compute03   <none>           <none>
+2025-08-05 15:58:46,262 INFO Initializing Printer with namespace: mis-viya and mode: both
+2025-08-05 15:58:46,262 INFO Error in C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya\get\pods.txt: prepull-ds-wmzfhblu-tltck                                         0/1     Init:0/1      0             16m     <none>           ntlhql5417-it-mis-k8s-sas-viya-prd-worker08-compute04   <none>           <none>
+2025-08-05 15:58:46,262 INFO Initializing Printer with namespace: mis-viya and mode: both
+2025-08-05 15:58:46,262 INFO Error in C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya\get\pods.txt: sas-jobflow-scheduler-5912f32c-dd22-4e00-80a1-9ca440b7fae582wvs   0/1     Init:0/3      0             23h     <none>           ntlhql5415-it-mis-k8s-sas-viya-prd-worker06-compute02   <none>           <none>
+2025-08-05 15:58:46,331 INFO Error in C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya\describe\pods.txt: Warning  FailedCreatePodSandBox  16m                 kubelet            Failed to create pod sandbox: rpc error: code = Unknown desc = [failed to set up sandbox container "b76aaccd576583c3e13b9a91fa5c3ca64254d78fcd30d16209cb261c9e4b2f95" network for pod "prepull-ds-wmzfhblu-d9pcg": networkPlugin cni failed to set up pod "prepull-ds-wmzfhblu-d9pcg_mis-viya" network: Multus: [mis-viya/prepull-ds-wmzfhblu-d9pcg]: error getting pod: Unauthorized, failed to clean up sandbox container "b76aaccd576583c3e13b9a91fa5c3ca64254d78fcd30d16209cb261c9e4b2f95" network for pod "prepull-ds-wmzfhblu-d9pcg": networkPlugin cni failed to teardown pod "prepull-ds-wmzfhblu-d9pcg_mis-viya" network: Multus: [mis-viya/prepull-ds-wmzfhblu-d9pcg]: error getting pod: Unauthorized]
+2025-08-05 15:58:46,331 INFO Error in C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya\describe\pods.txt: Warning  FailedCreatePodSandBox  16m                 kubelet            Failed to create pod sandbox: rpc error: code = Unknown desc = [failed to set up sandbox container "ccc1da42fd7b51438be1fea8de682ce6651eade70ef0d72e39efc4b9ce7c006d" network for pod "prepull-ds-wmzfhblu-g5br2": networkPlugin cni failed to set up pod "prepull-ds-wmzfhblu-g5br2_mis-viya" network: Multus: [mis-viya/prepull-ds-wmzfhblu-g5br2]: error getting pod: Unauthorized, failed to clean up sandbox container "ccc1da42fd7b51438be1fea8de682ce6651eade70ef0d72e39efc4b9ce7c006d" network for pod "prepull-ds-wmzfhblu-g5br2": networkPlugin cni failed to teardown pod "prepull-ds-wmzfhblu-g5br2_mis-viya" network: Multus: [mis-viya/prepull-ds-wmzfhblu-g5br2]: error getting pod: Unauthorized]
+2025-08-05 15:58:46,331 INFO Error in C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya\describe\pods.txt: Warning  FailedCreatePodSandBox  16m                 kubelet            Failed to create pod sandbox: rpc error: code = Unknown desc = [failed to set up sandbox container "2ae33f4b360ec11da38ecb034b2ff83c13b73e0f4281e5253048d801f41c5554" network for pod "prepull-ds-wmzfhblu-tltck": networkPlugin cni failed to set up pod "prepull-ds-wmzfhblu-tltck_mis-viya" network: Multus: [mis-viya/prepull-ds-wmzfhblu-tltck]: error getting pod: Unauthorized, failed to clean up sandbox container "2ae33f4b360ec11da38ecb034b2ff83c13b73e0f4281e5253048d801f41c5554" network for pod "prepull-ds-wmzfhblu-tltck": networkPlugin cni failed to teardown pod "prepull-ds-wmzfhblu-tltck_mis-viya" network: Multus: [mis-viya/prepull-ds-wmzfhblu-tltck]: error getting pod: Unauthorized]
+2025-08-05 15:58:46,356 INFO Found 4 pods with issues:
+2025-08-05 15:58:46,356 INFO - prepull-ds-wmzfhblu-d9pcg
+2025-08-05 15:58:46,356 INFO - prepull-ds-wmzfhblu-g5br2
+2025-08-05 15:58:46,356 INFO - prepull-ds-wmzfhblu-tltck
+2025-08-05 15:58:46,361 INFO - sas-jobflow-scheduler-5912f32c-dd22-4e00-80a1-9ca440b7fae582wvs
+2025-08-05 16:18:16,600 INFO START
+2025-08-05 16:18:16,628 INFO Saved path to get-k8s-info output: C:\sample_data\CS0289415_20250804_120215
+2025-08-05 16:18:17,959 INFO Using saved path: C:\sample_data\CS0289415_20250804_120215
+2025-08-05 16:18:19,268 INFO Processing logs on C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya
+2025-08-05 16:18:19,294 INFO Initializing Printer with namespace: mis-viya and mode: both
+2025-08-05 16:18:19,297 INFO Printer file path set to: output\auto_k8s_mis-viya_20250805_161819.txt
+2025-08-05 16:18:19,298 INFO Error in C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya\get\pods.txt: prepull-ds-wmzfhblu-d9pcg                                         0/1     Init:0/1      0             16m     <none>           ntlhql5415-it-mis-k8s-sas-viya-prd-worker06-compute02   <none>           <none>
+2025-08-05 16:18:19,298 INFO Initializing Printer with namespace: mis-viya and mode: both
+2025-08-05 16:18:19,299 INFO Printer file path set to: output\auto_k8s_mis-viya_20250805_161819.txt
+2025-08-05 16:18:19,299 INFO Error in C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya\get\pods.txt: prepull-ds-wmzfhblu-g5br2                                         0/1     Init:0/1      0             16m     <none>           ntlhql5416-it-mis-k8s-sas-viya-prd-worker07-compute03   <none>           <none>
+2025-08-05 16:18:19,299 INFO Initializing Printer with namespace: mis-viya and mode: both
+2025-08-05 16:18:19,301 INFO Printer file path set to: output\auto_k8s_mis-viya_20250805_161819.txt
+2025-08-05 16:18:19,301 INFO Error in C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya\get\pods.txt: prepull-ds-wmzfhblu-tltck                                         0/1     Init:0/1      0             16m     <none>           ntlhql5417-it-mis-k8s-sas-viya-prd-worker08-compute04   <none>           <none>
+2025-08-05 16:18:19,302 INFO Initializing Printer with namespace: mis-viya and mode: both
+2025-08-05 16:18:19,303 INFO Printer file path set to: output\auto_k8s_mis-viya_20250805_161819.txt
+2025-08-05 16:18:19,303 INFO Error in C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya\get\pods.txt: sas-jobflow-scheduler-5912f32c-dd22-4e00-80a1-9ca440b7fae582wvs   0/1     Init:0/3      0             23h     <none>           ntlhql5415-it-mis-k8s-sas-viya-prd-worker06-compute02   <none>           <none>
+2025-08-05 16:18:19,368 INFO Error in C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya\describe\pods.txt: Warning  FailedCreatePodSandBox  16m                 kubelet            Failed to create pod sandbox: rpc error: code = Unknown desc = [failed to set up sandbox container "b76aaccd576583c3e13b9a91fa5c3ca64254d78fcd30d16209cb261c9e4b2f95" network for pod "prepull-ds-wmzfhblu-d9pcg": networkPlugin cni failed to set up pod "prepull-ds-wmzfhblu-d9pcg_mis-viya" network: Multus: [mis-viya/prepull-ds-wmzfhblu-d9pcg]: error getting pod: Unauthorized, failed to clean up sandbox container "b76aaccd576583c3e13b9a91fa5c3ca64254d78fcd30d16209cb261c9e4b2f95" network for pod "prepull-ds-wmzfhblu-d9pcg": networkPlugin cni failed to teardown pod "prepull-ds-wmzfhblu-d9pcg_mis-viya" network: Multus: [mis-viya/prepull-ds-wmzfhblu-d9pcg]: error getting pod: Unauthorized]
+2025-08-05 16:18:19,369 INFO Error in C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya\describe\pods.txt: Warning  FailedCreatePodSandBox  16m                 kubelet            Failed to create pod sandbox: rpc error: code = Unknown desc = [failed to set up sandbox container "ccc1da42fd7b51438be1fea8de682ce6651eade70ef0d72e39efc4b9ce7c006d" network for pod "prepull-ds-wmzfhblu-g5br2": networkPlugin cni failed to set up pod "prepull-ds-wmzfhblu-g5br2_mis-viya" network: Multus: [mis-viya/prepull-ds-wmzfhblu-g5br2]: error getting pod: Unauthorized, failed to clean up sandbox container "ccc1da42fd7b51438be1fea8de682ce6651eade70ef0d72e39efc4b9ce7c006d" network for pod "prepull-ds-wmzfhblu-g5br2": networkPlugin cni failed to teardown pod "prepull-ds-wmzfhblu-g5br2_mis-viya" network: Multus: [mis-viya/prepull-ds-wmzfhblu-g5br2]: error getting pod: Unauthorized]
+2025-08-05 16:18:19,369 INFO Error in C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya\describe\pods.txt: Warning  FailedCreatePodSandBox  16m                 kubelet            Failed to create pod sandbox: rpc error: code = Unknown desc = [failed to set up sandbox container "2ae33f4b360ec11da38ecb034b2ff83c13b73e0f4281e5253048d801f41c5554" network for pod "prepull-ds-wmzfhblu-tltck": networkPlugin cni failed to set up pod "prepull-ds-wmzfhblu-tltck_mis-viya" network: Multus: [mis-viya/prepull-ds-wmzfhblu-tltck]: error getting pod: Unauthorized, failed to clean up sandbox container "2ae33f4b360ec11da38ecb034b2ff83c13b73e0f4281e5253048d801f41c5554" network for pod "prepull-ds-wmzfhblu-tltck": networkPlugin cni failed to teardown pod "prepull-ds-wmzfhblu-tltck_mis-viya" network: Multus: [mis-viya/prepull-ds-wmzfhblu-tltck]: error getting pod: Unauthorized]
+2025-08-05 16:18:19,454 INFO Found 4 pods with issues:
+2025-08-05 16:18:19,455 INFO - prepull-ds-wmzfhblu-d9pcg
+2025-08-05 16:18:19,456 INFO - prepull-ds-wmzfhblu-g5br2
+2025-08-05 16:18:19,456 INFO - prepull-ds-wmzfhblu-tltck
+2025-08-05 16:18:19,457 INFO - sas-jobflow-scheduler-5912f32c-dd22-4e00-80a1-9ca440b7fae582wvs
+2025-08-06 11:39:11,377 INFO START
+2025-08-06 11:39:11,406 INFO Saved path to get-k8s-info output: C:\sample_data\CS0289415_20250804_120215
+2025-08-06 11:39:13,233 INFO Using saved path: C:\sample_data\CS0289415_20250804_120215
+2025-08-06 11:39:14,614 INFO Processing logs on C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya
+2025-08-06 11:39:42,286 INFO START
+2025-08-06 11:39:42,292 INFO Saved path to get-k8s-info output: C:\sample_data\CS0289415_20250804_120215
+2025-08-06 11:39:43,248 INFO Using saved path: C:\sample_data\CS0289415_20250804_120215
+2025-08-06 11:39:44,375 INFO Processing logs on C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya
+2025-08-06 11:39:44,509 INFO Found 4 pods with issues:
+2025-08-06 11:39:44,510 INFO - prepull-ds-wmzfhblu-d9pcg
+2025-08-06 11:39:44,511 INFO - prepull-ds-wmzfhblu-g5br2
+2025-08-06 11:39:44,511 INFO - prepull-ds-wmzfhblu-tltck
+2025-08-06 11:39:44,512 INFO - sas-jobflow-scheduler-5912f32c-dd22-4e00-80a1-9ca440b7fae582wvs
+2025-08-06 11:40:41,996 INFO START
+2025-08-06 11:40:41,998 INFO Saved path to get-k8s-info output: C:\sample_data\CS0289415_20250804_120215
+2025-08-06 11:40:44,314 INFO Using saved path: C:\sample_data\CS0289415_20250804_120215
+2025-08-06 11:40:44,812 INFO Processing logs on C:\sample_data\CS0289415_20250804_120215\kubernetes\mis-viya
+2025-08-06 11:40:44,816 INFO Initializing Printer with namespace: mis-viya and mode: both
+2025-08-06 11:40:44,817 INFO Printer file path set to: output\auto_k8s_mis-viya_20250806_114044.txt
+2025-08-06 11:40:44,818 INFO Initializing Printer with namespace: mis-viya and mode: both
+2025-08-06 11:40:44,818 INFO Printer file path set to: output\auto_k8s_mis-viya_20250806_114044.txt
+2025-08-06 11:40:44,819 INFO Initializing Printer with namespace: mis-viya and mode: both
+2025-08-06 11:40:44,819 INFO Printer file path set to: output\auto_k8s_mis-viya_20250806_114044.txt
+2025-08-06 11:40:44,820 INFO Initializing Printer with namespace: mis-viya and mode: both
+2025-08-06 11:40:44,821 INFO Printer file path set to: output\auto_k8s_mis-viya_20250806_114044.txt
+2025-08-06 11:40:44,907 INFO Found 4 pods with issues:
+2025-08-06 11:40:44,909 INFO - prepull-ds-wmzfhblu-d9pcg
+2025-08-06 11:40:44,912 INFO - prepull-ds-wmzfhblu-g5br2
+2025-08-06 11:40:44,913 INFO - prepull-ds-wmzfhblu-tltck
+2025-08-06 11:40:44,915 INFO - sas-jobflow-scheduler-5912f32c-dd22-4e00-80a1-9ca440b7fae582wvs
+2025-08-06 12:29:38,864 INFO START
+2025-08-06 12:29:38,894 INFO Saved path to get-k8s-info output: C:\sample_data\CS0289415_20250804_120215
+2025-08-06 12:29:40,133 INFO Not using saved path
+2025-08-06 12:29:43,193 INFO Processing logs on C:\sample_data\CS0287492_20250804_115212\kubernetes\viya-dev-ns
+2025-08-06 12:29:43,227 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 12:29:43,229 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_122943.txt
+2025-08-06 12:29:43,231 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 12:29:43,233 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_122943.txt
+2025-08-06 12:29:43,235 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 12:29:43,236 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_122943.txt
+2025-08-06 12:29:43,237 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 12:29:43,239 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_122943.txt
+2025-08-06 12:29:43,728 INFO Found 4 pods with issues:
+2025-08-06 12:29:43,730 INFO - sas-data-studio-app-856cfd5486-v47xk
+2025-08-06 12:29:43,731 INFO - sas-decision-manager-app-58bd99dddf-p2lvm
+2025-08-06 12:29:43,732 INFO - sas-job-execution-app-869948fbdd-lwmzf
+2025-08-06 12:29:43,734 INFO - sas-readiness-66458dc68c-4qn6q
+2025-08-06 13:20:09,396 INFO START
+2025-08-06 13:20:09,415 INFO Saved path to get-k8s-info output: C:\sample_data\CS0287492_20250804_115212
+2025-08-06 13:20:13,818 INFO Using saved path: C:\sample_data\CS0287492_20250804_115212
+2025-08-06 13:20:14,514 INFO Processing logs on C:\sample_data\CS0287492_20250804_115212\kubernetes\openshift-ingress
+2025-08-06 13:20:29,155 INFO START
+2025-08-06 13:20:29,157 INFO Saved path to get-k8s-info output: C:\sample_data\CS0287492_20250804_115212
+2025-08-06 13:20:32,127 INFO Using saved path: C:\sample_data\CS0287492_20250804_115212
+2025-08-06 13:20:33,054 INFO Processing logs on C:\sample_data\CS0287492_20250804_115212\kubernetes\viya-dev-ns
+2025-08-06 13:20:33,091 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 13:20:33,092 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_132033.txt
+2025-08-06 13:20:33,093 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 13:20:33,093 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_132033.txt
+2025-08-06 13:20:33,094 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 13:20:33,094 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_132033.txt
+2025-08-06 13:20:33,096 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 13:20:33,097 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_132033.txt
+2025-08-06 13:20:33,520 INFO Found 4 pods with issues:
+2025-08-06 13:20:33,522 INFO - sas-data-studio-app-856cfd5486-v47xk
+2025-08-06 13:20:33,523 INFO - sas-decision-manager-app-58bd99dddf-p2lvm
+2025-08-06 13:20:33,524 INFO - sas-job-execution-app-869948fbdd-lwmzf
+2025-08-06 13:20:33,524 INFO - sas-readiness-66458dc68c-4qn6q
+2025-08-06 13:20:44,180 INFO START
+2025-08-06 13:20:44,183 INFO Saved path to get-k8s-info output: C:\sample_data\CS0287492_20250804_115212
+2025-08-06 13:20:44,755 INFO Using saved path: C:\sample_data\CS0287492_20250804_115212
+2025-08-06 13:20:45,139 INFO Processing logs on C:\sample_data\CS0287492_20250804_115212\kubernetes\viya-dev-ns
+2025-08-06 13:25:02,455 INFO START
+2025-08-06 13:25:02,457 INFO Saved path to get-k8s-info output: C:\sample_data\CS0287492_20250804_115212
+2025-08-06 13:25:06,055 INFO Using saved path: C:\sample_data\CS0287492_20250804_115212
+2025-08-06 13:25:06,841 INFO Processing logs on C:\sample_data\CS0287492_20250804_115212\kubernetes\viya-dev-ns
+2025-08-06 13:25:06,844 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 13:25:06,845 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_132506.txt
+2025-08-06 13:25:06,845 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 13:25:06,845 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_132506.txt
+2025-08-06 13:25:06,846 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 13:25:06,846 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_132506.txt
+2025-08-06 13:25:06,846 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 13:25:06,846 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_132506.txt
+2025-08-06 13:25:06,917 INFO Found 4 pods with issues:
+2025-08-06 13:25:06,917 INFO - sas-data-studio-app-856cfd5486-v47xk
+2025-08-06 13:25:06,918 INFO - sas-decision-manager-app-58bd99dddf-p2lvm
+2025-08-06 13:25:06,919 INFO - sas-job-execution-app-869948fbdd-lwmzf
+2025-08-06 13:25:06,919 INFO - sas-readiness-66458dc68c-4qn6q
+2025-08-06 13:55:29,085 INFO START
+2025-08-06 13:55:29,086 INFO cache_info.json does not exist. Creating a new one.
+2025-08-06 13:55:29,088 INFO No saved path found. Asking user for input.
+2025-08-06 13:55:47,314 INFO User provided path: C:\sample_data\CS0287492_20250804_115212
+2025-08-06 13:56:37,738 INFO START
+2025-08-06 13:56:37,739 INFO cache_info.json does not exist. Creating a new one.
+2025-08-06 13:56:37,742 INFO No saved path found. Asking user for input.
+2025-08-06 13:56:44,441 INFO User provided path: C:\sample_data\CS0287492_20250804_115212
+2025-08-06 13:57:39,517 INFO START
+2025-08-06 13:57:39,519 INFO cache_info.json does not exist. Creating a new one.
+2025-08-06 13:57:39,524 INFO No saved path found. Asking user for input.
+2025-08-06 13:57:45,327 INFO User provided path: C:\sample_data\CS0287492_20250804_115212
+2025-08-06 13:57:47,244 INFO Processing logs on C:\sample_data\CS0287492_20250804_115212\kubernetes\viya-dev-ns
+2025-08-06 13:57:47,278 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 13:57:47,280 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_135747.txt
+2025-08-06 13:57:47,282 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 13:57:47,284 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_135747.txt
+2025-08-06 13:57:47,286 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 13:57:47,289 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_135747.txt
+2025-08-06 13:57:47,291 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 13:57:47,293 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_135747.txt
+2025-08-06 13:57:47,870 INFO Found 4 pods with issues:
+2025-08-06 13:57:47,872 INFO - sas-data-studio-app-856cfd5486-v47xk
+2025-08-06 13:57:47,873 INFO - sas-decision-manager-app-58bd99dddf-p2lvm
+2025-08-06 13:57:47,875 INFO - sas-job-execution-app-869948fbdd-lwmzf
+2025-08-06 13:57:47,876 INFO - sas-readiness-66458dc68c-4qn6q
+2025-08-06 13:59:39,290 INFO START
+2025-08-06 13:59:39,310 INFO Saved path to get-k8s-info output: C:\sample_data\CS0287492_20250804_115212
+2025-08-06 13:59:40,578 INFO Using saved path: C:\sample_data\CS0287492_20250804_115212
+2025-08-06 13:59:41,774 INFO Processing logs on C:\sample_data\CS0287492_20250804_115212\kubernetes\viya-dev-ns
+2025-08-06 13:59:41,809 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 13:59:41,810 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_135941.txt
+2025-08-06 13:59:41,811 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 13:59:41,811 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_135941.txt
+2025-08-06 13:59:41,811 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 13:59:41,812 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_135941.txt
+2025-08-06 13:59:41,812 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 13:59:41,815 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_135941.txt
+2025-08-06 13:59:42,202 INFO Found 4 pods with issues:
+2025-08-06 13:59:42,202 INFO - sas-data-studio-app-856cfd5486-v47xk
+2025-08-06 13:59:42,203 INFO - sas-decision-manager-app-58bd99dddf-p2lvm
+2025-08-06 13:59:42,203 INFO - sas-job-execution-app-869948fbdd-lwmzf
+2025-08-06 13:59:42,203 INFO - sas-readiness-66458dc68c-4qn6q
+2025-08-06 14:04:03,245 INFO START
+2025-08-06 14:04:03,247 INFO Saved path to get-k8s-info output: C:\sample_data\CS0287492_20250804_115212
+2025-08-06 14:04:08,670 INFO Using saved path: C:\sample_data\CS0287492_20250804_115212
+2025-08-06 14:04:09,174 INFO Processing logs on C:\sample_data\CS0287492_20250804_115212\kubernetes\viya-dev-ns
+2025-08-06 14:04:09,178 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:04:09,179 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_140409.txt
+2025-08-06 14:04:09,179 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:04:09,180 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_140409.txt
+2025-08-06 14:04:09,180 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:04:09,181 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_140409.txt
+2025-08-06 14:04:09,181 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:04:09,182 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_140409.txt
+2025-08-06 14:04:09,272 INFO Found 4 pods with issues:
+2025-08-06 14:04:09,273 INFO - sas-data-studio-app-856cfd5486-v47xk
+2025-08-06 14:04:09,275 INFO - sas-decision-manager-app-58bd99dddf-p2lvm
+2025-08-06 14:04:09,276 INFO - sas-job-execution-app-869948fbdd-lwmzf
+2025-08-06 14:04:09,277 INFO - sas-readiness-66458dc68c-4qn6q
+2025-08-06 14:10:08,674 INFO START
+2025-08-06 14:10:08,675 INFO Saved path to get-k8s-info output: C:\sample_data\CS0287492_20250804_115212
+2025-08-06 14:10:11,852 INFO Using saved path: C:\sample_data\CS0287492_20250804_115212
+2025-08-06 14:10:13,323 INFO Processing logs on C:\sample_data\CS0287492_20250804_115212\kubernetes\viya-dev-ns
+2025-08-06 14:10:13,328 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:10:13,329 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_141013.txt
+2025-08-06 14:10:13,329 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:10:13,330 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_141013.txt
+2025-08-06 14:10:13,330 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:10:13,330 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_141013.txt
+2025-08-06 14:10:13,332 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:10:13,332 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_141013.txt
+2025-08-06 14:10:13,403 INFO Found 4 pods with issues:
+2025-08-06 14:10:13,404 INFO - sas-data-studio-app-856cfd5486-v47xk
+2025-08-06 14:10:13,404 INFO - sas-decision-manager-app-58bd99dddf-p2lvm
+2025-08-06 14:10:13,405 INFO - sas-job-execution-app-869948fbdd-lwmzf
+2025-08-06 14:10:13,405 INFO - sas-readiness-66458dc68c-4qn6q
+2025-08-06 14:50:02,181 INFO START
+2025-08-06 14:50:02,203 INFO No saved path found. Asking user for input.
+2025-08-06 14:50:18,674 INFO User provided path: C:\sample_data\CS0287492_20250804_115212
+2025-08-06 14:50:21,327 INFO Processing logs on C:\sample_data\CS0287492_20250804_115212\kubernetes\viya-dev-ns
+2025-08-06 14:50:21,352 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,353 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,354 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,355 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,356 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,356 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,356 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,356 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,357 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,357 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,357 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,357 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,357 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,358 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,358 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,359 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,359 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,360 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,361 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,363 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,364 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,365 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,365 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,366 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,366 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,367 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,368 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,368 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,368 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,369 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,369 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,369 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,369 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,369 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,370 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,370 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,370 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,370 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,370 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,370 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,371 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,371 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,371 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,371 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,371 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,371 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,372 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,372 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,372 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,372 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,372 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,372 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,372 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,373 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,373 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,374 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,374 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,374 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,374 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,374 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,375 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,375 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,375 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,375 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,375 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,376 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,376 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,376 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,376 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,376 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,376 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,378 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,379 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,380 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,380 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,381 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,381 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,382 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,383 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,383 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,384 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,384 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,384 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,384 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,384 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,385 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,385 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,385 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,385 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,385 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,385 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,386 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,386 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,386 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,386 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,386 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,386 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,386 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,386 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,386 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,386 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,387 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,387 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,387 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,387 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,387 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,387 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,387 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,387 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,388 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,388 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,388 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,388 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,388 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,388 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,388 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,388 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,389 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,389 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,389 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,389 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,389 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,389 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,389 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,389 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,389 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,389 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,389 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,390 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,390 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,390 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,390 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,390 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,390 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,390 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,390 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,390 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,390 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,390 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,391 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,391 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,391 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,391 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,391 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,391 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,391 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,391 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,391 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,391 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,391 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,391 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,391 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,391 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,392 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,392 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,392 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,392 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,392 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,392 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,392 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,392 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,392 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,392 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,392 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,392 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,392 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,393 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,393 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,393 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,393 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,393 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,393 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,393 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,393 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,393 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,393 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,393 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,393 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,393 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,394 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,394 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,394 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,394 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,394 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,394 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,394 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,394 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,394 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,394 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,394 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,394 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,395 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,395 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,395 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,395 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,395 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,395 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,395 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,395 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,396 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,396 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,396 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,396 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,396 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,396 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,396 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,396 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,396 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,396 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,396 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,396 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,397 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,397 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,397 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,397 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,397 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,397 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,397 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,397 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,397 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,397 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,397 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,397 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,397 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,397 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,398 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,398 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,398 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,398 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,398 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,398 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,398 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,398 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,398 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,398 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,398 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,398 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,398 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,398 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,399 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,399 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,399 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,399 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,399 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,399 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,399 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,399 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,399 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,399 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,399 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,399 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,399 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,399 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,400 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,400 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,400 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,400 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,400 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,400 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,400 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,400 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,400 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,400 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,400 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,400 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,400 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,400 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,401 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,401 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,401 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,401 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,401 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,401 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,401 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,401 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,401 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,401 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,401 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,401 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,402 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,402 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,402 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,402 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,402 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,402 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,402 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,402 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,402 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,402 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,402 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,402 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,403 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,403 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,403 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,403 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,403 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,403 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,403 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,403 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,403 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,403 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,404 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,404 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,404 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,404 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,404 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,404 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,404 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,404 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,404 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,404 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,404 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,404 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,404 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,404 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,405 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,405 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,405 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,405 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,405 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,405 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,405 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,405 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,405 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,405 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,405 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,405 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,405 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,405 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,406 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,406 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,406 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,406 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,406 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,406 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,406 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,406 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,406 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,406 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,406 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,406 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,406 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,406 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,407 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,407 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:50:21,407 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145021.txt
+2025-08-06 14:50:21,883 INFO Found 4 pods with issues:
+2025-08-06 14:50:21,883 INFO - sas-data-studio-app-856cfd5486-v47xk
+2025-08-06 14:50:21,884 INFO - sas-decision-manager-app-58bd99dddf-p2lvm
+2025-08-06 14:50:21,884 INFO - sas-job-execution-app-869948fbdd-lwmzf
+2025-08-06 14:50:21,884 INFO - sas-readiness-66458dc68c-4qn6q
+2025-08-06 14:54:38,263 INFO START
+2025-08-06 14:54:38,268 INFO Saved path to get-k8s-info output: C:\sample_data\CS0287492_20250804_115212
+2025-08-06 14:54:39,300 INFO Using saved path: C:\sample_data\CS0287492_20250804_115212
+2025-08-06 14:54:41,010 INFO Processing logs on C:\sample_data\CS0287492_20250804_115212\kubernetes\viya-dev-ns
+2025-08-06 14:54:41,013 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,014 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,015 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,015 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,016 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,016 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,017 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,017 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,017 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,018 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,018 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,019 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,019 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,020 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,020 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,021 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,022 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,023 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,023 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,024 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,024 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,025 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,025 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,025 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,026 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,026 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,026 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,026 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,026 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,027 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,027 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,027 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,027 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,027 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,027 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,027 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,027 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,027 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,028 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,028 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,028 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,028 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,028 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,028 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,030 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,031 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,031 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,032 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,032 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,033 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,033 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,034 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,034 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,035 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,035 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,035 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,035 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,035 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,035 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,036 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,036 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,037 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,037 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,038 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,038 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,038 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,038 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,039 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,039 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,039 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,039 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,039 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,039 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,039 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,039 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,039 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,039 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,039 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,040 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,040 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,040 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,040 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,040 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,040 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,040 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,040 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,040 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,040 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,040 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,040 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,040 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,041 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,041 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,041 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,041 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,041 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,041 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,041 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,041 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,041 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,041 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,041 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,041 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,042 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,042 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,042 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,042 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,042 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,042 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,042 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,042 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,042 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,042 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,043 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,043 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,043 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,043 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,043 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,043 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,043 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,043 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,043 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,043 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,043 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,043 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,044 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,044 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,044 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,044 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,044 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,044 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,044 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,044 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,044 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,044 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,044 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,044 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,044 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,045 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,045 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,045 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,045 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,045 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,045 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,045 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,045 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,045 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,045 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,045 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,045 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,045 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,046 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,046 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,046 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,046 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,046 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,046 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,046 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,046 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,046 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,046 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,046 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,046 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,046 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,046 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,047 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,047 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,047 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,047 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,047 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,047 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,047 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,047 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,047 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,047 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,047 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,048 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,048 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,048 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,048 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,048 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,048 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,048 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,048 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,048 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,048 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,048 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,049 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,049 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,049 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,049 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,049 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,049 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,049 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,049 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,049 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,049 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,050 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,050 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,050 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,050 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,050 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,050 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,050 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,050 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,050 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,050 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,051 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,051 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,051 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,051 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,051 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,051 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,052 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,052 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,052 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,052 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,052 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,052 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,054 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,055 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,055 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,055 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,056 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,056 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,056 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,056 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,056 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,056 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,057 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,057 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,057 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,057 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,057 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,057 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,057 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,057 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,057 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,057 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,058 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,058 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,058 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,058 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,058 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,058 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,058 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,058 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,058 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,058 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,058 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,058 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,059 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,059 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,059 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,059 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,059 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,059 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,059 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,059 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,059 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,059 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,059 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,059 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,059 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,060 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,060 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,060 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,060 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,060 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,060 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,060 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,060 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,060 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,060 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,060 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,060 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,061 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,061 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,061 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,061 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,061 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,061 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,061 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,061 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,061 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,061 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,061 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,061 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,061 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,062 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,062 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,062 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,062 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,062 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,062 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,062 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,062 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,062 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,062 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,062 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,062 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,062 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,063 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,063 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,063 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,063 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,063 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,063 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,063 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,063 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,063 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,063 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,063 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,063 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,063 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,064 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,064 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,064 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,064 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,064 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,064 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,064 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,064 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,064 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,064 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,064 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,064 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,065 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,065 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,065 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,065 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,065 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,065 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,066 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,066 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,066 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,066 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,066 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,066 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,066 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,066 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,067 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,067 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,068 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,068 INFO Initializing Printer with namespace: viya-dev-ns and mode: both
+2025-08-06 14:54:41,068 INFO Printer file path set to: output\auto_k8s_viya-dev-ns_20250806_145441.txt
+2025-08-06 14:54:41,156 INFO Found 4 pods with issues:
+2025-08-06 14:54:41,157 INFO - sas-data-studio-app-856cfd5486-v47xk
+2025-08-06 14:54:41,157 INFO - sas-decision-manager-app-58bd99dddf-p2lvm
+2025-08-06 14:54:41,158 INFO - sas-job-execution-app-869948fbdd-lwmzf
+2025-08-06 14:54:41,159 INFO - sas-readiness-66458dc68c-4qn6q
