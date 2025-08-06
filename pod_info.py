@@ -16,6 +16,7 @@ class PodInfo:
         self.errors = {}
         self.logs = []
         self.seen_messages = set()  # For filtering duplicates
+        self.printer = Printer(os.path.basename(namespace_path), mode="both")
         
     #extracts JSON messages from log lines, unless it fails
     def parse_json_message(self, line: str, category: str) -> str:

@@ -163,7 +163,7 @@ def main():
         pods_with_errors_name_list = [pod.name for pod in pods_with_errors]
 
         current_pod_name = None
-        for line in describe_lines:
+        for line in describe_pods_output_lines:
             if line.startswith('Name:'):
                 current_pod_name = line.split()[1]
             if current_pod_name in pods_with_errors_name_list:
