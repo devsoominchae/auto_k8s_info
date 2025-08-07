@@ -51,7 +51,25 @@
             "access denied",
             "invalid credentials",
             "token expired"
-        ]
+        ],
+        "Tool Execution Failures": [
+            "sonder-log-icu.tool.error.executing.command.log",
+            "sonder-log-icu.tool.executor.failed.running.tools.log",
+            "Service executor failed to execute successfully: exit status 1"
+        ],
+        "Certificate Write Failures": [
+            "writeAsPem failed",
+            "error writing PEM file"
+        ],
+        "Certificate Errors": [
+        "CA certificate Secret already exists",          
+        "error generating certificates",                 
+        "failed to create cert secret",                 
+        "failed to write certificate file",            
+        "invalid certificate configuration"
+    ]
+
+
     }
 }
 
