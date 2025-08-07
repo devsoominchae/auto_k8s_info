@@ -17,6 +17,13 @@ The purpose of this project is to automate situation appraisal procedure of the 
 3. Analyze the logs and organize errors or warnings that might be the cause of the issue
 4. Search for other related issues that causes the pod to be inoperable
 
+### Notes
+Dont forget to install packages using the code below (or just pip install pymongo)
+
+```
+pip install -r requirements.txt
+```
+
 ### Testing
 First you will need an unzipped sample get-k8s-info.sh output. 
 ######
