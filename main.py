@@ -70,8 +70,8 @@ def main():
         with open(conf.get("cache", "cache.json"), 'w', encoding='utf-8') as f:
             json.dump(conf.get("cache_default", {"saved_case_info_dir": ""}), f, indent=2)
     with open(conf.get("cache", "cache.json"), 'r') as cache_file:
-        cache = json.load(cache_file)
-        saved_case_info_dir = cache['saved_case_info_dir']
+        cache = json.loads(cache_file)
+        saved_case_info_dir = cache.get('saved_case_info_dir', '')
 
     if saved_case_info_dir:
         print(f"Saved path to get-k8s-info output: {saved_case_info_dir}")
@@ -82,7 +82,7 @@ def main():
             logging.info("Not using saved path")
             saved_case_info_dir = ""
             case_info_dir = remove_invalid_windows_path_chars(input(f"Please enter the path to the get-k8s-info output folder: ").strip())
-            cache['saved_case_info_dir'] = case_info_dir
+            cache.get('saved_case_info_dir', '') = case_info_dir
             with open(conf.get("cache", "cache.json"), 'w', encoding='utf-8') as f:
                 json.dump(cache, f, indent=2)
         else:
@@ -95,7 +95,7 @@ def main():
         logging.info("No saved path found. Asking user for input.")
         case_info_dir = remove_invalid_windows_path_chars(input("Please enter the path to the get-k8s-info output file: ").strip())
         logging.info(f"User provided path: {case_info_dir}")
-        cache['saved_case_info_dir'] = case_info_dir
+        cache.get('saved_case_info_dir', '') = case_info_dir
         with open(conf.get("cache", "cache.json"), 'w', encoding='utf-8') as f:
             json.dump(cache, f, indent=2)
 
