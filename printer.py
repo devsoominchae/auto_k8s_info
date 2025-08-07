@@ -5,8 +5,7 @@ import json
 from datetime import datetime
 
 # Custom imports
-from utils import conf
-from logging_conf import logging
+from utils import conf, logging
 
 PRINTER_MODE = ["console", "file", "both"]
 DATETIME_FORMAT = "%Y%m%d_%H%M%S"
