@@ -4,8 +4,7 @@ import os
 import json
 
 # Custom imports
-from utils import format_timestamp
-from logging_conf import logging
+from utils import format_timestamp, logging
 from printer import Printer
 
 
