@@ -73,7 +73,10 @@
         "PVC Errors": [
             "PersistentVolumeClaim is not bound",
             "PersistentVolumeClaim is not available",
-            "PersistentVolumeClaim is in pending state"
+            "PersistentVolumeClaim is in pending state",
+            "PVC pending",
+            "PVC"
+
         ],
         "FailedMount Errors": [
             "MountVolume.SetUp failed for volume",
