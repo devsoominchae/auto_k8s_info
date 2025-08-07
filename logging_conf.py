@@ -1,18 +1,9 @@
 # logging_conf.py
 
-import os
-import json
 import logging
 
 # Custom imports
-from utils import restore_conf
-
-if os.path.exists('conf.json'):
-    with open('conf.json', 'r', encoding='utf-8') as f:
-        conf = json.load(f)
-else:
-    restore_conf()
-    exit(1)
+from utils import conf
 
 
 def load_logging_level():

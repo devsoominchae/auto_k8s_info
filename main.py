@@ -4,16 +4,15 @@ import json
 import re
 
 # Custom imports
+from utils import conf
 from printer import Printer
 from pod_info import PodInfo
 from logging_conf import logging
 
-with open('conf.json', 'r', encoding='utf-8') as f:
-    conf = json.load(f)
 
 
 def remove_invalid_windows_path_chars(filename):
-    invalid_chars = conf['invalid_windows_path_chars']
+    invalid_chars = conf.get('invalid_windows_path_chars', ["<", ">", "\"", "/", "|", "?", "*"])
     for char in invalid_chars:
         filename = filename.replace(char, '')
     return filename
@@ -55,7 +54,7 @@ def log_file_collection(namespace_path, pods_with_errors):
 
             with open(log_file_path, "r", encoding="utf-8", errors="ignore") as log_file:
                 for line in log_file:
-                    for category, patterns in conf['log_error_patterns'].items():
+                    for category, patterns in conf.get('log_error_patterns', {}).items():
                         if any(p in line for p in patterns):
                             pod.add_error_once_by_message(file_name, category, line)
                             break
@@ -64,13 +63,13 @@ def main():
     # Check if cache.json exists using the relataive path to where this script is located
     logging.info("START")
     saved_case_info_dir = ""
-    if not os.path.exists(conf["cache"]):
-        print(f'{conf["cache"]} does not exist. Creating a new one.')        
-        logging.info(f'{conf["cache"]} does not exist. Creating a new one.')        
+    if not os.path.exists(conf.get("cache", "cache.json")):
+        print(f'{conf.get("cache", "cache.json")} does not exist. Creating a new one.')        
+        logging.info(f'{conf.get("cache", "cache.json")} does not exist. Creating a new one.')        
 
-        with open(conf["cache"], 'w', encoding='utf-8') as f:
-            json.dump(conf["cache_default"], f, indent=2)
-    with open(conf["cache"], 'r') as cache_file:
+        with open(conf.get("cache", "cache.json"), 'w', encoding='utf-8') as f:
+            json.dump(conf.get("cache_default", {"saved_case_info_dir": ""}), f, indent=2)
+    with open(conf.get("cache", "cache.json"), 'r') as cache_file:
         cache = json.load(cache_file)
         saved_case_info_dir = cache['saved_case_info_dir']
 
@@ -79,12 +78,12 @@ def main():
         logging.info(f"Saved path to get-k8s-info output: {saved_case_info_dir}")
         use_saved_path = remove_invalid_windows_path_chars(input("Do you want to use this saved path? (yes - default/no): ").strip().lower())
 
-        if use_saved_path not in conf["yes_list"]:
+        if use_saved_path not in conf.get("yes_list", ["yes", "y", "Y", "Yes", "", "YES"]):
             logging.info("Not using saved path")
             saved_case_info_dir = ""
             case_info_dir = remove_invalid_windows_path_chars(input(f"Please enter the path to the get-k8s-info output folder: ").strip())
             cache['saved_case_info_dir'] = case_info_dir
-            with open(conf["cache"], 'w', encoding='utf-8') as f:
+            with open(conf.get("cache", "cache.json"), 'w', encoding='utf-8') as f:
                 json.dump(cache, f, indent=2)
         else:
             case_info_dir = saved_case_info_dir
@@ -97,7 +96,7 @@ def main():
         case_info_dir = remove_invalid_windows_path_chars(input("Please enter the path to the get-k8s-info output file: ").strip())
         logging.info(f"User provided path: {case_info_dir}")
         cache['saved_case_info_dir'] = case_info_dir
-        with open(conf["cache"], 'w', encoding='utf-8') as f:
+        with open(conf.get("cache", "cache.json"), 'w', encoding='utf-8') as f:
             json.dump(cache, f, indent=2)
 
     # List the folders under kubernetes folder and let user select one
@@ -154,7 +153,7 @@ def main():
     pods_without_errors = []
 
     for line in get_pods_output_lines:
-        matched, category = line_matches_error_patterns(line, conf["get_pods_error_patterns"], "all")
+        matched, category = line_matches_error_patterns(line, conf.get("get_pods_error_patterns", {}), "all")
         pod_name = line.split()[0]
         pod_node = line.split()[reverse_node_name_index] if reverse_node_name_index != -1 else "unknown"
         if matched:
@@ -182,7 +181,7 @@ def main():
             if line.startswith('Name:'):
                 current_pod_name = line.split()[1]
             if current_pod_name in pods_with_errors_name_list:
-                matched, category = line_matches_error_patterns(line, conf["describe_pods_error_patterns"])
+                matched, category = line_matches_error_patterns(line, conf.get("describe_pods_error_patterns", {}))
                 if matched:
                     for pod in pods_with_errors:
                         if pod.name == current_pod_name:
