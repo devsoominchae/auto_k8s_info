@@ -143,6 +143,9 @@ def main():
 
     if 'NODE' in get_pods_output_lines[0]:
         node_name_index = get_pods_output_lines[0].split().index('NODE')
+        fields = get_pods_output_lines[0].split()
+        node_name_index = fields.index('NODE')
+        reverse_node_name_index = -(len(fields) - 2 - node_name_index)
     else:
         print("The 'NODE' column is not present in the get pods output. Defaulting to 'unknown'.")
         logging.warning("The 'NODE' column is not present in the get pods output. Defaulting to 'unknown'.")
@@ -153,7 +156,7 @@ def main():
     for line in get_pods_output_lines:
         matched, category = line_matches_error_patterns(line, conf["get_pods_error_patterns"], "all")
         pod_name = line.split()[0]
-        pod_node = line.split()[node_name_index] if node_name_index != -1 else "unknown"
+        pod_node = line.split()[reverse_node_name_index] if reverse_node_name_index != -1 else "unknown"
         if matched:
             pod_info = PodInfo(pod_name, category, pod_node, namespace_path)
             pod_info.add_error(get_pods_output, line.strip())
