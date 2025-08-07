@@ -4,6 +4,7 @@
         "saved_case_info_dir": ""
     },
     "output_timestamp_format": "%Y-%m-%d %H:%M:%S",
+    "print_level": 1,
     "output_folder" : "output",
     "logging" : {
         "level": "INFO",
@@ -68,8 +69,15 @@
         "failed to create cert secret",                 
         "failed to write certificate file",            
         "invalid certificate configuration"
-    ]
-
-
+        ],
+        "PVC Errors": [
+            "PersistentVolumeClaim is not bound",
+            "PersistentVolumeClaim is not available",
+            "PersistentVolumeClaim is in pending state"
+        ],
+        "FailedMount Errors": [
+            "MountVolume.SetUp failed for volume",
+            "references non-existent secret key"
+        ]
     }
 }
