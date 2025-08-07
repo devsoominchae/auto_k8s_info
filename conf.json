@@ -1,79 +1,75 @@
 {
-  "cache": "cache.json",
-  "cache_default": {
-    "saved_case_info_dir": ""
-  },
-  "output_folder": "output",
-  "logging": {
-    "level": "INFO",
-    "format": "%(asctime)s %(levelname)s %(message)s"
-  },
-  "output_timestamp_format": "%Y-%m-%d %H:%M:%S",
-  "print_level" : 1,
-  "yes_list": [
-    "yes",
-    "y",
-    "Y",
-    "Yes",
-    "",
-    "YES"
-  ],
-  "invalid_windows_path_chars": [
-    "<",
-    ">",
-    "\"",
-    "/",
-    "|",
-    "?",
-    "*"
-  ],
-  "describe_pods_error_patterns": {
-    "Warning": [
-      "Warning"
+    "cache" : "cache.json",
+    "cache_default" : {
+        "saved_case_info_dir": ""
+    },
+    "output_timestamp_format": "%Y-%m-%d %H:%M:%S",
+    "output_folder" : "output",
+    "logging" : {
+        "level": "INFO",
+        "format": "%(asctime)s %(levelname)s %(message)s"
+    },
+    "yes_list" : ["yes", "y", "Y", "Yes", "", "YES"],
+    "invalid_windows_path_chars": ["<", ">", "\"", "/", "|", "?", "*"],
+    "describe_pods_error_patterns" : {
+        "Warning" : ["Warning"]
+    },
+    "get_pods_error_patterns" : {
+        "Error": ["Error"],
+        "Running No Pods": ["0/", "Running"],
+        "Hanged in Init": ["Init:"],
+        "Crashed": ["CrashLoopBackOff"]
+    },
+    "log_error_patterns" : {
+        "CAS Control Issues": [
+            "no ready CAS servers",
+            "cas-control is not ready"
+        ],
+        "Start Sequencer Warnings": [
+            "SKIP_INIT_BLOCK",
+            "bypassing sequencing",
+            "exit code 0"
+        ],
+        "Readiness Check Failures": [
+            "check \"sas-endpoints-ready\" failed",
+            "no available addresses",
+            "endpoints have no available addresses",
+            "0 available addresses",
+            "failed readiness check"
+        ],
+        "Telemetry Warnings": [
+            "OpenTelemetry support not installed",
+            "noop Open Telemetry MeterProvider",
+            "no metrics will be collected"
+        ],
+        "Stalled Init Warnings": [
+            "Waiting for",
+            "POD(s) to Complete"
+        ],
+        "Authentication Failures": [
+            "Unauthorized",
+            "authentication failed",
+            "access denied",
+            "invalid credentials",
+            "token expired"
+        ],
+        "Tool Execution Failures": [
+            "sonder-log-icu.tool.error.executing.command.log",
+            "sonder-log-icu.tool.executor.failed.running.tools.log",
+            "Service executor failed to execute successfully: exit status 1"
+        ],
+        "Certificate Write Failures": [
+            "writeAsPem failed",
+            "error writing PEM file"
+        ],
+        "Certificate Errors": [
+        "CA certificate Secret already exists",          
+        "error generating certificates",                 
+        "failed to create cert secret",                 
+        "failed to write certificate file",            
+        "invalid certificate configuration"
     ]
-  },
-  "get_pods_error_patterns": {
-    "Error": [
-      "Error"
-    ],
-    "Running No Pods": [
-      "0/",
-      "Running"
-    ],
-    "Hanged in Init": [
-      "Init:"
-    ],
-    "Crashed": [
-      "CrashLoopBackOff"
-    ]
-  },
-  "log_error_patterns": {
-    "CAS Control Issues": [
-      "no ready CAS servers",
-      "cas-control is not ready"
-    ],
-    "Start Sequencer Warnings": [
-      "SKIP_INIT_BLOCK",
-      "bypassing sequencing",
-      "exit code 0"
-    ],
-    "Readiness Check Failures": [
-      "check \"sas-endpoints-ready\" failed",
-      "no available addresses",
-      "endpoints have no available addresses",
-      "0 available addresses",
-      "failed readiness check"
-    ],
-    "Stalled Init Warnings": [
-      "Waiting for",
-      "POD(s) to Complete"
-    ],
-    "Authentication Failures": [
-      "Unauthorized",
-      "authentication failed",
-      "access denied",
-      "invalid credentials",
-      "token expired"
-    ]
-  }
+
+
+    }
 }
