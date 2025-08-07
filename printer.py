@@ -5,13 +5,12 @@ import json
 from datetime import datetime
 
 # Custom imports
+from utils import conf
 from logging_conf import logging
 
 PRINTER_MODE = ["console", "file", "both"]
 DATETIME_FORMAT = "%Y%m%d_%H%M%S"
 
-with open('conf.json', 'r', encoding='utf-8') as f:
-    conf = json.load(f)
 
 class Printer:
     def __init__(self, namespace, mode="both"):

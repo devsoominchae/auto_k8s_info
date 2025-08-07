@@ -3,8 +3,6 @@
 import os
 import json
 
-with open('conf.json', 'r', encoding='utf-8') as f:
-    conf = json.load(f)
 
 
 RESTORE_CONF_FILE = 'conf_restored.json'
@@ -87,6 +85,14 @@ CONF = {
   }
 }
 
+def get_conf():
+    global conf
+    if os.path.exists('conf.json'):
+        with open('conf.json', 'r', encoding='utf-8') as f:
+            conf = json.load(f)
+    else:
+        restore_conf()
+        exit(1)
 
 def restore_conf():
     if os.path.exists(RESTORE_CONF_FILE):
@@ -105,3 +111,5 @@ def format_timestamp(timestamp):
     except ValueError:
         print(f"Invalid timestamp format: {timestamp}. Using original.")
         return timestamp
+
+get_conf()
