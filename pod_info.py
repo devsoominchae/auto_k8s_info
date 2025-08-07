@@ -1,11 +1,13 @@
 #pod_info.py
+import re
 import os
+import json
 
 # Custom imports
+from utils import format_timestamp
 from logging_conf import logging
 from printer import Printer
-import json
-import re
+
 
 class PodInfo:
     def __init__(self, name, status, node, namespace_path):
@@ -54,7 +56,7 @@ class PodInfo:
             if message not in self.seen_messages:
                 self.seen_messages.add(message)
                 timestamp = log_json.get("timeStamp", "unknown-time")
-                formatted = f"[{category}] {timestamp} - {message}"
+                formatted = f"[{category}] {format_timestamp(timestamp)} - {message}"
                 self.add_error(filename, formatted)
 
         except json.JSONDecodeError:

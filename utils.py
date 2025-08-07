@@ -3,6 +3,9 @@
 import os
 import json
 
+with open('conf.json', 'r', encoding='utf-8') as f:
+    conf = json.load(f)
+
 
 RESTORE_CONF_FILE = 'conf_restored.json'
 CONF = {
@@ -93,3 +96,12 @@ def restore_conf():
         json.dump(CONF, f, indent=2)
     print(f"Configuration restored to {RESTORE_CONF_FILE}. Rename it to 'conf.json' to use it.")
 
+def format_timestamp(timestamp):
+    """Format a timestamp string to a more readable format."""
+    try:
+        from datetime import datetime
+        dt = datetime.fromisoformat(timestamp)
+        return dt.strftime(conf.get("output_timestamp_format", "%Y-%m-%d %H:%M:%S"))
+    except ValueError:
+        print(f"Invalid timestamp format: {timestamp}. Using original.")
+        return timestamp
