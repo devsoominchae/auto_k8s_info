@@ -1,14 +1,24 @@
+from dotenv import load_dotenv
+import os
 from mongodb_handler import MongoHandler
-import getpass
 
-# Prompt user
-username = input("Enter MongoDB username: ")
-password = getpass.getpass("Enter MongoDB password: ")
+# Load .env file from current directory
+load_dotenv()
 
-# Construct URI dynamically using user input
-uri = f"mongodb+srv://{username}:{password}@logdictionary.ziwndyc.mongodb.net/?retryWrites=true&w=majority&appName=logDictionary"
+# Read credentials and config from environment variables
+username = os.getenv("MONGO_USER")
+password = os.getenv("MONGO_PASS")
+cluster = os.getenv("MONGO_CLUSTER", "logdictionary.ziwndyc.mongodb.net")
+db_name = os.getenv("MONGO_DB_NAME", "log_config")
 
-# Define patterns
+# Ensure required credentials exist
+if not username or not password:
+    raise ValueError("MongoDB username or password not set in .env file.")
+
+# Construct URI
+uri = f"mongodb+srv://{username}:{password}@{cluster}/?retryWrites=true&w=majority&appName=logDictionary"
+
+# Define patterns to update
 conf_patterns = {
     "CAS Control Issues": ["no ready CAS servers", "cas-control is not ready"],
     "Telemetry Warnings": ["OpenTelemetry support not installed"],
@@ -21,8 +31,8 @@ conf_patterns = {
     ]
 }
 
-# Use dynamic URI to connect
-mongo = MongoHandler(uri)
+# Connect and update MongoDB
+mongo = MongoHandler(uri, db_name)
 mongo.update_error_patterns(conf_patterns)
 
 print("Updated!")
