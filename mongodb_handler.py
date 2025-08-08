@@ -5,11 +5,12 @@ class MongoHandler:
     def __init__(self, uri, db_name="log_config"):
         self.client = MongoClient(uri)
         self.db = self.client[db_name]
-        self.config = self.db["config"]
+        self.config = self.db["log_error_patterns"]
         self.logs = self.db["logs"]
 
     def get_error_patterns(self):
         doc = self.config.find_one({"type": "log_error_patterns"})
+        #print("Loaded MongoDB config document:", doc) Checks loaded document
         return doc["patterns"] if doc else {}
 
     def update_error_patterns(self, new_patterns):
