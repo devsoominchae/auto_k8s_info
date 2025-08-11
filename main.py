@@ -8,6 +8,10 @@ from utils import conf, load_cache, get_case_info_dir_from_user, get_namespace_p
 from printer import Printer
 from pod_info import PodInfo
 
+from mongodb_handler import MongoHandler
+from dotenv import load_dotenv
+import os
+
 
 
 def line_matches_error_patterns(line, error_patterns, mode='any'):
@@ -55,6 +59,18 @@ def log_file_collection(namespace_path, pods_with_errors):
 def main():
     # Check if cache.json exists using the relataive path to where this script is located
     logging.info("START")
+    
+    load_dotenv()
+    mongo_uri = os.getenv("MONGODB_URI")
+
+    if not mongo_uri:
+        print("MongoDB URI not found in environment variables. Exiting.")
+        return
+
+    mongo = MongoHandler(uri=mongo_uri)
+
+    # Replace conf log_error_patterns with patterns from MongoDB
+    conf["log_error_patterns"] = mongo.get_error_patterns()
     cache = load_cache()
 
     case_info_dir = get_case_info_dir_from_user(cache)
