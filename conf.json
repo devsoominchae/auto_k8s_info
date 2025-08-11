@@ -3,6 +3,7 @@
     "cache_default" : {
         "saved_case_info_dir": ""
     },
+    "mongodb_conn_var_url" : "http://trck1076843.trc.sas.com:8000/.env",
     "output_timestamp_format": "%Y-%m-%d %H:%M:%S",
     "print_level": 1,
     "output_folder" : "output",
@@ -10,7 +11,6 @@
         "level": "INFO",
         "format": "%(asctime)s %(levelname)s %(message)s"
     },
-    "print_level" : 1,
     "yes_list" : ["yes", "y", "Y", "Yes", "", "YES"],
     "invalid_windows_path_chars": ["<", ">", "\"", "/", "|", "?", "*"],
     "describe_pods_error_patterns" : {

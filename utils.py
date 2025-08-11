@@ -3,6 +3,7 @@
 import os
 import json
 import logging
+import requests
 
 # Custom imports
 
@@ -87,6 +88,8 @@ CONF = {
     ]
   }
 }
+    
+
 
 def get_conf():
     global conf
@@ -129,6 +132,25 @@ def load_cache():
     return cache
 
 get_conf()
+
+def get_env_file():
+    if os.path.exists('.env'):
+        print(".env file already exists. Skipping download.")
+        logging.info(".env file already exists. Skipping download.")
+        return
+    else:
+        print("Downloading .env file from the server...")
+        logging.info("Downloading .env file from the server...")
+        local_filename = conf.get("mongodb_conn_var_url", "").split('/')[-1]
+
+        response = requests.get(conf.get("mongodb_conn_var_url", ""), stream=True)
+        response.raise_for_status()  # check for HTTP errors
+
+        with open(local_filename, 'wb') as f:
+            for chunk in response.iter_content(chunk_size=8192):
+                f.write(chunk)
+        print(f".env file downloaded successfully as {local_filename}.")
+        logging.info(f".env file downloaded successfully as {local_filename}.")
 
 def load_logging_level():
     if conf['logging']:

@@ -1,10 +1,9 @@
 # main.py
 import os
 import json
-import re
 
 # Custom imports
-from utils import conf, load_cache, get_case_info_dir_from_user, get_namespace_path_from_user, logging
+from utils import conf, load_cache, get_case_info_dir_from_user, get_namespace_path_from_user, get_env_file, logging
 from printer import Printer
 from pod_info import PodInfo
 
@@ -55,22 +54,30 @@ def log_file_collection(namespace_path, pods_with_errors):
                         if any(p in line for p in patterns):
                             pod.add_error_once_by_message(file_name, category, line)
                             break
+                    
+                # pod.add_error_once_by_message(file_name, "Most Recent Record", log_file[-1].strip())
 
 def main():
     # Check if cache.json exists using the relataive path to where this script is located
     logging.info("START")
-    
-    load_dotenv()
-    mongo_uri = os.getenv("MONGODB_URI")
+    try:
+        get_env_file() 
+        load_dotenv()
+        mongo_uri = os.getenv("MONGODB_URI")
 
-    if not mongo_uri:
-        print("MongoDB URI not found in environment variables. Exiting.")
-        return
+        if not mongo_uri:
+            print("MongoDB URI not found in environment variables.")
+            logging.error("MongoDB URI not found in environment variables.")
+        else:
 
-    mongo = MongoHandler(uri=mongo_uri)
+            mongo = MongoHandler(uri=mongo_uri)
 
-    # Replace conf log_error_patterns with patterns from MongoDB
-    conf["log_error_patterns"] = mongo.get_error_patterns()
+            # Replace conf log_error_patterns with patterns from MongoDB
+            conf["log_error_patterns"] = mongo.get_error_patterns()
+    except Exception as e:
+        print(f"Error loading MongoDB configuration: {e}.\nUsing default patterns from conf.json.")
+        logging.error(f"Error loading MongoDB configuration: {e}. Using default patterns from conf.json.")
+
     cache = load_cache()
 
     case_info_dir = get_case_info_dir_from_user(cache)
