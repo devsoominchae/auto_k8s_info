@@ -1,3 +1,8 @@
 requirements.txt
 *pycache*
 .env
+
+*output*
+*vscode*
+cache.json
+*.log
