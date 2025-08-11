@@ -193,3 +193,38 @@ def get_case_info_dir_from_user(cache):
             json.dump(cache, f, indent=2)
 
     return case_info_dir
+
+def get_namespace_path_from_user(case_info_dir):
+    # List the folders under kubernetes folder and let user select one
+    kubernetes_path = os.path.join(case_info_dir, 'kubernetes')
+    if not os.path.exists(kubernetes_path):
+        print(f"The 'kubernetes' folder does not exist under {case_info_dir}.")
+        logging.error(f"The 'kubernetes' folder does not exist under {case_info_dir}. Exiting the program.")
+        return
+
+    folders = [f for f in os.listdir(kubernetes_path) if os.path.isdir(os.path.join(kubernetes_path, f))]
+    if not folders:
+        print("No folders found under 'kubernetes'.")
+        logging.error("No folders found under 'kubernetes'. Exiting the program.")
+        return
+
+    print("Available folders under kubernetes:")
+    for idx, folder in enumerate(folders):
+        print(f"{idx + 1}: {folder}")
+
+    try:
+        folder_choice = input("Please select a folder by number: ")
+        folder_index = int(folder_choice) - 1
+        if folder_index < 0 or folder_index >= len(folders):
+            print("Invalid selection.")
+            return
+        selected_folder = folders[folder_index]
+    except ValueError:
+        print("Invalid input. Please enter a number.")
+        return
+
+    print(f"You selected: {selected_folder}\n")
+    namespace_path = os.path.join(kubernetes_path, selected_folder)
+    logging.info(f"Processing logs on {namespace_path}")
+
+    return namespace_path
