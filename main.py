@@ -1,11 +1,13 @@
 # main.py
 import os
+import sys
 import json
 
 # Custom imports
 from utils import conf, load_cache, get_case_info_dir_from_user, get_namespace_path_from_user, get_env_file, logging
 from printer import Printer
 from pod_info import PodInfo
+from error_info import ErrorInfoHolder
 
 from mongodb_handler import MongoHandler
 from dotenv import load_dotenv
@@ -28,8 +30,7 @@ def line_matches_error_patterns(line, error_patterns, mode='any'):
 
 # Collect log file errors for each pod
 # If a log line matches a pattern, we parse it and store only unique messages ignoring timestamp
-def log_file_collection(namespace_path, pods_with_errors):
-    printer = Printer(os.path.basename(namespace_path), mode="console")
+def log_file_collection(namespace_path, pods_with_errors, printer):
     logs_dir = os.path.join(namespace_path, "logs")
     if not os.path.exists(logs_dir):
         printer.print_message(f"No logs folder found at {logs_dir}")
@@ -38,7 +39,6 @@ def log_file_collection(namespace_path, pods_with_errors):
 
     for pod in pods_with_errors:
         printer.print_message(f"\n=== Checking logs for pod: {pod.name} ===", print_level=2)
-        pod.get_log_files()
 
         if not pod.logs:
             printer.print_message(f"No log files found for pod {pod.name}")
@@ -56,6 +56,34 @@ def log_file_collection(namespace_path, pods_with_errors):
                             break
                     
                 # pod.add_error_once_by_message(file_name, "Most Recent Record", log_file[-1].strip())
+
+def analyze_pods_without_errors(namespace_path, pods_without_errors, printer):
+    error_info_holder = ErrorInfoHolder(printer)
+    printer_console = Printer(os.path.basename(namespace_path), mode="console")
+    printer.print_message("\nAnalyzing pods in normal state.")
+
+    i = 0
+    total_number_of_log_files = sum(len(pod.logs) for pod in pods_without_errors)
+
+    for pod in pods_without_errors:
+        printer.print_message(f"\n=== Analyzing pod without errors: {pod.name} ===", print_level=2)
+
+        if not pod.logs:
+            printer.print_message(f"No log files found for pod {pod.name}\n")
+            continue
+
+        for file_name in pod.logs:
+            i += 1
+            sys.stdout.write("\033[K")
+            printer_console.print_message(f"[{i}/{total_number_of_log_files} {i/total_number_of_log_files*100:.1f}%] Processing log file: {os.path.basename(file_name)}", print_level=1, end_="\r", flush_=True)
+            with open(file_name, "r", encoding="utf-8", errors="ignore") as log_file:
+                for line in log_file:
+                    for category, patterns in conf.get('log_error_patterns', {}).items():
+                        if any(p in line for p in patterns):
+                            error_info = error_info_holder.format_error(line, file_name, category)
+                            error_info_holder.add_error(error_info)
+
+    return error_info_holder
 
 def main():
     # Check if cache.json exists using the relataive path to where this script is located
@@ -78,11 +106,14 @@ def main():
         print(f"Error loading MongoDB configuration: {e}.\nUsing default patterns from conf.json.")
         logging.error(f"Error loading MongoDB configuration: {e}. Using default patterns from conf.json.")
 
+    print("Error patterns :\n", json.dumps(conf["log_error_patterns"], indent=4))
+
     cache = load_cache()
 
     case_info_dir = get_case_info_dir_from_user(cache)
 
     namespace_path = get_namespace_path_from_user(case_info_dir)
+    printer = Printer(os.path.basename(namespace_path), mode="both")
 
     get_pods_output = os.path.join(namespace_path, 'get','pods.txt')
     if not os.path.exists(get_pods_output):
@@ -110,11 +141,11 @@ def main():
         pod_name = line.split()[0]
         pod_node = line.split()[reverse_node_name_index] if reverse_node_name_index != -1 else "unknown"
         if matched:
-            pod_info = PodInfo(pod_name, category, pod_node, namespace_path)
+            pod_info = PodInfo(pod_name, category, pod_node, namespace_path, printer)
             pod_info.add_error(get_pods_output, line.strip())
             pods_with_errors.append(pod_info)
         elif not matched and pod_name != "NAME":
-            pod_info = PodInfo(pod_name, "No Issues", pod_node, namespace_path)
+            pod_info = PodInfo(pod_name, "No Issues", pod_node, namespace_path, printer)
             pods_without_errors.append(pod_info)
 
     
@@ -141,7 +172,7 @@ def main():
                             pod.add_error(describe_pods_output, line.strip())
                             break
 
-    log_file_collection(namespace_path, pods_with_errors)
+    log_file_collection(namespace_path, pods_with_errors, printer)
 
     if pods_with_errors:
         print("\nPods with issues:")
@@ -169,13 +200,9 @@ def main():
 
         print(f"\n Clean errors saved to: {all_errors_path}")
     
-    # log_file_collection(namespace_path, pods_without_errors)
-
-    # if pods_without_errors:
-    #     print("\nPods without issues:")
-    #     for pod in pods_without_errors:
-    #         if pod.errors:
-    #             pod.print_info()
+    error_info_holder = analyze_pods_without_errors(namespace_path, pods_without_errors, printer)
+    error_info_holder.print_pods_by_error_category()
+    error_info_holder.print_containers_by_error_category()
 
 if __name__ == "__main__":
     main()

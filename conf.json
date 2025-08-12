@@ -3,6 +3,7 @@
     "cache_default" : {
         "saved_case_info_dir": ""
     },
+    "max_files_to_show" : 10,
     "mongodb_conn_var_url" : "http://trck1076843.trc.sas.com:8000/.env",
     "output_timestamp_format": "%Y-%m-%d %H:%M:%S",
     "print_level": 1,
