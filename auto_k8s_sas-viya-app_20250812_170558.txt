@@ -1,0 +1,543 @@
+--------------------
+Pod Name: sas-cas-control-54bddd468b-2kpvm
+Status: Running No Pods
+Node: aks-stateless-54236555-vmss000009
+Details:
+
+1 Issue in C:\sample_data\CS0151503\kubernetes\sas-viya-app\get\pods.txt:
+  - sas-cas-control-54bddd468b-2kpvm                              0/1     Running     2 (20h ago)       21h     10.244.4.236   aks-stateless-54236555-vmss000009   <none>           <none>
+
+1 Issue in C:\sample_data\CS0151503\kubernetes\sas-viya-app\describe\pods.txt:
+  - Warning  Unhealthy  2m25s (x4773 over 20h)  kubelet  Readiness probe failed: HTTP probe failed with statuscode: 503
+
+5 Issues in C:\sample_data\CS0151503\kubernetes\sas-viya-app\logs\sas-cas-control-54bddd468b-2kpvm_sas-cas-control.log:
+  - [Telemetry Warnings] 2025-01-21 04:42:31 - OpenTelemetry support not installed
+  - [Telemetry Warnings] 2025-01-21 04:42:31 - using a noop Open Telemetry MeterProvider - no metrics will be collected
+  - [Stalled Init Warnings] 2025-01-21 04:44:01 - Service successfully launched. Waiting for service to finish.
+  - [CAS Control Issues] 2025-01-21 04:44:03 - no ready CAS servers, so cas-control is not ready
+  - [CAS Control Issues] 2025-01-21 04:44:03 - no ready CAS servers and no shutdown CAS servers found, so cas-control is not ready
+
+1 Issue in C:\sample_data\CS0151503\kubernetes\sas-viya-app\logs\sas-cas-control-54bddd468b-2kpvm_sas-certframe.log:
+  - [Certificate Errors] 2025-01-21 04:40:21 - OpensslCACertGenerator.EnsureCACertificateExists Openssl CA certificate Secret already exists [CaCertSecretName:sas-viya-ca-certificate-secret]
+
+1 Issue in C:\sample_data\CS0151503\kubernetes\sas-viya-app\logs\sas-cas-control-54bddd468b-2kpvm_sas-start-sequencer.log:
+  - [Start Sequencer Warnings] 2025-01-21 04:39:33 - SKIP_INIT_BLOCK is not set in the environment. Proceeding with sequencing [elapsed time:0m:0s:0ms name:main]
+--------------------
+--------------------
+Pod Name: sas-cas-server-default-controller
+Status: Hanged in Init
+Node: aks-cas-16772242-vmss000009
+Details:
+
+1 Issue in C:\sample_data\CS0151503\kubernetes\sas-viya-app\get\pods.txt:
+  - sas-cas-server-default-controller                             0/3     Init:1/2    0                 21h     10.244.0.4     aks-cas-16772242-vmss000009         <none>           <none>
+
+1 Issue in C:\sample_data\CS0151503\kubernetes\sas-viya-app\logs\sas-cas-server-default-controller_sas-certframe.log:
+  - [Certificate Errors] 2025-01-21 04:42:01 - OpensslCACertGenerator.EnsureCACertificateExists Openssl CA certificate Secret already exists [CaCertSecretName:sas-viya-ca-certificate-secret]
+
+6 Issues in C:\sample_data\CS0151503\kubernetes\sas-viya-app\logs\sas-cas-server-default-controller_sas-config-init.log:
+  - [Stalled Init Warnings] 2025-01-21 04:42:06 - Waiting for 1 seconds for Commonfiles POD(s) to Complete.
+  - [Stalled Init Warnings] 2025-01-21 04:42:07 - Waiting for 2 seconds for Commonfiles POD(s) to Complete.
+  - [Stalled Init Warnings] 2025-01-21 04:42:09 - Waiting for 4 seconds for Commonfiles POD(s) to Complete.
+  - [Stalled Init Warnings] 2025-01-21 04:42:13 - Waiting for 8 seconds for Commonfiles POD(s) to Complete.
+  - [Stalled Init Warnings] 2025-01-21 04:42:21 - Waiting for 16 seconds for Commonfiles POD(s) to Complete.
+  - [Stalled Init Warnings] 2025-01-21 04:42:37 - Waiting for 32 seconds for Commonfiles POD(s) to Complete.
+--------------------
+--------------------
+Pod Name: sas-commonfiles-6bc6s
+Status: Error
+Node: aks-stateless-54236555-vmss000009
+Details:
+
+1 Issue in C:\sample_data\CS0151503\kubernetes\sas-viya-app\get\pods.txt:
+  - sas-commonfiles-6bc6s                                         0/1     Error       0                 18h     10.244.4.83    aks-stateless-54236555-vmss000009   <none>           <none>
+--------------------
+--------------------
+Pod Name: sas-commonfiles-dfgks
+Status: Error
+Node: aks-stateless-54236555-vmss000009
+Details:
+
+1 Issue in C:\sample_data\CS0151503\kubernetes\sas-viya-app\get\pods.txt:
+  - sas-commonfiles-dfgks                                         0/1     Error       0                 18h     10.244.4.86    aks-stateless-54236555-vmss000009   <none>           <none>
+--------------------
+--------------------
+Pod Name: sas-commonfiles-g9wfv
+Status: Error
+Node: aks-stateless-54236555-vmss000009
+Details:
+
+1 Issue in C:\sample_data\CS0151503\kubernetes\sas-viya-app\get\pods.txt:
+  - sas-commonfiles-g9wfv                                         0/1     Error       0                 18h     10.244.4.84    aks-stateless-54236555-vmss000009   <none>           <none>
+--------------------
+--------------------
+Pod Name: sas-commonfiles-j27cc
+Status: Error
+Node: aks-stateless-54236555-vmss000009
+Details:
+
+1 Issue in C:\sample_data\CS0151503\kubernetes\sas-viya-app\get\pods.txt:
+  - sas-commonfiles-j27cc                                         0/1     Error       0                 18h     10.244.4.88    aks-stateless-54236555-vmss000009   <none>           <none>
+--------------------
+--------------------
+Pod Name: sas-commonfiles-k4tfb
+Status: Error
+Node: aks-stateless-54236555-vmss000009
+Details:
+
+1 Issue in C:\sample_data\CS0151503\kubernetes\sas-viya-app\get\pods.txt:
+  - sas-commonfiles-k4tfb                                         0/1     Error       0                 18h     10.244.4.85    aks-stateless-54236555-vmss000009   <none>           <none>
+--------------------
+--------------------
+Pod Name: sas-commonfiles-pq94q
+Status: Error
+Node: aks-stateless-54236555-vmss000009
+Details:
+
+1 Issue in C:\sample_data\CS0151503\kubernetes\sas-viya-app\get\pods.txt:
+  - sas-commonfiles-pq94q                                         0/1     Error       0                 18h     10.244.4.87    aks-stateless-54236555-vmss000009   <none>           <none>
+--------------------
+--------------------
+Pod Name: sas-commonfiles-qtwkj
+Status: Error
+Node: aks-stateless-54236555-vmss000009
+Details:
+
+1 Issue in C:\sample_data\CS0151503\kubernetes\sas-viya-app\get\pods.txt:
+  - sas-commonfiles-qtwkj                                         0/1     Error       0                 18h     10.244.4.81    aks-stateless-54236555-vmss000009   <none>           <none>
+--------------------
+--------------------
+Pod Name: sas-compute-server-86e3dace-d218-4f94-b932-2d7b33d31d51-753
+Status: Hanged in Init
+Node: aks-compute-14689869-vmss000009
+Details:
+
+1 Issue in C:\sample_data\CS0151503\kubernetes\sas-viya-app\get\pods.txt:
+  - sas-compute-server-86e3dace-d218-4f94-b932-2d7b33d31d51-753   0/2     Init:1/2    0                 40m     10.244.3.123   aks-compute-14689869-vmss000009     <none>           <none>
+
+1 Issue in C:\sample_data\CS0151503\kubernetes\sas-viya-app\describe\pods.txt:
+  - Warning  FileSystemResizeFailed  41m   kubelet            MountVolume.NodeExpandVolume failed for volume "pvc-3df6b3d2-523d-4dab-a1c4-058b12cb1b0c" requested read-only file system
+
+1 Issue in C:\sample_data\CS0151503\kubernetes\sas-viya-app\logs\sas-compute-server-86e3dace-d218-4f94-b932-2d7b33d31d51-753_sas-certframe.log:
+  - [Certificate Errors] 2025-01-22 01:01:17 - OpensslCACertGenerator.EnsureCACertificateExists Openssl CA certificate Secret already exists [CaCertSecretName:sas-viya-ca-certificate-secret]
+--------------------
+--------------------
+Pod Name: sas-crunchy-platform-postgres-repo1-full-28954440-6b96t
+Status: Error
+Node: aks-stateful-42707547-vmss000009
+Details:
+
+1 Issue in C:\sample_data\CS0151503\kubernetes\sas-viya-app\get\pods.txt:
+  - sas-crunchy-platform-postgres-repo1-full-28954440-6b96t       0/1     Error       0                 26h     10.244.1.37    aks-stateful-42707547-vmss000009    <none>           <none>
+--------------------
+--------------------
+Pod Name: sas-crunchy-platform-postgres-repo1-full-28954440-xl22w
+Status: Error
+Node: aks-stateful-42707547-vmss000009
+Details:
+
+1 Issue in C:\sample_data\CS0151503\kubernetes\sas-viya-app\get\pods.txt:
+  - sas-crunchy-platform-postgres-repo1-full-28954440-xl22w       0/1     Error       0                 26h     10.244.1.33    aks-stateful-42707547-vmss000009    <none>           <none>
+--------------------
+--------------------
+Pod Name: sas-crunchy-platform-postgres-repo1-incr-28955880-875cm
+Status: Error
+Node: aks-stateful-42707547-vmss000009
+Details:
+
+1 Issue in C:\sample_data\CS0151503\kubernetes\sas-viya-app\get\pods.txt:
+  - sas-crunchy-platform-postgres-repo1-incr-28955880-875cm       0/1     Error       0                 26h     10.244.1.43    aks-stateful-42707547-vmss000009    <none>           <none>
+--------------------
+--------------------
+Pod Name: sas-crunchy-platform-postgres-repo1-incr-28955880-fvhlc
+Status: Error
+Node: aks-stateful-42707547-vmss000009
+Details:
+
+1 Issue in C:\sample_data\CS0151503\kubernetes\sas-viya-app\get\pods.txt:
+  - sas-crunchy-platform-postgres-repo1-incr-28955880-fvhlc       0/1     Error       0                 26h     10.244.1.34    aks-stateful-42707547-vmss000009    <none>           <none>
+--------------------
+--------------------
+Pod Name: sas-crunchy-platform-postgres-repo1-incr-28955880-fzj2x
+Status: Error
+Node: aks-stateful-42707547-vmss000009
+Details:
+
+1 Issue in C:\sample_data\CS0151503\kubernetes\sas-viya-app\get\pods.txt:
+  - sas-crunchy-platform-postgres-repo1-incr-28955880-fzj2x       0/1     Error       0                 26h     10.244.1.40    aks-stateful-42707547-vmss000009    <none>           <none>
+--------------------
+--------------------
+Pod Name: sas-crunchy-platform-postgres-repo1-incr-28955880-ggzmd
+Status: Error
+Node: aks-stateful-42707547-vmss000009
+Details:
+
+1 Issue in C:\sample_data\CS0151503\kubernetes\sas-viya-app\get\pods.txt:
+  - sas-crunchy-platform-postgres-repo1-incr-28955880-ggzmd       0/1     Error       0                 26h     10.244.1.38    aks-stateful-42707547-vmss000009    <none>           <none>
+--------------------
+--------------------
+Pod Name: sas-crunchy-platform-postgres-repo1-incr-28955880-wr24l
+Status: Error
+Node: aks-stateful-42707547-vmss000009
+Details:
+
+1 Issue in C:\sample_data\CS0151503\kubernetes\sas-viya-app\get\pods.txt:
+  - sas-crunchy-platform-postgres-repo1-incr-28955880-wr24l       0/1     Error       0                 26h     10.244.1.46    aks-stateful-42707547-vmss000009    <none>           <none>
+--------------------
+--------------------
+Pod Name: sas-microanalytic-score-9445d9bc5-nm6bf
+Status: Hanged in Init
+Node: aks-stateless-54236555-vmss000009
+Details:
+
+1 Issue in C:\sample_data\CS0151503\kubernetes\sas-viya-app\get\pods.txt:
+  - sas-microanalytic-score-9445d9bc5-nm6bf                       0/1     Init:2/4    0                 21h     10.244.4.43    aks-stateless-54236555-vmss000009   <none>           <none>
+
+1 Issue in C:\sample_data\CS0151503\kubernetes\sas-viya-app\logs\sas-microanalytic-score-9445d9bc5-nm6bf_sas-certframe.log:
+  - [Certificate Errors] 2025-01-21 04:42:28 - OpensslCACertGenerator.EnsureCACertificateExists Openssl CA certificate Secret already exists [CaCertSecretName:sas-viya-ca-certificate-secret]
+
+1 Issue in C:\sample_data\CS0151503\kubernetes\sas-viya-app\logs\sas-microanalytic-score-9445d9bc5-nm6bf_sas-start-sequencer.log:
+  - [Start Sequencer Warnings] 2025-01-21 04:39:45 - SKIP_INIT_BLOCK is not set in the environment. Proceeding with sequencing [elapsed time:0m:0s:0ms name:main]
+--------------------
+--------------------
+Pod Name: sas-model-repository-69c94c5484-vzl4w
+Status: Running No Pods
+Node: aks-stateless-54236555-vmss000009
+Details:
+
+1 Issue in C:\sample_data\CS0151503\kubernetes\sas-viya-app\get\pods.txt:
+  - sas-model-repository-69c94c5484-vzl4w                         0/1     Running     199 (6m24s ago)   21h     10.244.4.48    aks-stateless-54236555-vmss000009   <none>           <none>
+
+2 Issues in C:\sample_data\CS0151503\kubernetes\sas-viya-app\describe\pods.txt:
+  - Warning  Unhealthy  7m14s (x5968 over 20h)  kubelet  Startup probe failed: Get "https://10.244.4.48:8080/internal/live": dial tcp 10.244.4.48:8080: connect: connection refused
+  - Warning  BackOff    2m5s (x1323 over 20h)   kubelet  Back-off restarting failed container sas-model-repository in pod sas-model-repository-69c94c5484-vzl4w_sas-viya-app(2f745e24-497b-4bec-9f30-1b723c25da09)
+
+1 Issue in C:\sample_data\CS0151503\kubernetes\sas-viya-app\logs\sas-model-repository-69c94c5484-vzl4w_sas-certframe.log:
+  - [Certificate Errors] 2025-01-21 04:42:36 - OpensslCACertGenerator.EnsureCACertificateExists Openssl CA certificate Secret already exists [CaCertSecretName:sas-viya-ca-certificate-secret]
+
+12 Issues in C:\sample_data\CS0151503\kubernetes\sas-viya-app\logs\sas-model-repository-69c94c5484-vzl4w_sas-model-repository.log:
+  - [Telemetry Warnings] INFO  2025-01-22-01:40:39.721 [sas-bootstrap-tool] - OpenTelemetry support not installed
+  - [Telemetry Warnings] INFO  2025-01-22-01:40:39.722 [sas-bootstrap-tool] - using a noop Open Telemetry MeterProvider - no metrics will be collected
+  - [Telemetry Warnings] INFO  2025-01-22-01:40:50.065 [sas-bootstrap-tool] - OpenTelemetry support not installed
+  - [Telemetry Warnings] INFO  2025-01-22-01:40:50.065 [sas-bootstrap-tool] - using a noop Open Telemetry MeterProvider - no metrics will be collected
+  - [Telemetry Warnings] INFO  2025-01-22-01:41:00.377 [sas-bootstrap-tool] - OpenTelemetry support not installed
+  - [Telemetry Warnings] INFO  2025-01-22-01:41:00.377 [sas-bootstrap-tool] - using a noop Open Telemetry MeterProvider - no metrics will be collected
+  - [Telemetry Warnings] INFO  2025-01-22-01:41:10.705 [sas-bootstrap-tool] - OpenTelemetry support not installed
+  - [Telemetry Warnings] INFO  2025-01-22-01:41:10.706 [sas-bootstrap-tool] - using a noop Open Telemetry MeterProvider - no metrics will be collected
+  - [Telemetry Warnings] INFO  2025-01-22-01:41:21.048 [sas-bootstrap-tool] - OpenTelemetry support not installed
+  - [Telemetry Warnings] INFO  2025-01-22-01:41:21.048 [sas-bootstrap-tool] - using a noop Open Telemetry MeterProvider - no metrics will be collected
+  - [Telemetry Warnings] INFO  2025-01-22-01:41:31.384 [sas-bootstrap-tool] - OpenTelemetry support not installed
+  - [Telemetry Warnings] INFO  2025-01-22-01:41:31.384 [sas-bootstrap-tool] - using a noop Open Telemetry MeterProvider - no metrics will be collected
+
+1 Issue in C:\sample_data\CS0151503\kubernetes\sas-viya-app\logs\sas-model-repository-69c94c5484-vzl4w_sas-start-sequencer.log:
+  - [Start Sequencer Warnings] 2025-01-21 04:39:46 - SKIP_INIT_BLOCK is not set in the environment. Proceeding with sequencing [elapsed time:0m:0s:0ms name:main]
+--------------------
+--------------------
+Pod Name: sas-readiness-5655ff78cf-2s8rz
+Status: Running No Pods
+Node: aks-stateless-54236555-vmss000009
+Details:
+
+1 Issue in C:\sample_data\CS0151503\kubernetes\sas-viya-app\get\pods.txt:
+  - sas-readiness-5655ff78cf-2s8rz                                0/1     Running     0                 21h     10.244.4.55    aks-stateless-54236555-vmss000009   <none>           <none>
+
+1 Issue in C:\sample_data\CS0151503\kubernetes\sas-viya-app\describe\pods.txt:
+  - Warning  Unhealthy  2m13s (x4787 over 21h)  kubelet  Readiness probe failed: HTTP probe failed with statuscode: 503
+
+1 Issue in C:\sample_data\CS0151503\kubernetes\sas-viya-app\logs\sas-readiness-5655ff78cf-2s8rz_sas-certframe.log:
+  - [Certificate Errors] 2025-01-21 04:39:49 - OpensslCACertGenerator.EnsureCACertificateExists Openssl CA certificate Secret already exists [CaCertSecretName:sas-viya-ca-certificate-secret]
+
+20 Issues in C:\sample_data\CS0151503\kubernetes\sas-viya-app\logs\sas-readiness-5655ff78cf-2s8rz_sas-readiness.log:
+  - [Stalled Init Warnings] 2025-01-21 04:39:50 - Service successfully launched. Waiting for service to finish.
+  - [Telemetry Warnings] 2025-01-21 04:39:50 - OpenTelemetry support not installed
+  - [Telemetry Warnings] 2025-01-21 04:39:50 - using a noop Open Telemetry MeterProvider - no metrics will be collected
+  - [Readiness Check Failures] 2025-01-21 04:39:50 - The check "sas-endpoints-ready" failed - 137 endpoints have no available addresses: sas-activities,sas-analytics-components,sas-analytics-data-segmentation,sas-analytics-events,sas-analytics-execution,sas-analytics-flows,sas-analytics-gateway,sas-analytics-localization,sas-analytics-pipelines,sas-analytics-validation,sas-annotations,sas-app-registry,sas-arke,sas-audit,sas-authorization,sas-batch,sas-business-rules,sas-cas-access-management,sas-cas-formats,sas-cas-management,sas-cas-proxy,sas-cas-row-sets,sas-catalog,sas-catalog-table-bot,sas-code-debugger,sas-code-debugger-app,sas-comments,sas-compute,sas-config-reconciler,sas-configuration,sas-connect,sas-connect-spawner,sas-consul-server,sas-credentials,sas-crossdomainproxy,sas-data-agent-content,sas-data-agent-management,sas-data-connections,sas-data-discovery,sas-data-explorer-app,sas-data-flows,sas-data-mining,sas-data-mining-models,sas-data-mining-project-resources,sas-data-mining-project-settings,sas-data-mining-results,sas-data-mining-risk-models,sas-data-mining-warehouse,sas-data-plans,sas-data-quality,sas-data-sources,sas-data-studio-app,sas-data-tables,sas-decision-manager-app,sas-decisions,sas-decisions-runtime-builder,sas-deployment-data,sas-device-management,sas-discovery-table-provider,sas-drive,sas-drive-app,sas-environment-manager-app,sas-event-monitor,sas-event-stream-manager-app,sas-event-stream-processing-metering-app,sas-event-stream-processing-studio-app,sas-feature-flags,sas-files,sas-folders,sas-forecasting-comparison,sas-forecasting-data-definition,sas-forecasting-events,sas-forecasting-exploration,sas-forecasting-filters,sas-forecasting-gateway,sas-forecasting-models,sas-forecasting-overrides,sas-forecasting-pipelines,sas-formats,sas-geo-enrichment,sas-glossary,sas-graph-builder-app,sas-graph-templates,sas-identities,sas-import-9,sas-information-catalog-app,sas-insights,sas-job-definitions,sas-job-execution,sas-job-execution-app,sas-job-flow-scheduling,sas-launcher,sas-licenses,sas-lineage-app,sas-links,sas-list-data,sas-localization,sas-logon-app,sas-mail,sas-maps,sas-metering,sas-microanalytic-score,sas-ml-pipeline-automation,sas-model-management,sas-model-manager-app,sas-model-publish,sas-model-repository,sas-model-studio-app,sas-natural-language-generation,sas-notifications,sas-office-addin-app,sas-preferences,sas-qkb-management,sas-reference-data,sas-relationships,sas-report-alerts,sas-report-data,sas-report-distribution,sas-report-images,sas-report-packages,sas-report-renderer,sas-report-templates,sas-report-transforms,sas-reports,sas-row-sets,sas-scheduler,sas-score-definitions,sas-score-execution,sas-search,sas-search-index,sas-studio,sas-studio-app,sas-templates,sas-thumbnails,sas-types,sas-web-data-access,sas-workload-orchestrator
+  - [Readiness Check Failures] 2025-01-21 04:40:20 - The check "sas-endpoints-ready" failed - 162 endpoints have no available addresses: sas-activities,sas-analytics-components,sas-analytics-data-segmentation,sas-analytics-events,sas-analytics-execution,sas-analytics-flows,sas-analytics-gateway,sas-analytics-localization,sas-analytics-pipelines,sas-analytics-validation,sas-annotations,sas-app-registry,sas-arke,sas-audit,sas-authorization,sas-batch,sas-business-rules,sas-cas-access-management,sas-cas-formats,sas-cas-management,sas-cas-proxy,sas-cas-row-sets,sas-catalog,sas-catalog-table-bot,sas-category-taxonomy,sas-code-debugger,sas-code-debugger-app,sas-comments,sas-compute,sas-concept-taxonomy,sas-config-reconciler,sas-configuration,sas-connect,sas-connect-spawner,sas-credentials,sas-crossdomainproxy,sas-data-agent-content,sas-data-agent-management,sas-data-agent-server-colocated,sas-data-connections,sas-data-discovery,sas-data-explorer-app,sas-data-flows,sas-data-mining,sas-data-mining-models,sas-data-mining-project-resources,sas-data-mining-project-settings,sas-data-mining-results,sas-data-mining-risk-models,sas-data-mining-warehouse,sas-data-plans,sas-data-quality,sas-data-sources,sas-data-studio-app,sas-data-tables,sas-decision-manager-app,sas-decisions,sas-decisions-runtime-builder,sas-deployment-data,sas-device-management,sas-discovery-table-provider,sas-documents,sas-drive,sas-drive-app,sas-environment-manager-app,sas-event-monitor,sas-event-stream-manager-app,sas-event-stream-processing-metering-app,sas-event-stream-processing-studio-app,sas-feature-flags,sas-files,sas-folders,sas-fonts,sas-forecasting-comparison,sas-forecasting-data-definition,sas-forecasting-events,sas-forecasting-exploration,sas-forecasting-filters,sas-forecasting-gateway,sas-forecasting-models,sas-forecasting-overrides,sas-forecasting-pipelines,sas-formats,sas-geo-enrichment,sas-glossary,sas-graph-builder-app,sas-graph-templates,sas-identities,sas-import-9,sas-information-catalog-app,sas-insights,sas-job-definitions,sas-job-execution,sas-job-execution-app,sas-job-flow-scheduling,sas-launcher,sas-licenses,sas-lineage-app,sas-links,sas-list-data,sas-localization,sas-logon-app,sas-mail,sas-maps,sas-metering,sas-microanalytic-score,sas-ml-pipeline-automation,sas-model-management,sas-model-manager-app,sas-model-publish,sas-model-repository,sas-model-studio-app,sas-natural-language-generation,sas-notifications,sas-office-addin-app,sas-preferences,sas-qkb-management,sas-reference-data,sas-relationships,sas-report-alerts,sas-report-data,sas-report-distribution,sas-report-images,sas-report-operations,sas-report-packages,sas-report-renderer,sas-report-templates,sas-report-transforms,sas-reports,sas-row-sets,sas-scheduler,sas-score-definitions,sas-score-execution,sas-search,sas-search-index,sas-studio,sas-studio-app,sas-studio-development,sas-subject-contacts,sas-templates,sas-terms-management,sas-text-analytics-execution,sas-text-analytics-provider,sas-theme-content,sas-theme-designer-app,sas-themes,sas-thumbnails,sas-topic-management,sas-transfer,sas-transformations,sas-treatment-definitions,sas-types,sas-visual-analytics,sas-visual-analytics-administration,sas-visual-analytics-app,sas-web-data-access,sas-webhooks,sas-workflow,sas-workflow-definition,sas-workflow-history,sas-workflow-manager-app,sas-workload-orchestrator
+  - [Readiness Check Failures] 2025-01-21 04:40:51 - The check "sas-endpoints-ready" failed - 161 endpoints have no available addresses: sas-activities,sas-analytics-components,sas-analytics-data-segmentation,sas-analytics-events,sas-analytics-execution,sas-analytics-flows,sas-analytics-gateway,sas-analytics-localization,sas-analytics-pipelines,sas-analytics-validation,sas-annotations,sas-app-registry,sas-audit,sas-authorization,sas-batch,sas-business-rules,sas-cas-access-management,sas-cas-formats,sas-cas-management,sas-cas-proxy,sas-cas-row-sets,sas-catalog,sas-catalog-table-bot,sas-category-taxonomy,sas-code-debugger,sas-code-debugger-app,sas-comments,sas-compute,sas-concept-taxonomy,sas-config-reconciler,sas-configuration,sas-connect,sas-connect-spawner,sas-credentials,sas-crossdomainproxy,sas-data-agent-content,sas-data-agent-management,sas-data-agent-server-colocated,sas-data-connections,sas-data-discovery,sas-data-explorer-app,sas-data-flows,sas-data-mining,sas-data-mining-models,sas-data-mining-project-resources,sas-data-mining-project-settings,sas-data-mining-results,sas-data-mining-risk-models,sas-data-mining-warehouse,sas-data-plans,sas-data-quality,sas-data-sources,sas-data-studio-app,sas-data-tables,sas-decision-manager-app,sas-decisions,sas-decisions-runtime-builder,sas-deployment-data,sas-device-management,sas-discovery-table-provider,sas-documents,sas-drive,sas-drive-app,sas-environment-manager-app,sas-event-monitor,sas-event-stream-manager-app,sas-event-stream-processing-metering-app,sas-event-stream-processing-studio-app,sas-feature-flags,sas-files,sas-folders,sas-fonts,sas-forecasting-comparison,sas-forecasting-data-definition,sas-forecasting-events,sas-forecasting-exploration,sas-forecasting-filters,sas-forecasting-gateway,sas-forecasting-models,sas-forecasting-overrides,sas-forecasting-pipelines,sas-formats,sas-geo-enrichment,sas-glossary,sas-graph-builder-app,sas-graph-templates,sas-identities,sas-import-9,sas-information-catalog-app,sas-insights,sas-job-definitions,sas-job-execution,sas-job-execution-app,sas-job-flow-scheduling,sas-launcher,sas-licenses,sas-lineage-app,sas-links,sas-list-data,sas-localization,sas-logon-app,sas-mail,sas-maps,sas-metering,sas-microanalytic-score,sas-ml-pipeline-automation,sas-model-management,sas-model-manager-app,sas-model-publish,sas-model-repository,sas-model-studio-app,sas-natural-language-generation,sas-notifications,sas-office-addin-app,sas-preferences,sas-qkb-management,sas-reference-data,sas-relationships,sas-report-alerts,sas-report-data,sas-report-distribution,sas-report-images,sas-report-operations,sas-report-packages,sas-report-renderer,sas-report-templates,sas-report-transforms,sas-reports,sas-row-sets,sas-scheduler,sas-score-definitions,sas-score-execution,sas-search,sas-search-index,sas-studio,sas-studio-app,sas-studio-development,sas-subject-contacts,sas-templates,sas-terms-management,sas-text-analytics-execution,sas-text-analytics-provider,sas-theme-content,sas-theme-designer-app,sas-themes,sas-thumbnails,sas-topic-management,sas-transfer,sas-transformations,sas-treatment-definitions,sas-types,sas-visual-analytics,sas-visual-analytics-administration,sas-visual-analytics-app,sas-web-data-access,sas-webhooks,sas-workflow,sas-workflow-definition,sas-workflow-history,sas-workflow-manager-app,sas-workload-orchestrator
+  - [Readiness Check Failures] 2025-01-21 04:41:51 - The check "sas-endpoints-ready" failed - 160 endpoints have no available addresses: sas-activities,sas-analytics-components,sas-analytics-data-segmentation,sas-analytics-events,sas-analytics-execution,sas-analytics-flows,sas-analytics-gateway,sas-analytics-localization,sas-analytics-pipelines,sas-analytics-validation,sas-annotations,sas-app-registry,sas-audit,sas-authorization,sas-batch,sas-business-rules,sas-cas-access-management,sas-cas-formats,sas-cas-management,sas-cas-proxy,sas-cas-row-sets,sas-catalog,sas-catalog-table-bot,sas-category-taxonomy,sas-code-debugger,sas-code-debugger-app,sas-comments,sas-compute,sas-concept-taxonomy,sas-config-reconciler,sas-configuration,sas-connect,sas-connect-spawner,sas-credentials,sas-crossdomainproxy,sas-data-agent-content,sas-data-agent-management,sas-data-agent-server-colocated,sas-data-connections,sas-data-discovery,sas-data-explorer-app,sas-data-flows,sas-data-mining,sas-data-mining-models,sas-data-mining-project-resources,sas-data-mining-project-settings,sas-data-mining-results,sas-data-mining-risk-models,sas-data-mining-warehouse,sas-data-plans,sas-data-quality,sas-data-sources,sas-data-studio-app,sas-data-tables,sas-decision-manager-app,sas-decisions,sas-decisions-runtime-builder,sas-deployment-data,sas-device-management,sas-discovery-table-provider,sas-documents,sas-drive,sas-drive-app,sas-environment-manager-app,sas-event-monitor,sas-event-stream-manager-app,sas-event-stream-processing-metering-app,sas-event-stream-processing-studio-app,sas-feature-flags,sas-files,sas-folders,sas-fonts,sas-forecasting-comparison,sas-forecasting-data-definition,sas-forecasting-events,sas-forecasting-exploration,sas-forecasting-filters,sas-forecasting-gateway,sas-forecasting-models,sas-forecasting-overrides,sas-forecasting-pipelines,sas-formats,sas-geo-enrichment,sas-glossary,sas-graph-builder-app,sas-graph-templates,sas-identities,sas-import-9,sas-information-catalog-app,sas-insights,sas-job-definitions,sas-job-execution,sas-job-execution-app,sas-job-flow-scheduling,sas-launcher,sas-licenses,sas-lineage-app,sas-links,sas-list-data,sas-localization,sas-mail,sas-maps,sas-metering,sas-microanalytic-score,sas-ml-pipeline-automation,sas-model-management,sas-model-manager-app,sas-model-publish,sas-model-repository,sas-model-studio-app,sas-natural-language-generation,sas-notifications,sas-office-addin-app,sas-preferences,sas-qkb-management,sas-reference-data,sas-relationships,sas-report-alerts,sas-report-data,sas-report-distribution,sas-report-images,sas-report-operations,sas-report-packages,sas-report-renderer,sas-report-templates,sas-report-transforms,sas-reports,sas-row-sets,sas-scheduler,sas-score-definitions,sas-score-execution,sas-search,sas-search-index,sas-studio,sas-studio-app,sas-studio-development,sas-subject-contacts,sas-templates,sas-terms-management,sas-text-analytics-execution,sas-text-analytics-provider,sas-theme-content,sas-theme-designer-app,sas-themes,sas-thumbnails,sas-topic-management,sas-transfer,sas-transformations,sas-treatment-definitions,sas-types,sas-visual-analytics,sas-visual-analytics-administration,sas-visual-analytics-app,sas-web-data-access,sas-webhooks,sas-workflow,sas-workflow-definition,sas-workflow-history,sas-workflow-manager-app,sas-workload-orchestrator
+  - [Readiness Check Failures] 2025-01-21 04:42:21 - The check "sas-endpoints-ready" failed - 155 endpoints have no available addresses: sas-activities,sas-analytics-components,sas-analytics-data-segmentation,sas-analytics-events,sas-analytics-execution,sas-analytics-flows,sas-analytics-gateway,sas-analytics-localization,sas-analytics-pipelines,sas-analytics-validation,sas-annotations,sas-app-registry,sas-audit,sas-batch,sas-business-rules,sas-cas-access-management,sas-cas-formats,sas-cas-management,sas-cas-proxy,sas-cas-row-sets,sas-cas-server-default,sas-catalog,sas-catalog-table-bot,sas-category-taxonomy,sas-code-debugger,sas-code-debugger-app,sas-comments,sas-compute,sas-concept-taxonomy,sas-connect,sas-connect-spawner,sas-credentials,sas-crossdomainproxy,sas-data-agent-content,sas-data-agent-management,sas-data-agent-server-colocated,sas-data-connections,sas-data-discovery,sas-data-explorer-app,sas-data-flows,sas-data-mining,sas-data-mining-models,sas-data-mining-project-resources,sas-data-mining-project-settings,sas-data-mining-results,sas-data-mining-risk-models,sas-data-mining-warehouse,sas-data-plans,sas-data-quality,sas-data-sources,sas-data-studio-app,sas-data-tables,sas-decision-manager-app,sas-decisions,sas-decisions-runtime-builder,sas-deployment-data,sas-device-management,sas-discovery-table-provider,sas-documents,sas-drive,sas-drive-app,sas-environment-manager-app,sas-event-monitor,sas-event-stream-manager-app,sas-event-stream-processing-metering-app,sas-event-stream-processing-studio-app,sas-files,sas-fonts,sas-forecasting-comparison,sas-forecasting-data-definition,sas-forecasting-events,sas-forecasting-exploration,sas-forecasting-filters,sas-forecasting-gateway,sas-forecasting-models,sas-forecasting-overrides,sas-forecasting-pipelines,sas-formats,sas-geo-enrichment,sas-glossary,sas-graph-builder-app,sas-graph-templates,sas-identities,sas-import-9,sas-information-catalog-app,sas-insights,sas-job-definitions,sas-job-execution,sas-job-execution-app,sas-job-flow-scheduling,sas-launcher,sas-licenses,sas-lineage-app,sas-links,sas-list-data,sas-localization,sas-mail,sas-maps,sas-metering,sas-microanalytic-score,sas-ml-pipeline-automation,sas-model-management,sas-model-manager-app,sas-model-publish,sas-model-repository,sas-model-studio-app,sas-natural-language-generation,sas-notifications,sas-office-addin-app,sas-preferences,sas-qkb-management,sas-reference-data,sas-relationships,sas-report-alerts,sas-report-data,sas-report-distribution,sas-report-images,sas-report-operations,sas-report-packages,sas-report-renderer,sas-report-templates,sas-report-transforms,sas-reports,sas-row-sets,sas-scheduler,sas-score-definitions,sas-score-execution,sas-search,sas-search-index,sas-studio,sas-studio-app,sas-studio-development,sas-subject-contacts,sas-templates,sas-terms-management,sas-text-analytics-execution,sas-text-analytics-provider,sas-theme-content,sas-theme-designer-app,sas-themes,sas-thumbnails,sas-topic-management,sas-transfer,sas-transformations,sas-treatment-definitions,sas-visual-analytics,sas-visual-analytics-administration,sas-visual-analytics-app,sas-web-data-access,sas-webhooks,sas-workflow,sas-workflow-definition,sas-workflow-history,sas-workflow-manager-app,sas-workload-orchestrator
+  - [Readiness Check Failures] 2025-01-21 04:42:52 - The check "sas-endpoints-ready" failed - 124 endpoints have no available addresses: sas-activities,sas-analytics-components,sas-analytics-data-segmentation,sas-analytics-events,sas-analytics-execution,sas-analytics-flows,sas-analytics-gateway,sas-analytics-localization,sas-analytics-pipelines,sas-analytics-validation,sas-annotations,sas-batch,sas-business-rules,sas-cas-access-management,sas-cas-formats,sas-cas-management,sas-cas-proxy,sas-cas-row-sets,sas-cas-server-default,sas-catalog,sas-catalog-table-bot,sas-comments,sas-compute,sas-connect,sas-connect-spawner,sas-crossdomainproxy,sas-data-agent-content,sas-data-agent-management,sas-data-agent-server-colocated,sas-data-connections,sas-data-discovery,sas-data-explorer-app,sas-data-flows,sas-data-mining,sas-data-mining-models,sas-data-mining-project-resources,sas-data-mining-project-settings,sas-data-mining-results,sas-data-mining-risk-models,sas-data-mining-warehouse,sas-data-plans,sas-data-quality,sas-data-sources,sas-data-studio-app,sas-data-tables,sas-decision-manager-app,sas-decisions,sas-decisions-runtime-builder,sas-deployment-data,sas-device-management,sas-discovery-table-provider,sas-documents,sas-drive,sas-drive-app,sas-environment-manager-app,sas-event-monitor,sas-event-stream-manager-app,sas-event-stream-processing-metering-app,sas-event-stream-processing-studio-app,sas-forecasting-comparison,sas-forecasting-data-definition,sas-forecasting-events,sas-forecasting-exploration,sas-forecasting-filters,sas-forecasting-gateway,sas-forecasting-models,sas-forecasting-overrides,sas-forecasting-pipelines,sas-geo-enrichment,sas-glossary,sas-graph-templates,sas-import-9,sas-job-execution-app,sas-job-flow-scheduling,sas-licenses,sas-list-data,sas-mail,sas-maps,sas-metering,sas-microanalytic-score,sas-ml-pipeline-automation,sas-model-management,sas-model-manager-app,sas-model-publish,sas-model-repository,sas-model-studio-app,sas-natural-language-generation,sas-notifications,sas-office-addin-app,sas-qkb-management,sas-reference-data,sas-relationships,sas-report-alerts,sas-report-data,sas-report-distribution,sas-report-images,sas-report-operations,sas-report-packages,sas-report-renderer,sas-report-templates,sas-report-transforms,sas-reports,sas-row-sets,sas-scheduler,sas-score-definitions,sas-score-execution,sas-search,sas-search-index,sas-studio,sas-studio-app,sas-studio-development,sas-subject-contacts,sas-templates,sas-terms-management,sas-text-analytics-provider,sas-thumbnails,sas-topic-management,sas-transfer,sas-treatment-definitions,sas-visual-analytics,sas-web-data-access,sas-workflow,sas-workflow-definition,sas-workflow-history
+  - [Readiness Check Failures] 2025-01-21 04:43:22 - The check "sas-endpoints-ready" failed - 103 endpoints have no available addresses: sas-activities,sas-analytics-components,sas-analytics-data-segmentation,sas-analytics-events,sas-analytics-flows,sas-analytics-gateway,sas-analytics-localization,sas-analytics-pipelines,sas-analytics-validation,sas-annotations,sas-batch,sas-business-rules,sas-cas-access-management,sas-cas-formats,sas-cas-management,sas-cas-proxy,sas-cas-row-sets,sas-cas-server-default,sas-catalog,sas-catalog-table-bot,sas-comments,sas-compute,sas-connect,sas-connect-spawner,sas-crossdomainproxy,sas-data-agent-server-colocated,sas-data-connections,sas-data-discovery,sas-data-explorer-app,sas-data-flows,sas-data-mining,sas-data-mining-models,sas-data-mining-project-resources,sas-data-mining-project-settings,sas-data-mining-results,sas-data-mining-warehouse,sas-data-plans,sas-data-quality,sas-data-sources,sas-data-tables,sas-decisions,sas-deployment-data,sas-device-management,sas-discovery-table-provider,sas-documents,sas-drive,sas-event-monitor,sas-event-stream-manager-app,sas-event-stream-processing-metering-app,sas-event-stream-processing-studio-app,sas-forecasting-comparison,sas-forecasting-data-definition,sas-forecasting-events,sas-forecasting-exploration,sas-forecasting-filters,sas-forecasting-gateway,sas-forecasting-models,sas-forecasting-overrides,sas-forecasting-pipelines,sas-geo-enrichment,sas-glossary,sas-import-9,sas-job-execution-app,sas-job-flow-scheduling,sas-licenses,sas-list-data,sas-mail,sas-maps,sas-metering,sas-microanalytic-score,sas-ml-pipeline-automation,sas-model-management,sas-model-repository,sas-natural-language-generation,sas-notifications,sas-qkb-management,sas-reference-data,sas-relationships,sas-report-alerts,sas-report-data,sas-report-distribution,sas-report-images,sas-report-packages,sas-report-renderer,sas-report-templates,sas-report-transforms,sas-reports,sas-row-sets,sas-scheduler,sas-score-definitions,sas-score-execution,sas-search,sas-search-index,sas-studio,sas-studio-app,sas-subject-contacts,sas-templates,sas-terms-management,sas-text-analytics-provider,sas-thumbnails,sas-topic-management,sas-transfer,sas-web-data-access
+  - [Readiness Check Failures] 2025-01-21 04:43:53 - The check "sas-endpoints-ready" failed - 77 endpoints have no available addresses: sas-activities,sas-analytics-gateway,sas-business-rules,sas-cas-access-management,sas-cas-formats,sas-cas-management,sas-cas-proxy,sas-cas-row-sets,sas-cas-server-default,sas-catalog,sas-catalog-table-bot,sas-crossdomainproxy,sas-data-agent-server-colocated,sas-data-connections,sas-data-explorer-app,sas-data-flows,sas-data-mining,sas-data-mining-project-resources,sas-data-mining-project-settings,sas-data-mining-results,sas-data-mining-warehouse,sas-data-plans,sas-data-quality,sas-data-sources,sas-data-tables,sas-decisions,sas-documents,sas-drive,sas-event-monitor,sas-event-stream-manager-app,sas-event-stream-processing-metering-app,sas-event-stream-processing-studio-app,sas-forecasting-comparison,sas-forecasting-data-definition,sas-forecasting-events,sas-forecasting-exploration,sas-forecasting-filters,sas-forecasting-gateway,sas-forecasting-models,sas-forecasting-overrides,sas-forecasting-pipelines,sas-geo-enrichment,sas-glossary,sas-import-9,sas-job-execution-app,sas-list-data,sas-maps,sas-microanalytic-score,sas-model-management,sas-model-repository,sas-natural-language-generation,sas-qkb-management,sas-reference-data,sas-relationships,sas-report-alerts,sas-report-data,sas-report-distribution,sas-report-images,sas-report-packages,sas-report-renderer,sas-report-templates,sas-report-transforms,sas-reports,sas-row-sets,sas-scheduler,sas-score-definitions,sas-score-execution,sas-search,sas-search-index,sas-studio,sas-studio-app,sas-subject-contacts,sas-terms-management,sas-text-analytics-provider,sas-thumbnails,sas-topic-management,sas-web-data-access
+  - [Readiness Check Failures] 2025-01-21 04:44:24 - The check "sas-endpoints-ready" failed - 59 endpoints have no available addresses: sas-activities,sas-analytics-gateway,sas-business-rules,sas-cas-access-management,sas-cas-formats,sas-cas-management,sas-cas-proxy,sas-cas-row-sets,sas-cas-server-default,sas-catalog,sas-catalog-table-bot,sas-crossdomainproxy,sas-data-explorer-app,sas-data-flows,sas-data-mining,sas-data-mining-project-resources,sas-data-mining-project-settings,sas-data-plans,sas-data-quality,sas-decisions,sas-documents,sas-drive,sas-event-stream-manager-app,sas-event-stream-processing-metering-app,sas-event-stream-processing-studio-app,sas-forecasting-comparison,sas-forecasting-data-definition,sas-forecasting-events,sas-forecasting-exploration,sas-forecasting-filters,sas-forecasting-gateway,sas-forecasting-models,sas-forecasting-overrides,sas-forecasting-pipelines,sas-geo-enrichment,sas-glossary,sas-list-data,sas-maps,sas-microanalytic-score,sas-model-repository,sas-natural-language-generation,sas-qkb-management,sas-reference-data,sas-relationships,sas-report-data,sas-report-packages,sas-report-templates,sas-report-transforms,sas-reports,sas-scheduler,sas-search,sas-search-index,sas-studio-app,sas-subject-contacts,sas-terms-management,sas-text-analytics-provider,sas-thumbnails,sas-topic-management,sas-web-data-access
+  - [Readiness Check Failures] 2025-01-21 04:44:55 - The check "sas-endpoints-ready" failed - 47 endpoints have no available addresses: sas-activities,sas-cas-access-management,sas-cas-formats,sas-cas-management,sas-cas-proxy,sas-cas-row-sets,sas-cas-server-default,sas-data-explorer-app,sas-data-flows,sas-data-mining,sas-data-mining-project-resources,sas-data-mining-project-settings,sas-data-plans,sas-data-quality,sas-decisions,sas-documents,sas-drive,sas-event-stream-manager-app,sas-event-stream-processing-studio-app,sas-forecasting-comparison,sas-forecasting-data-definition,sas-forecasting-events,sas-forecasting-exploration,sas-forecasting-filters,sas-forecasting-gateway,sas-forecasting-models,sas-forecasting-overrides,sas-forecasting-pipelines,sas-list-data,sas-microanalytic-score,sas-model-repository,sas-natural-language-generation,sas-qkb-management,sas-reference-data,sas-report-data,sas-report-packages,sas-report-templates,sas-report-transforms,sas-reports,sas-scheduler,sas-search,sas-search-index,sas-studio-app,sas-subject-contacts,sas-terms-management,sas-thumbnails,sas-topic-management
+  - [Readiness Check Failures] 2025-01-21 04:45:25 - The check "sas-endpoints-ready" failed - 28 endpoints have no available addresses: sas-activities,sas-cas-access-management,sas-cas-formats,sas-cas-management,sas-cas-proxy,sas-cas-row-sets,sas-cas-server-default,sas-data-mining,sas-data-mining-project-resources,sas-data-mining-project-settings,sas-data-quality,sas-drive,sas-forecasting-comparison,sas-forecasting-data-definition,sas-forecasting-events,sas-forecasting-exploration,sas-forecasting-filters,sas-forecasting-gateway,sas-forecasting-models,sas-forecasting-overrides,sas-forecasting-pipelines,sas-list-data,sas-microanalytic-score,sas-model-repository,sas-qkb-management,sas-search,sas-search-index,sas-thumbnails
+  - [Readiness Check Failures] 2025-01-21 04:45:55 - The check "sas-endpoints-ready" failed - 15 endpoints have no available addresses: sas-cas-access-management,sas-cas-formats,sas-cas-management,sas-cas-proxy,sas-cas-row-sets,sas-cas-server-default,sas-data-mining,sas-data-mining-project-resources,sas-data-mining-project-settings,sas-data-quality,sas-microanalytic-score,sas-model-repository,sas-qkb-management,sas-search,sas-search-index
+  - [Readiness Check Failures] 2025-01-21 04:46:25 - The check "sas-endpoints-ready" failed - 13 endpoints have no available addresses: sas-cas-access-management,sas-cas-formats,sas-cas-management,sas-cas-proxy,sas-cas-row-sets,sas-cas-server-default,sas-data-mining,sas-data-mining-project-resources,sas-data-mining-project-settings,sas-microanalytic-score,sas-model-repository,sas-search,sas-search-index
+  - [Readiness Check Failures] 2025-01-21 04:46:55 - The check "sas-endpoints-ready" failed - 10 endpoints have no available addresses: sas-cas-access-management,sas-cas-formats,sas-cas-management,sas-cas-proxy,sas-cas-row-sets,sas-cas-server-default,sas-microanalytic-score,sas-model-repository,sas-search,sas-search-index
+  - [Readiness Check Failures] 2025-01-21 06:24:31 - The check "sas-endpoints-ready" failed - 11 endpoints have no available addresses: sas-cas-access-management,sas-cas-formats,sas-cas-management,sas-cas-proxy,sas-cas-row-sets,sas-cas-server-default,sas-data-agent-server-colocated,sas-microanalytic-score,sas-model-repository,sas-search,sas-search-index
+  - [Readiness Check Failures] 2025-01-22 00:05:46 - The check "sas-endpoints-ready" failed - 11 endpoints have no available addresses: sas-cas-access-management,sas-cas-formats,sas-cas-management,sas-cas-proxy,sas-cas-row-sets,sas-cas-server-default,sas-logon-app,sas-microanalytic-score,sas-model-repository,sas-search,sas-search-index
+  - [Readiness Check Failures] 2025-01-22 01:02:06 - The check "sas-endpoints-ready" failed - 11 endpoints have no available addresses: sas-cas-access-management,sas-cas-formats,sas-cas-management,sas-cas-proxy,sas-cas-row-sets,sas-cas-server-default,sas-launcher,sas-microanalytic-score,sas-model-repository,sas-search,sas-search-index
+
+1 Issue in C:\sample_data\CS0151503\kubernetes\sas-viya-app\logs\sas-readiness-5655ff78cf-2s8rz_sas-start-sequencer.log:
+  - [Start Sequencer Warnings] 2025-01-21 04:39:47 - SKIP_INIT_BLOCK is not set in the environment. Proceeding with sequencing [elapsed time:0m:0s:0ms name:main]
+--------------------
+--------------------
+Pod Name: sas-search-5c85cc745b-f448h
+Status: Running No Pods
+Node: aks-stateless-54236555-vmss000009
+Details:
+
+1 Issue in C:\sample_data\CS0151503\kubernetes\sas-viya-app\get\pods.txt:
+  - sas-search-5c85cc745b-f448h                                   0/1     Running     200 (9m44s ago)   21h     10.244.4.66    aks-stateless-54236555-vmss000009   <none>           <none>
+
+2 Issues in C:\sample_data\CS0151503\kubernetes\sas-viya-app\describe\pods.txt:
+  - Warning  BackOff    7m2s (x1293 over 20h)  kubelet  Back-off restarting failed container sas-search in pod sas-search-5c85cc745b-f448h_sas-viya-app(f6ee25f5-f2df-44af-bad2-d2c7dce21662)
+  - Warning  Unhealthy  2m1s (x5991 over 20h)  kubelet  Startup probe failed: Get "https://10.244.4.66:8080/internal/live": dial tcp 10.244.4.66:8080: connect: connection refused
+
+1 Issue in C:\sample_data\CS0151503\kubernetes\sas-viya-app\logs\sas-search-5c85cc745b-f448h_sas-certframe.log:
+  - [Certificate Errors] 2025-01-21 04:42:42 - OpensslCACertGenerator.EnsureCACertificateExists Openssl CA certificate Secret already exists [CaCertSecretName:sas-viya-ca-certificate-secret]
+
+2 Issues in C:\sample_data\CS0151503\kubernetes\sas-viya-app\logs\sas-search-5c85cc745b-f448h_sas-search.log:
+  - [Telemetry Warnings] 2025-01-22 01:37:13 - OpenTelemetry support not installed
+  - [Telemetry Warnings] 2025-01-22 01:37:13 - using a noop Open Telemetry MeterProvider - no metrics will be collected
+
+1 Issue in C:\sample_data\CS0151503\kubernetes\sas-viya-app\logs\sas-search-5c85cc745b-f448h_sas-start-sequencer.log:
+  - [Start Sequencer Warnings] 2025-01-21 04:39:49 - SKIP_INIT_BLOCK is not set in the environment. Proceeding with sequencing [elapsed time:0m:0s:0ms name:main]
+--------------------
+
+Analyzing pods in normal state.
+
+Error: [Telemetry Warnings] found in 87 files
+List of files:
+ - sas-analytics-events-8844b8954-mpghp_sas-analytics-events.log : OpenTelemetry support not installed
+ - sas-analytics-execution-cb998f6cb-v89hx_sas-analytics-execution.log : OpenTelemetry support not installed
+ - sas-analytics-resources-85558f646f-jvvh5_sas-analytics-resources.log : OpenTelemetry support not installed
+ - sas-annotations-69c79b64cb-wgc7l_sas-annotations.log : OpenTelemetry support not installed
+ - sas-app-registry-67b994c68c-v9cmn_sas-app-registry.log : OpenTelemetry support not installed
+ - sas-audit-5c78b9789d-7mpg8_sas-audit.log : OpenTelemetry support not installed
+ - sas-backup-purge-job-28955535-8292n_sas-backup-agent.log : OpenTelemetry support not installed
+ - sas-backup-purge-job-28955535-8292n_sas-backup-purge-job.log : OpenTelemetry support not installed
+ - sas-backup-purge-job-28956975-frzgk_sas-backup-agent.log : OpenTelemetry support not installed
+ - sas-backup-purge-job-28956975-frzgk_sas-backup-purge-job.log : OpenTelemetry support not installed
+ - ... and 77 more files
+
+
+Error: [Stalled Init Warnings] found in 94 files
+List of files:
+ - sas-analytics-events-8844b8954-mpghp_sas-analytics-events.log : Service successfully launched. Waiting for service to finish.
+ - sas-analytics-execution-cb998f6cb-v89hx_sas-analytics-execution.log : Service successfully launched. Waiting for service to finish.
+ - sas-analytics-resources-85558f646f-jvvh5_sas-analytics-resources.log : Service successfully launched. Waiting for service to finish.
+ - sas-annotations-69c79b64cb-wgc7l_sas-annotations.log : Service successfully launched. Waiting for service to finish.
+ - sas-app-registry-67b994c68c-v9cmn_sas-app-registry.log : Service successfully launched. Waiting for service to finish.
+ - sas-arke-7c7ddf699d-22wvr_sas-arke.log : Service successfully launched. Waiting for service to finish.
+ - sas-audit-5c78b9789d-7mpg8_sas-audit.log : Service successfully launched. Waiting for service to finish.
+ - ... and 84 more files
+
+
+Error: [Certificate Errors] found in 138 files
+List of files:
+ - sas-analytics-events-8844b8954-mpghp_sas-certframe.log : OpensslCACertGenerator.EnsureCACertificateExists Openssl CA certificate Secret already exists [CaCertSecretName:sas-viya-ca-certificate-secret]
+ - sas-analytics-execution-cb998f6cb-v89hx_sas-certframe.log : OpensslCACertGenerator.EnsureCACertificateExists Openssl CA certificate Secret already exists [CaCertSecretName:sas-viya-ca-certificate-secret]
+ - sas-analytics-gateway-7d6d978644-jdgmt_sas-certframe.log : OpensslCACertGenerator.EnsureCACertificateExists Openssl CA certificate Secret already exists [CaCertSecretName:sas-viya-ca-certificate-secret]
+ - sas-analytics-resources-85558f646f-jvvh5_sas-certframe.log : OpensslCACertGenerator.EnsureCACertificateExists Openssl CA certificate Secret already exists [CaCertSecretName:sas-viya-ca-certificate-secret]
+ - sas-annotations-69c79b64cb-wgc7l_sas-certframe.log : OpensslCACertGenerator.EnsureCACertificateExists Openssl CA certificate Secret already exists [CaCertSecretName:sas-viya-ca-certificate-secret]
+ - sas-app-registry-67b994c68c-v9cmn_sas-certframe.log : OpensslCACertGenerator.EnsureCACertificateExists Openssl CA certificate Secret already exists [CaCertSecretName:sas-viya-ca-certificate-secret]
+ - sas-arke-7c7ddf699d-22wvr_sas-certframe.log : OpensslCACertGenerator.EnsureCACertificateExists Openssl CA certificate Secret already exists [CaCertSecretName:sas-viya-ca-certificate-secret]
+ - sas-audit-5c78b9789d-7mpg8_sas-certframe.log : OpensslCACertGenerator.EnsureCACertificateExists Openssl CA certificate Secret already exists [CaCertSecretName:sas-viya-ca-certificate-secret]
+ - sas-authorization-fdbcdc44c-pljdd_sas-certframe.log : OpensslCACertGenerator.EnsureCACertificateExists Openssl CA certificate Secret already exists [CaCertSecretName:sas-viya-ca-certificate-secret]
+ - sas-backup-purge-job-28955535-8292n_sas-certframe.log : OpensslCACertGenerator.EnsureCACertificateExists Openssl CA certificate Secret already exists [CaCertSecretName:sas-viya-ca-certificate-secret]
+ - ... and 128 more files
+
+
+Error: [Start Sequencer Warnings] found in 118 files
+List of files:
+ - sas-analytics-events-8844b8954-mpghp_sas-start-sequencer.log : SKIP_INIT_BLOCK is not set in the environment. Proceeding with sequencing [elapsed time:0m:0s:0ms name:main]
+ - sas-analytics-execution-cb998f6cb-v89hx_sas-start-sequencer.log : SKIP_INIT_BLOCK is not set in the environment. Proceeding with sequencing [elapsed time:0m:0s:0ms name:main]
+ - sas-analytics-gateway-7d6d978644-jdgmt_sas-start-sequencer.log : SKIP_INIT_BLOCK is not set in the environment. Proceeding with sequencing [elapsed time:0m:0s:0ms name:main]
+ - sas-analytics-resources-85558f646f-jvvh5_sas-start-sequencer.log : SKIP_INIT_BLOCK is not set in the environment. Proceeding with sequencing [elapsed time:0m:0s:0ms name:main]
+ - sas-annotations-69c79b64cb-wgc7l_sas-start-sequencer.log : SKIP_INIT_BLOCK is not set in the environment. Proceeding with sequencing [elapsed time:0m:0s:0ms name:main]
+ - sas-app-registry-67b994c68c-v9cmn_sas-start-sequencer.log : SKIP_INIT_BLOCK is not set in the environment. Proceeding with sequencing [elapsed time:0m:0s:0ms name:main]
+ - sas-arke-7c7ddf699d-22wvr_sas-start-sequencer.log : SKIP_INIT_BLOCK is not set in the environment. Proceeding with sequencing [elapsed time:0m:0s:0ms name:main]
+ - sas-audit-5c78b9789d-7mpg8_sas-start-sequencer.log : SKIP_INIT_BLOCK is not set in the environment. Proceeding with sequencing [elapsed time:0m:0s:0ms name:main]
+ - sas-authorization-fdbcdc44c-pljdd_sas-start-sequencer.log : SKIP_INIT_BLOCK is not set in the environment. Proceeding with sequencing [elapsed time:0m:0s:0ms name:main]
+ - sas-batch-94584577f-djnkb_sas-start-sequencer.log : SKIP_INIT_BLOCK is not set in the environment. Proceeding with sequencing [elapsed time:0m:0s:0ms name:main]
+ - ... and 108 more files
+
+
+Error: [Tool Execution Failures] found in 4 files
+List of files:
+ - sas-backup-purge-job-28955535-8292n_sas-backup-purge-job.log : Service executor failed to execute successfully: exit status 1
+ - sas-backup-purge-job-28956975-frzgk_sas-backup-purge-job.log : Service executor failed to execute successfully: exit status 1
+ - sas-backup-purge-job-28958415-7qmr4_sas-backup-purge-job.log : Service executor failed to execute successfully: exit status 1
+ - sas-scheduled-backup-job-28954140-frk4j_sas-backup-job.log : Service executor failed to execute successfully: exit status 1
+
+Error: [PVC Errors] found in 1 file
+List of files:
+ - sas-esp-operator-84db8c8768-v2s2h_sas-esp-operator.log : failed to reconcile ESP Server custom resource
+
+Error [Telemetry Warnings] found in 78 containers
+ - sas-text-analytics-execution
+ - sas-batch
+ - sas-graph-templates
+ - sas-analytics-execution
+ - sas-data-mining-models
+ - sas-analytics-events
+ - sas-insights
+ - sas-forecasting
+ - sas-feature-flags
+ - sas-analytics-resources
+ - sas-text-analytics-provider
+ - sas-import-data-loader
+ - sas-file-store
+ - sas-information-catalog-app
+ - sas-model-management
+ - sas-connect
+ - sas-links
+ - sas-report-distribution
+ - sas-catalog-services
+ - sas-backup-purge-job
+ - sas-studio-development
+ - sas-device-management
+ - sas-environment-manager-app
+ - sas-job-execution-app
+ - sas-data-mining-results
+ - sas-discovery-services
+ - sas-data-agent-services
+ - sas-content
+ - sas-studio-steps
+ - sas-deployment-data
+ - sas-code-debugger-app
+ - sas-ml-pipeline-automation
+ - sas-geography
+ - sas-studio
+ - sas-job-flow-scheduling
+ - sas-drive-app
+ - sas-visual-analytics-administration
+ - sas-data-flows
+ - sas-app-registry
+ - sas-visual-analytics-app
+ - sas-list-data
+ - sas-report-alerts
+ - sas-formats
+ - sas-report-renderers
+ - sas-model-publish
+ - sas-backup-job
+ - sas-text-analytics-taxonomies
+ - sas-decisions-runtime-builder
+ - sas-score-definitions
+ - sas-workflow-manager-app
+ - sas-lineage-app
+ - sas-data-sources
+ - sas-visual-analytics
+ - sas-decision-manager-app
+ - sas-model-manager-app
+ - sas-data-studio-app
+ - sas-data-mining-project-resources
+ - sas-score-execution
+ - sas-webhooks
+ - sas-data-mining-risk-models
+ - sas-audit
+ - sas-theme-designer-app
+ - sas-config-reconciler
+ - sas-compute
+ - sas-localization
+ - sas-web-assets
+ - sas-backup-agent
+ - sas-configuration
+ - sas-event-monitor
+ - sas-model-studio-app
+ - sas-preferences
+ - sas-code-debugger
+ - sas-office-addin-app
+ - sas-annotations
+ - sas-data-quality-services
+ - sas-text-analytics-data
+ - sas-graph-builder-app
+ - sas-collaboration
+
+Error [Stalled Init Warnings] found in 78 containers
+ - sas-text-analytics-execution
+ - sas-batch
+ - sas-graph-templates
+ - sas-analytics-execution
+ - sas-data-mining-models
+ - sas-analytics-events
+ - sas-insights
+ - sas-forecasting
+ - sas-feature-flags
+ - sas-analytics-resources
+ - sas-text-analytics-provider
+ - sas-import-data-loader
+ - sas-file-store
+ - sas-information-catalog-app
+ - sas-model-management
+ - sas-connect
+ - sas-links
+ - sas-report-distribution
+ - sas-catalog-services
+ - sas-studio-development
+ - sas-device-management
+ - sas-environment-manager-app
+ - sas-job-execution-app
+ - sas-data-mining-results
+ - sas-discovery-services
+ - sas-data-agent-services
+ - sas-content
+ - sas-studio-steps
+ - sas-deployment-data
+ - sas-code-debugger-app
+ - sas-ml-pipeline-automation
+ - sas-geography
+ - sas-studio
+ - sas-job-flow-scheduling
+ - sas-drive-app
+ - sas-visual-analytics-administration
+ - sas-data-flows
+ - sas-app-registry
+ - sas-visual-analytics-app
+ - sas-list-data
+ - sas-report-alerts
+ - sas-formats
+ - sas-report-renderers
+ - sas-model-publish
+ - sas-text-analytics-taxonomies
+ - sas-decisions-runtime-builder
+ - sas-score-definitions
+ - sas-workflow-manager-app
+ - sas-lineage-app
+ - sas-data-sources
+ - sas-visual-analytics
+ - sas-decision-manager-app
+ - sas-model-manager-app
+ - sas-data-studio-app
+ - sas-data-mining-project-resources
+ - sas-report-operations-core
+ - sas-score-execution
+ - sas-webhooks
+ - sas-data-mining-risk-models
+ - sas-arke
+ - sas-audit
+ - sas-theme-designer-app
+ - sas-config-reconciler
+ - sas-compute
+ - sas-localization
+ - sas-web-assets
+ - sas-configuration
+ - sas-event-monitor
+ - sas-model-studio-app
+ - sas-preferences
+ - sas-code-debugger
+ - sas-office-addin-app
+ - sas-annotations
+ - sas-data-quality-services
+ - sas-text-analytics-data
+ - sas-graph-builder-app
+ - sas-collaboration
+
+Error [Certificate Errors] found in 4 containers
+ - sas-certframe-admin
+ - sas-certframe-platform-postgres-replication
+ - sas-certframe-platform-postgres
+ - sas-certframe
+
+Error [Start Sequencer Warnings] found in 2 containers
+ - sas-workload-orchestrator
+ - sas-start-sequencer
+
+Error [Tool Execution Failures] found in 2 containers
+ - sas-backup-purge-job
+ - sas-backup-job
+
+Error [PVC Errors] found in 1 container
+ - sas-esp-operator
