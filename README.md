@@ -2,10 +2,10 @@
 The purpose of this project is to automate situation appraisal procedure of the get-k8s-info.sh output provided by SAS.
 
 ### TODO
-1. Search for other related issues that causes the pod to be inoperable
-2. Find status of other components that are related to the abnormal pod (PVC, Secret, Deployment etc.)
-3. Find any other pod logs that contain errors
-4. Store error patterns on a database and find it in the logs
+1. Find status of other components that are related to the abnormal pod (PVC, Secret, Deployment etc.)
+2. Add feature to let users modify error patterns
+3. Let users create their own patterns
+
 
 ### DONE
 1. Read kubectl get pods output and analyze pods in abnormal state
@@ -16,6 +16,8 @@ The purpose of this project is to automate situation appraisal procedure of the 
 2. Read the logs of the pods that are in an abnormal state
 3. Analyze the logs and organize errors or warnings that might be the cause of the issue
 4. Search for other related issues that causes the pod to be inoperable
+5. Find any other pod logs that contain errors
+6. Store error patterns on a database and find it in the logs
 
 ### Notes
 Dont forget to install packages using the code below (or just pip install pymongo)
