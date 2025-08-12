@@ -29,17 +29,14 @@ class Printer:
             with open(self.file_path, 'a', encoding='utf-8') as file:
                 file.write(message + '\n')
     
-    def print_message(self, message, print_level=1):
+    def print_message(self, message, print_level=1, end_=None, flush_=False):
         if conf['print_level'] >= print_level:
             match self.mode:
                 case "console":
-                    print(message)
+                    print(message, end=end_, flush=flush_)
                     self.write_to_file(message)
                 case "file":
                     self.write_to_file(message)
                 case "both":
                     print(message)
                     self.write_to_file(message)
-
-
-        

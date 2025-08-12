@@ -115,7 +115,7 @@ def format_timestamp(timestamp):
         dt = datetime.fromisoformat(timestamp)
         return dt.strftime(conf.get("output_timestamp_format", "%Y-%m-%d %H:%M:%S"))
     except ValueError:
-        print(f"Invalid timestamp format: {timestamp}. Using original.")
+        logging.info(f"Invalid timestamp format: {timestamp}. Using original.")
         return timestamp
 
 def load_cache():
@@ -130,6 +130,12 @@ def load_cache():
         cache = json.load(cache_file)
       
     return cache
+
+def parse_container_name(log_file_path):
+    log_file_name = os.path.basename(log_file_path)
+    container_name = log_file_name.split("_")[-1].replace(".log", "")
+
+    return container_name
 
 get_conf()
 
@@ -197,7 +203,7 @@ def get_case_info_dir_from_user(cache):
             logging.info("Not using saved path")
             saved_case_info_dir = ""
             case_info_dir = remove_invalid_windows_path_chars(input(f"Please enter the path to the get-k8s-info output folder: ").strip())
-            cache.setdefault('saved_case_info_dir', case_info_dir)
+            cache['saved_case_info_dir'] = case_info_dir
             with open(conf.get("cache", "cache.json"), 'w', encoding='utf-8') as f:
                 json.dump(cache, f, indent=2)
         else:

@@ -1,4 +1,5 @@
 from pymongo import MongoClient
+from utils import logging
 
 # mongodb_handler.py - Handles MongoDB connections and log pattern storage
 class MongoHandler:
@@ -8,9 +9,12 @@ class MongoHandler:
         self.config = self.db["log_error_patterns"]
         self.logs = self.db["logs"]
 
+        print(f"MongoDB connection established to database: {db_name}")
+        logging.info(f"MongoDB connection established to database: {db_name}")
+
+
     def get_error_patterns(self):
         doc = self.config.find_one({"type": "log_error_patterns"})
-        #print("Loaded MongoDB config document:", doc) Checks loaded document
         return doc["patterns"] if doc else {}
 
     def update_error_patterns(self, new_patterns):

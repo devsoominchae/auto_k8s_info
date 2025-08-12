@@ -9,7 +9,7 @@ from printer import Printer
 
 
 class PodInfo:
-    def __init__(self, name, status, node, namespace_path):
+    def __init__(self, name, status, node, namespace_path, printer):
         self.name = name
         self.status = status
         self.node = node
@@ -17,7 +17,8 @@ class PodInfo:
         self.errors = {}
         self.logs = []
         self.seen_messages = set()  # For filtering duplicates
-        self.printer = Printer(os.path.basename(namespace_path), mode="both")
+        self.printer = printer
+        self.get_log_files()
         
     #extracts JSON messages from log lines, unless it fails
     def parse_json_message(self, line: str, category: str) -> str:
@@ -55,8 +56,8 @@ class PodInfo:
             if message not in self.seen_messages:
                 self.seen_messages.add(message)
                 timestamp = log_json.get("timeStamp", "unknown-time")
-                formatted = f"[{category}] {format_timestamp(timestamp)} - {message}"
-                self.add_error(filename, formatted)
+                formatted_error = f"[{category}] {format_timestamp(timestamp)} - {message}"
+                self.add_error(filename, formatted_error)
 
         except json.JSONDecodeError:
             # Not JSON – fallback
@@ -78,8 +79,6 @@ class PodInfo:
                     self.printer.print_message(f"  - {error}")
         else:
             self.printer.print_message("No additional details available.")
-        
-        self.get_log_files()
 
         self.printer.print_message("-" * 20)
     
@@ -88,7 +87,7 @@ class PodInfo:
         if os.path.exists(self.pod_logs_files_path):
             self.logs = [os.path.join(self.pod_logs_files_path, f) for f in os.listdir(self.pod_logs_files_path) if f.startswith(self.name)]
         else:
-            print(f"No logs directory found for {self.name} at {self.pod_logs_files_path}.")
+            print(f"No logs directory found for {self.name} at {self.pod_logs_files_path}.\n")
     
     def print_pod_name(self):
         print(self.name)
