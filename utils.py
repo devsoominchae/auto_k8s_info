@@ -3,6 +3,7 @@
 import os
 import json
 import logging
+import inflect
 import requests
 
 # Custom imports
@@ -107,6 +108,11 @@ def restore_conf():
     with open(RESTORE_CONF_FILE, 'w', encoding='utf-8') as f:
         json.dump(CONF, f, indent=2)
     print(f"Configuration restored to {RESTORE_CONF_FILE}. Rename it to 'conf.json' to use it.")
+
+p = inflect.engine()
+
+def pluralize(count, word):
+    return f"{count} {p.plural(word, count)}"
 
 def format_timestamp(timestamp):
     """Format a timestamp string to a more readable format."""

@@ -4,7 +4,7 @@ import os
 import json
 
 # Custom imports
-from utils import conf, logging, format_timestamp, parse_container_name
+from utils import conf, logging, format_timestamp, parse_container_name, pluralize
 from printer import Printer
 
 class ErrorInfo:
@@ -50,18 +50,18 @@ class ErrorInfoHolder:
     
     def print_pods_by_error_category(self):
         for category, error_infos in self.errors.items():
-            self.printer.print_message(f"Error: [{category}] found in {len(error_infos)} files")
+            self.printer.print_message(f"\nError: [{category}] found in {pluralize(len(error_infos), 'file')}")
             self.printer.print_message("List of files:")
             for error_info in error_infos[:conf["max_files_to_show"]]:
                 if error_info.message:
                     self.printer.print_message(f" - {os.path.basename(error_info.file_name)} : {error_info.message}")
             if len(error_infos) > conf["max_files_to_show"]:
-                self.printer.print_message(f" - ... and {len(error_infos) - conf['max_files_to_show']} more files\n")
+                self.printer.print_message(f" - ... and {pluralize(len(error_infos) - conf['max_files_to_show'], 'more file')}\n")
     
     def print_containers_by_error_category(self):
         for category, error_infos in self.errors.items():
             containers_with_errors = set(error_info.container for error_info in error_infos)
-            self.printer.print_message(f"\nError [{category}] found in {len(containers_with_errors)} containers")
+            self.printer.print_message(f"\nError [{category}] found in {pluralize(len(containers_with_errors), 'container')}")
             for container in containers_with_errors:
                 if container:
                     self.printer.print_message(f" - {container}")

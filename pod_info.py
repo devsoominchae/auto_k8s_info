@@ -4,7 +4,7 @@ import os
 import json
 
 # Custom imports
-from utils import format_timestamp, logging
+from utils import format_timestamp, logging, pluralize
 from printer import Printer
 
 
@@ -74,7 +74,7 @@ class PodInfo:
         self.printer.print_message("Details:")
         if self.errors:
             for filename, errors in self.errors.items():
-                self.printer.print_message(f"\nIssues in {filename}:")
+                self.printer.print_message(f"\n{pluralize(len(errors), 'Issue')} in {filename}:")
                 for error in errors:
                     self.printer.print_message(f"  - {error}")
         else:
