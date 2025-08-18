@@ -182,9 +182,14 @@ def main():
     with open(get_pods_output, 'r') as get_pods_output_file:
         get_pods_output_lines = get_pods_output_file.readlines()
 
-    if 'NODE' in get_pods_output_lines[0]:
-        node_name_index = get_pods_output_lines[0].split().index('NODE')
-        fields = get_pods_output_lines[0].split()
+    for i, line in enumerate(get_pods_output_lines):
+        if line.startswith("NAME"):
+            column_index = i
+            break
+
+    if 'NODE' in get_pods_output_lines[column_index]:
+        node_name_index = get_pods_output_lines[column_index].split().index('NODE')
+        fields = get_pods_output_lines[column_index].split()
         node_name_index = fields.index('NODE')
         reverse_node_name_index = -(len(fields) - 2 - node_name_index)
     else:
@@ -194,7 +199,7 @@ def main():
     pods_with_errors = []
     pods_without_errors = []
 
-    for line in get_pods_output_lines:
+    for line in get_pods_output_lines[column_index + 1:]:
         matched, category = line_matches_error_patterns(line, conf.get("get_pods_error_patterns", {}), "all")
         pod_name = line.split()[0]
         pod_node = line.split()[reverse_node_name_index] if reverse_node_name_index != -1 else "unknown"
