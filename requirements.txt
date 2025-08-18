@@ -1,3 +1,4 @@
 pymongo
 python-dotenv
 inflect
+prompt_toolkit

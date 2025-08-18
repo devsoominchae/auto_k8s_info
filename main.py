@@ -3,6 +3,10 @@ import os
 import sys
 import json
 
+from prompt_toolkit import prompt
+from prompt_toolkit.completion import WordCompleter
+
+
 # Custom imports
 from utils import conf, load_cache, get_case_info_dir_from_user, get_namespace_path_from_user, get_env_file, logging
 from printer import Printer
@@ -12,7 +16,6 @@ from error_info import ErrorInfoHolder
 from mongodb_handler import MongoHandler
 from dotenv import load_dotenv
 from pprint import pprint
-import os
 
 
 def line_matches_error_patterns(line, error_patterns, mode='any'):
@@ -99,7 +102,13 @@ def custom_error_patterns(mongo_handler):
         existing_patterns = mongo_handler.get_error_patterns()
         existing_categories = list(existing_patterns.keys())
         print("\nExisting categories in MongoDB:", ", ".join(existing_categories))
-        selected_category = input("Enter a category to add this message to (or type new one): ").strip()
+        
+        # Create a completer
+        category_completer = WordCompleter(existing_categories, ignore_case=True)
+
+        # Prompt with autocomplete
+        selected_category = prompt("Enter a category to add this message to (or type new one): ", completer=category_completer).strip()
+
         
         if selected_category not in existing_categories:
             create_new = input(f"'{selected_category}' not found. Create new category? (y/n): ").strip().lower()
