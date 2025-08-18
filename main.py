@@ -11,8 +11,8 @@ from error_info import ErrorInfoHolder
 
 from mongodb_handler import MongoHandler
 from dotenv import load_dotenv
+from pprint import pprint
 import os
-
 
 
 def line_matches_error_patterns(line, error_patterns, mode='any'):
@@ -85,6 +85,47 @@ def analyze_pods_without_errors(namespace_path, pods_without_errors, printer):
 
     return error_info_holder
 
+def custom_error_patterns(mongo_handler):
+    add_custom = input("\nDo you want to add custom error patterns? (y/n): ").strip().lower()
+    if add_custom not in ['y', 'yes']:
+        return {}
+    temp_patterns = {}
+    while True:
+        custom_msg = input("Enter the custom error message (or press enter to stop): ").strip()
+        if not custom_msg:
+            break
+    
+        #Pre defined categories within mongodb
+        existing_patterns = mongo_handler.get_error_patterns()
+        existing_categories = list(existing_patterns.keys())
+        print("\nExisting categories in MongoDB:", ", ".join(existing_categories))
+        selected_category = input("Enter a category to add this message to (or type new one): ").strip()
+        
+        if selected_category not in existing_categories:
+            create_new = input(f"'{selected_category}' not found. Create new category? (y/n): ").strip().lower()
+            if create_new not in ['y', 'yes']:
+                continue    
+        current_patterns = existing_patterns.get(selected_category, [])
+        if custom_msg in current_patterns:
+            print("Message already exists in this category. Skipping.")
+            continue        
+        if selected_category not in temp_patterns:
+            temp_patterns[selected_category] = []
+        temp_patterns[selected_category].append(custom_msg)
+        print(f"Added to temp: [{selected_category}] -> {custom_msg}")
+        
+    if temp_patterns:
+        pprint(temp_patterns)
+        save_perm = input("\nDo you want to save these to MongoDB permanently? (y/n): ").strip().lower()
+        if save_perm in ['y', 'yes']:
+            for cat, msgs in temp_patterns.items():
+                for msg in msgs:
+                    mongo_handler.add_error_pattern(cat, msg)
+            print("Patterns saved to MongoDB.")
+            
+    return temp_patterns
+
+            
 def main():
     # Check if cache.json exists using the relataive path to where this script is located
     logging.info("START")
@@ -102,6 +143,12 @@ def main():
 
             # Replace conf log_error_patterns with patterns from MongoDB
             conf["log_error_patterns"] = mongo.get_error_patterns()
+            user_defined_patterns = custom_error_patterns(mongo)
+            for cat, patterns in user_defined_patterns.items():
+                if cat in conf["log_error_patterns"]:
+                    conf["log_error_patterns"][cat].extend(patterns)
+                else:
+                    conf["log_error_patterns"][cat] = patterns
     except Exception as e:
         print(f"Error loading MongoDB configuration: {e}.\nUsing default patterns from conf.json.")
         logging.error(f"Error loading MongoDB configuration: {e}. Using default patterns from conf.json.")
