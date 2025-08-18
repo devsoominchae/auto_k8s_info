@@ -20,7 +20,7 @@ The purpose of this project is to automate situation appraisal procedure of the 
 6. Store error patterns on a database and find it in the logs
 
 ### Notes
-Dont forget to install packages using the code below (or just pip install pymongo)
+Dont forget to install packages using the code below 
 
 ```
 pip install -r requirements.txt
