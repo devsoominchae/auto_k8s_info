@@ -98,7 +98,10 @@ def custom_error_patterns(mongo_handler):
         #Pre defined categories within mongodb
         existing_patterns = mongo_handler.get_error_patterns()
         existing_categories = list(existing_patterns.keys())
-        print("\nExisting categories in MongoDB:", ", ".join(existing_categories))
+        #To print nicely the categories
+        print("\nExisting categories in MongoDB:")
+        for idx, cat in enumerate(existing_categories, 1):
+            print(f"  {idx}. {cat}")
         selected_category = input("Enter a category to add this message to (or type new one): ").strip()
         
         if selected_category not in existing_categories:
@@ -113,16 +116,10 @@ def custom_error_patterns(mongo_handler):
             temp_patterns[selected_category] = []
         temp_patterns[selected_category].append(custom_msg)
         print(f"Added to temp: [{selected_category}] -> {custom_msg}")
-        
     if temp_patterns:
         pprint(temp_patterns)
-        save_perm = input("\nDo you want to save these to MongoDB permanently? (y/n): ").strip().lower()
-        if save_perm in ['y', 'yes']:
-            for cat, msgs in temp_patterns.items():
-                for msg in msgs:
-                    mongo_handler.add_error_pattern(cat, msg)
-            print("Patterns saved to MongoDB.")
-            
+        print("\nThese patterns are temporary, used for this session only.")
+                   
     return temp_patterns
 
             
@@ -142,13 +139,18 @@ def main():
             mongo = MongoHandler(uri=mongo_uri)
 
             # Replace conf log_error_patterns with patterns from MongoDB
-            conf["log_error_patterns"] = mongo.get_error_patterns()
-            user_defined_patterns = custom_error_patterns(mongo)
-            for cat, patterns in user_defined_patterns.items():
-                if cat in conf["log_error_patterns"]:
-                    conf["log_error_patterns"][cat].extend(patterns)
+
+            #calls the log pattern dict from mongodb, and merges it with the custom user patterns (if any)
+            mongo_patterns = mongo.get_error_patterns()
+            temp_user_patterns = custom_error_patterns(mongo)
+            for cat, patterns in temp_user_patterns.items():
+                if cat in mongo_patterns:
+                    mongo_patterns[cat].extend(p for p in patterns if p not in mongo_patterns[cat])
                 else:
-                    conf["log_error_patterns"][cat] = patterns
+                    mongo_patterns[cat] = patterns
+            conf["log_error_patterns"] = mongo_patterns
+            
+
     except Exception as e:
         print(f"Error loading MongoDB configuration: {e}.\nUsing default patterns from conf.json.")
         logging.error(f"Error loading MongoDB configuration: {e}. Using default patterns from conf.json.")
@@ -250,6 +252,15 @@ def main():
     error_info_holder = analyze_pods_without_errors(namespace_path, pods_without_errors, printer)
     error_info_holder.print_pods_by_error_category()
     error_info_holder.print_containers_by_error_category()
+    
+    if temp_user_patterns:
+        confirm_custom_patterns = input("\nDo you want to permanently save the custom error patterns you used? (y/n): ").strip().lower()
+        if confirm_custom_patterns in ['y', 'yes']:
+            for cat, msgs in temp_user_patterns.items():
+                for msg in msgs:
+                    mongo.add_error_pattern(cat, msg)
+            print("Custom patterns saved to MongoDB.")
+    
 
 if __name__ == "__main__":
     main()
