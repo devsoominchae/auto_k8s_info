@@ -1,48 +1,87 @@
 from pymongo import MongoClient
 from utils import logging
 
-# mongodb_handler.py - Handles MongoDB connections and log pattern storage
 class MongoHandler:
     def __init__(self, uri, db_name="log_config"):
         self.client = MongoClient(uri)
         self.db = self.client[db_name]
-        self.config = self.db["log_error_patterns"]
+        self.shared_config = self.db["log_error_patterns"]       # Default shared patterns
+        self.user_config = self.db["user_error_patterns"]        # User-specific patterns
         self.logs = self.db["logs"]
 
         print(f"MongoDB connection established to database: {db_name}")
         logging.info(f"MongoDB connection established to database: {db_name}")
 
+    # Default Shared Dictionary
+
     def get_error_patterns(self):
-        doc = self.config.find_one({"type": "log_error_patterns"})
+        doc = self.shared_config.find_one({"type": "log_error_patterns"})
         return doc["patterns"] if doc else {}
 
     def update_error_patterns(self, new_patterns):
-        self.config.update_one(
+        self.shared_config.update_one(
             {"type": "log_error_patterns"},
             {"$set": {"patterns": new_patterns}},
             upsert=True
         )
 
     def add_error_pattern(self, category, pattern):
-        doc = self.config.find_one({"type": "log_error_patterns"})
+        doc = self.shared_config.find_one({"type": "log_error_patterns"})
         if not doc:
-            # Insert a new document if it doesn't exist
-            self.config.insert_one({
+            self.shared_config.insert_one({
                 "type": "log_error_patterns",
                 "patterns": {category: [pattern]}
             })
             return
 
-        # If category doesn't exist, create it
         if category not in doc.get("patterns", {}):
-            self.config.update_one(
+            self.shared_config.update_one(
                 {"type": "log_error_patterns"},
                 {"$set": {f"patterns.{category}": [pattern]}}
             )
         else:
-            # If pattern doesn't already exist, add it using $addToSet
-            self.config.update_one(
+            self.shared_config.update_one(
                 {"type": "log_error_patterns"},
+                {"$addToSet": {f"patterns.{category}": pattern}}
+            )
+
+    # User-Specific Dictionary
+    
+    def ensure_user_document(self, user_id):
+        if not self.user_config.find_one({"user_id": user_id}):
+            self.user_config.insert_one({
+                "user_id": user_id,
+                "patterns": {}
+            })
+
+    def get_user_patterns(self, user_id):
+        doc = self.user_config.find_one({"user_id": user_id})
+        return doc["patterns"] if doc else {}
+
+    def update_user_patterns(self, user_id, new_patterns):
+        self.user_config.update_one(
+            {"user_id": user_id},
+            {"$set": {"patterns": new_patterns}},
+            upsert=True
+        )
+
+    def add_user_error_pattern(self, user_id, category, pattern):
+        doc = self.user_config.find_one({"user_id": user_id})
+        if not doc:
+            self.user_config.insert_one({
+                "user_id": user_id,
+                "patterns": {category: [pattern]}
+            })
+            return
+
+        if category not in doc.get("patterns", {}):
+            self.user_config.update_one(
+                {"user_id": user_id},
+                {"$set": {f"patterns.{category}": [pattern]}}
+            )
+        else:
+            self.user_config.update_one(
+                {"user_id": user_id},
                 {"$addToSet": {f"patterns.{category}": pattern}}
             )
 

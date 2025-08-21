@@ -1,0 +1,12 @@
+{
+    "patterns":{
+    "Memory Errors": [
+        "TEST",
+        "HELLO WORLD"
+    ],
+    "Timeouts": [
+        "Request timed out",
+        "Connection timed out"
+    ]
+}
+}
