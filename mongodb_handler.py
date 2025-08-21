@@ -3,6 +3,7 @@ from utils import logging
 
 class MongoHandler:
     def __init__(self, uri, db_name="log_config"):
+        self.uri = uri
         self.client = MongoClient(uri)
         self.db = self.client[db_name]
         self.shared_config = self.db["log_error_patterns"]       # Default shared patterns
@@ -11,6 +12,12 @@ class MongoHandler:
 
         print(f"MongoDB connection established to database: {db_name}")
         logging.info(f"MongoDB connection established to database: {db_name}")
+    
+    def close_connection(self):
+        self.client.close()
+    
+    def open_connection(self):
+        self.client = MongoClient(self.uri)
 
     # Default Shared Dictionary
 
@@ -47,12 +54,18 @@ class MongoHandler:
 
     # User-Specific Dictionary
     
-    def ensure_user_document(self, user_id):
-        if not self.user_config.find_one({"user_id": user_id}):
-            self.user_config.insert_one({
+    def user_exists(self, user_id):
+        return self.user_config.find_one({"user_id": user_id})
+
+    def add_document(self, user_id, patterns={}):
+        self.user_config.insert_one({
                 "user_id": user_id,
-                "patterns": {}
+                "patterns": patterns
             })
+    
+    def ensure_user_document(self, user_id):
+        if not self.user_exists(user_id):
+            self.add_document(user_id)
 
     def get_user_patterns(self, user_id):
         doc = self.user_config.find_one({"user_id": user_id})

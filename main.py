@@ -3,6 +3,8 @@ import os
 import sys
 import json
 
+from pprint import pprint
+from dotenv import load_dotenv
 from prompt_toolkit import prompt
 from prompt_toolkit.completion import WordCompleter
 
@@ -12,10 +14,8 @@ from utils import conf, load_cache, get_case_info_dir_from_user, get_namespace_p
 from printer import Printer
 from pod_info import PodInfo
 from error_info import ErrorInfoHolder
-
+from log_uploader import get_user_id_from_user, replace_user_dict_with_file, user_dict_has_valid_format, return_default_dict
 from mongodb_handler import MongoHandler
-from dotenv import load_dotenv
-from pprint import pprint
 
 
 def line_matches_error_patterns(line, error_patterns, mode='any'):
@@ -89,8 +89,8 @@ def analyze_pods_without_errors(namespace_path, pods_without_errors, printer):
     return error_info_holder
 
 def custom_error_patterns(mongo_handler):
-    add_custom = input("\nDo you want to add custom error patterns? (y/n): ").strip().lower()
-    if add_custom not in ['y', 'yes']:
+    add_custom = input("\nDo you want to add custom error patterns? (y - default/n): ").strip().lower()
+    if add_custom not in conf['yes_list']:
         return {}
     temp_patterns = {}
     while True:
@@ -98,10 +98,10 @@ def custom_error_patterns(mongo_handler):
         if not custom_msg:
             break
     
-        #Pre defined categories within mongodb
+        # Pre defined categories within mongodb
         existing_patterns = mongo_handler.get_error_patterns()
         existing_categories = list(existing_patterns.keys())
-        #To print nicely the categories
+        # To print nicely the categories
         print("\nExisting categories in MongoDB:")
         for idx, cat in enumerate(existing_categories, 1):
             print(f"  {idx}. {cat}")
@@ -131,6 +131,30 @@ def custom_error_patterns(mongo_handler):
                    
     return temp_patterns
 
+def user_will_update_dict():
+    answer = input(f"Would you like to update the error patterns? (y - default/n)").strip()
+    if answer in conf["yes_list"]:
+        return True
+    else:
+        return False
+
+def select_option_download_upload():
+    options = {
+        "1": "download",
+        "2": "upload"
+    }
+
+    while True:
+        print("\nPlease select an action:")
+        for key, value in options.items():
+            print(f"{key}. {value.capitalize()}")
+
+        choice = input("Enter choice: ").strip()
+
+        if choice in options:
+            return options[choice]
+
+        print("❌ Invalid choice. Please try again.")
             
 def main():
     # Check if cache.json exists using the relataive path to where this script is located
@@ -149,15 +173,32 @@ def main():
 
             # Replace conf log_error_patterns with patterns from MongoDB
 
-            #calls the log pattern dict from mongodb, and merges it with the custom user patterns (if any)
+            # calls the log pattern dict from mongodb, and merges it with the custom user patterns (if any)
             mongo_patterns = mongo.get_error_patterns()
-            temp_user_patterns = custom_error_patterns(mongo)
-            for cat, patterns in temp_user_patterns.items():
-                if cat in mongo_patterns:
-                    mongo_patterns[cat].extend(p for p in patterns if p not in mongo_patterns[cat])
-                else:
-                    mongo_patterns[cat] = patterns
-            conf["log_error_patterns"] = mongo_patterns
+            # TODO Check if below code can be deleted
+            # temp_user_patterns = custom_error_patterns(mongo)
+            # for cat, patterns in temp_user_patterns.items():
+            #     if cat in mongo_patterns:
+            #         mongo_patterns[cat].extend(p for p in patterns if p not in mongo_patterns[cat])
+            #     else:
+            #         mongo_patterns[cat] = patterns
+            # conf["log_error_patterns"] = mongo_patterns
+            user_id = get_user_id_from_user(mongo_uri)
+            if user_id != "default":
+                if mongo.user_exists(user_id):
+                    temp_user_dict = mongo.get_user_patterns()
+                    print(temp_user_dict)
+                if user_will_update_dict():
+                    match select_option_download_upload():
+                        case "download":
+                            with open("temp.json", "w", encoding="utf-8") as f:
+                                json.dump(temp_user_dict, f, ensure_ascii=False, indent=4)
+                        case "upload":
+                            user_dict_path = input("Enter the path to your JSON file: ").strip()
+                            if user_dict_has_valid_format(user_dict_path):
+                                replace_user_dict_with_file(user_dict_path, user_id, mongo_uri)
+            else:
+                return_default_dict(mongo_uri)
             
 
     except Exception as e:
