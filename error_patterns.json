@@ -1,0 +1,14 @@
+{
+    "Memory Errors": [
+        "TEST",
+        "HELLO WORLD",
+        "Test input"
+    ],
+    "Timeouts": [
+        "Request timed out",
+        "Connection timed out"
+    ],
+    "Authrization": [
+        "Unathorized"
+    ]
+}

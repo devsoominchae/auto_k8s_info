@@ -11,7 +11,7 @@ load_dotenv()
 
 uri = os.getenv("MONGODB_URI")
 
-def load_user_json(file_path):
+def load_json_from_path(file_path):
     if not os.path.exists(file_path):
         print(f"File not found: {file_path}")
         return None
@@ -24,75 +24,76 @@ def load_user_json(file_path):
             return None
 
 def user_dict_has_valid_format(user_dict_path):
-    user_dict = load_user_json(user_dict_path)
-    top = list(user_dict.keys())
+    user_dict = load_json_from_path(user_dict_path)
+    categories = list(user_dict.keys())
     patterns = list(user_dict.values())
-
-    if top[0] != "patterns":
-        print(f"Top key must be \"patterns\", not {top[0]}")
-        logging.error(f"Top key must be \"patterns\", not {top[0]}")
-        return False
-    for pattern in patterns:
-        category, error_patterns = pattern.items()
+    
+    for category in categories:
         if type(category) != str:
             print(f"The type of the name of the category must be str not {type(category)}")
             logging.error(f"The type of the name of the category must be str not {type(category)}")
-        for error_pattern in error_patterns:
-            if type(error_pattern) != str:
-                print(f"The type of the error pattern must be str not {type(error_pattern)}")
-                logging.error(f"The type of the error pattern must be str not {type(error_pattern)}")
+            return False
+    
+    for pattern in patterns:
+        if type(pattern) != list:
+            print(f"The type of that contains error patterns must be a list (ex. ['error pattern 1', 'error pattern 2']) not {type(pattern)}")
+            logging.error(f"The type of that contains error patterns must be a list (ex. ['error pattern 1', 'error pattern 2']) not {type(pattern)}")
+            return False
+        for pattern_element in pattern:
+            if type(pattern_element) != str:
+                print(f"The type of the pattern element must be a string (ex. ['error pattern 1', 'error pattern 2']) not {type(pattern_element)}")
+                logging.error(f"The type of the pattern element must be a string (ex. ['error pattern 1', 'error pattern 2']) not {type(pattern_element)}")
                 return False
     return True
         
+# def replace_user_dict_with_file(user_dict_path, username, mongo):
+#     # Load JSON
+#     if user_dict_has_valid_format(user_dict_path):
+#         user_dict = load_json_from_path(user_dict_path)
 
-def return_default_dict(mongo_uri):
-    mongo = MongoHandler(uri=mongo_uri)
-    return mongo.get_error_patterns()
+#         # Check/Create user doc
+#         mongo.ensure_user_document(username)
 
-def replace_user_dict_with_file(file_path, username, mongo_uri):
-    # Load JSON
-    user_data = load_user_json(file_path)
-    if not user_data:
-        print("Invalid or missing JSON.")
-        return
+#         # Overwrite their personal patterns with this file
+#         mongo.update_user_patterns(username, user_dict)
+#         print(f"Patterns successfully replaced for user '{username}'.")
 
-    if "patterns" not in user_data:
-        print("JSON must contain a top-level 'patterns' key.")
-        return
-
-    # Connect to Mongo
-    mongo = MongoHandler(uri=mongo_uri)
-    
-    # Check/Create user doc
-    mongo.ensure_user_document(username)
-
-    # Overwrite their personal patterns with this file
-    mongo.update_user_patterns(username, user_data["patterns"])
-    print(f"Patterns successfully replaced for user '{username}'.")
-
-def get_user_id_from_user(mongo_uri):
-    mongo = MongoHandler(uri=mongo_uri)
+def get_user_id_from_user(mongo):
     user_id = input("Enter your username: ").strip()
     if user_id == "":
         print(f"User ID cannot be blank. Using default error patterns.")
         logging.info(f"User ID cannot be blank. Using default error patterns.")
         return "default"
     elif not mongo.user_exists(user_id):
-        create_user_input = input(f"User ID does not exist. Would you like to create a new user? (y - default/n)").strip()
-        if create_user_input in conf["yes_pattern"]:
-            default_dict = return_default_dict(mongo_uri)
-            mongo.add_document(user_id, default_dict["patterns"])
+        create_user_input = input(f"User ID does not exist. Would you like to create a new user? (yes - default/no): ").strip()
+        if create_user_input in conf["yes_list"]:
+            default_dict = mongo.get_default_error_patterns()
+            mongo.add_document(user_id, default_dict)
         else:
-            print("Using default error pattern")
+            print("Using default error patterns.")
             return "default"
     return user_id
 
-
-
-if __name__ == "__main__":
-    USERNAME = get_user_id_from_user()
-    if USERNAME != "default":
-        FILE_PATH = input("Enter path to your JSON file: ").strip()
-        replace_user_dict_with_file(FILE_PATH, USERNAME, uri)
+def user_will_create_new_id(mongo):
+    new_id_yes_or_no = input("Would you like to create a new user? (yes - default/no)").strip()
+    if new_id_yes_or_no in conf["yes_list"]:
+        return True
     else:
-        return_default_dict(uri)
+        return False
+    
+def user_will_update_dict():
+    answer = input(f"Would you like to upload/download the error patterns? (yes - default/no): ").strip()
+    if answer in conf["yes_list"]:
+        return True
+    else:
+        return False
+
+
+
+# if __name__ == "__main__":
+#     USERNAME = get_user_id_from_user()
+#     if USERNAME != "default":
+#         FILE_PATH = input("Enter path to your JSON file: ").strip()
+#         replace_user_dict_with_file(FILE_PATH, USERNAME, uri)
+#     else:
+#         return_default_dict(uri)

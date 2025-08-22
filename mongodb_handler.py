@@ -21,7 +21,7 @@ class MongoHandler:
 
     # Default Shared Dictionary
 
-    def get_error_patterns(self):
+    def get_default_error_patterns(self):
         doc = self.shared_config.find_one({"type": "log_error_patterns"})
         return doc["patterns"] if doc else {}
 
@@ -65,6 +65,7 @@ class MongoHandler:
     
     def ensure_user_document(self, user_id):
         if not self.user_exists(user_id):
+            print(f"User ID {user_id} has no error patterns saved. ")
             self.add_document(user_id)
 
     def get_user_patterns(self, user_id):
