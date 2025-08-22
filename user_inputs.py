@@ -1,0 +1,140 @@
+# user_inputs.py
+
+import os
+import json
+from prompt_toolkit import prompt
+from prompt_toolkit.completion import WordCompleter
+
+# Custom imports
+from utils import logging, conf, remove_invalid_windows_path_chars, load_json_from_path
+
+def select_option(options, message_to_prompt="Please select an action:", tab_complete=False):
+    options_dict = {str(i+1) : element for i, element in enumerate(options)}
+    
+    print(f"\n{message_to_prompt}")
+    for key, value in options_dict.items():
+        print(f"{key}. {value}")
+
+    choice = ""
+    if tab_complete:
+        menu_completer = WordCompleter(
+            options,
+            ignore_case=True
+        )
+        choice = prompt("Enter choice: ", completer=menu_completer).strip()
+    else:
+        choice = input("Enter choice: ").strip()
+
+    if choice in options_dict:
+        print(f"Your choice: {options_dict[choice]}")
+        return options_dict[choice]
+    
+    if choice in options_dict.values():
+        print(f"Your choice: {choice}")
+        return choice
+
+    print("❌ Invalid choice. Please try again.")
+
+
+def get_case_info_dir_from_user(cache):
+    saved_case_info_dir = cache.get('saved_case_info_dir', '')
+    if saved_case_info_dir:
+        print(f"Saved path to get-k8s-info output: {saved_case_info_dir}")
+        logging.info(f"Saved path to get-k8s-info output: {saved_case_info_dir}")
+        use_saved_path = remove_invalid_windows_path_chars(input("Do you want to use this saved path? (yes - default/no): ").strip().lower())
+
+        if use_saved_path not in conf.get("yes_list", ["yes", "y", "Y", "Yes", "", "YES"]):
+            logging.info("Not using saved path")
+            saved_case_info_dir = ""
+            case_info_dir = remove_invalid_windows_path_chars(input(f"Please enter the path to the get-k8s-info output folder: ").strip())
+            cache['saved_case_info_dir'] = case_info_dir
+            with open(conf.get("cache", "cache.json"), 'w', encoding='utf-8') as f:
+                json.dump(cache, f, indent=2)
+        else:
+            case_info_dir = saved_case_info_dir
+            print(f"Using saved path: {case_info_dir}")
+            logging.info(f"Using saved path: {case_info_dir}")
+
+    else:
+        # Get user input to specify the path to the get-k8s-info output
+        logging.info("No saved path found. Asking user for input.")
+        case_info_dir = remove_invalid_windows_path_chars(input("Please enter the path to the get-k8s-info output file: ").strip())
+        logging.info(f"User provided path: {case_info_dir}")
+        cache.setdefault('saved_case_info_dir', case_info_dir)
+        with open(conf.get("cache", "cache.json"), 'w', encoding='utf-8') as f:
+            json.dump(cache, f, indent=2)
+
+    return case_info_dir
+
+def get_namespace_path_from_user(case_info_dir):
+    # List the folders under kubernetes folder and let user select one
+    kubernetes_path = os.path.join(case_info_dir, 'kubernetes')
+    if not os.path.exists(kubernetes_path):
+        print(f"The 'kubernetes' folder does not exist under {case_info_dir}.")
+        logging.error(f"The 'kubernetes' folder does not exist under {case_info_dir}. Exiting the program.")
+        return
+
+    folders = [f for f in os.listdir(kubernetes_path) if os.path.isdir(os.path.join(kubernetes_path, f))]
+    if not folders:
+        print("No folders found under 'kubernetes'.")
+        logging.error("No folders found under 'kubernetes'. Exiting the program.")
+        return
+
+    selected_folder = select_option(folders, message_to_prompt="Available folders under kubernetes:", tab_complete=True)
+    namespace_path = os.path.join(kubernetes_path, selected_folder)
+    logging.info(f"Processing logs on {namespace_path}")
+
+    return namespace_path
+
+def user_dict_has_valid_format(user_dict_path):
+    user_dict = load_json_from_path(user_dict_path)
+    categories = list(user_dict.keys())
+    patterns = list(user_dict.values())
+    
+    for category in categories:
+        if type(category) != str:
+            print(f"The type of the name of the category must be str not {type(category)}")
+            logging.error(f"The type of the name of the category must be str not {type(category)}")
+            return False
+    
+    for pattern in patterns:
+        if type(pattern) != list:
+            print(f"The type of that contains error patterns must be a list (ex. ['error pattern 1', 'error pattern 2']) not {type(pattern)}")
+            logging.error(f"The type of that contains error patterns must be a list (ex. ['error pattern 1', 'error pattern 2']) not {type(pattern)}")
+            return False
+        for pattern_element in pattern:
+            if type(pattern_element) != str:
+                print(f"The type of the pattern element must be a string (ex. ['error pattern 1', 'error pattern 2']) not {type(pattern_element)}")
+                logging.error(f"The type of the pattern element must be a string (ex. ['error pattern 1', 'error pattern 2']) not {type(pattern_element)}")
+                return False
+    return True
+
+
+def get_user_id_from_user(mongo):
+    all_users = mongo.get_all_users()
+    user_id = select_option(all_users, message_to_prompt="Select a user by number or by user ID", tab_complete=True)
+    # user_id = input("Enter your username or select by number: ").strip()
+    if user_id == "":
+        print(f"User ID cannot be blank. Using default error patterns.")
+        logging.info(f"User ID cannot be blank. Using default error patterns.")
+        return "default"
+    
+    return user_id
+
+def user_will_create_new_id(mongo, user_id):
+    if not mongo.user_exists(user_id):
+        create_user_input = input(f"User ID does not exist. Would you like to create a new user? (yes - default/no): ").strip()
+        if create_user_input in conf["yes_list"]:
+            default_dict = mongo.get_default_error_patterns()
+            mongo.add_document(user_id, default_dict)
+        else:
+            print("New user not created. Using default error patterns.")
+            logging.info("New user not created. Using default error patterns.")
+
+    
+def user_will_update_dict():
+    answer = input(f"Would you like to upload/download the error patterns? (yes - default/no): ").strip()
+    if answer in conf["yes_list"]:
+        return True
+    else:
+        return False
