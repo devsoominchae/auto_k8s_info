@@ -53,6 +53,10 @@ class MongoHandler:
             )
 
     # User-Specific Dictionary
+    def get_all_users(self):
+        all_user_documents = self.user_config.find({}, {"_id": 0, "user_id": 1})
+        all_users = [document['user_id'] for document in all_user_documents]
+        return all_users
     
     def user_exists(self, user_id):
         return self.user_config.find_one({"user_id": user_id})

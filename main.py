@@ -1,155 +1,26 @@
 # main.py
 import os
-import sys
 import json
 
 from pprint import pprint
 from dotenv import load_dotenv
-from prompt_toolkit import prompt
-from prompt_toolkit.completion import WordCompleter
 
 
 # Custom imports
-from utils import conf, load_cache, get_case_info_dir_from_user, get_namespace_path_from_user, get_env_file, logging
+from utils import conf, load_cache, logging, load_json_from_path, get_env_file
 from printer import Printer
 from pod_info import PodInfo
-from error_info import ErrorInfoHolder
-from log_uploader import get_user_id_from_user, user_dict_has_valid_format, load_json_from_path, user_will_update_dict, user_will_create_new_id
+from error_info import analyze_pods_without_errors, analyze_pods_with_errors, line_matches_error_patterns
+from user_inputs import get_user_id_from_user, user_dict_has_valid_format, user_will_update_dict, user_will_create_new_id, get_case_info_dir_from_user, get_namespace_path_from_user, select_option
 from mongodb_handler import MongoHandler
 
 
-def line_matches_error_patterns(line, error_patterns, mode='any'):
-    result = False, None
-    for category, patterns in error_patterns.items():
-        if mode == 'any':
-            if any(p in line for p in patterns):
-                result = True, category
-                break
-        elif mode == 'all':
-            if all(p in line for p in patterns):
-                result = True, category
-                break
-    return result
+DOWNLOAD_UPLOAD_OPTIPONS = [
+    "Download",
+    "Upload",
+    "Exit"
+    ]
 
-# Collect log file errors for each pod
-# If a log line matches a pattern, we parse it and store only unique messages ignoring timestamp
-def log_file_collection(namespace_path, pods_with_errors, printer, error_patterns):
-    logs_dir = os.path.join(namespace_path, "logs")
-    if not os.path.exists(logs_dir):
-        printer.print_message(f"No logs folder found at {logs_dir}")
-        logging.warning(f"No logs folder found at {logs_dir}. Skipping log file collection.")
-        return
-
-    for pod in pods_with_errors:
-        printer.print_message(f"\n=== Checking logs for pod: {pod.name} ===", print_level=2)
-
-        if not pod.logs:
-            printer.print_message(f"No log files found for pod {pod.name}")
-            continue
-
-        for file_name in pod.logs:
-            log_file_path = os.path.join(logs_dir, file_name)
-            printer.print_message(f"Processing log file: {file_name}", print_level=2)
-
-            with open(log_file_path, "r", encoding="utf-8", errors="ignore") as log_file:
-                for line in log_file:
-                    for category, patterns in conf.get('log_error_patterns', {}).items():
-                        if any(p in line for p in patterns):
-                            pod.add_error_once_by_message(file_name, category, line)
-                            break
-                    
-                # pod.add_error_once_by_message(file_name, "Most Recent Record", log_file[-1].strip())
-
-def analyze_pods_without_errors(namespace_path, pods_without_errors, printer, error_patterns):
-    error_info_holder = ErrorInfoHolder(printer)
-    printer_console = Printer(os.path.basename(namespace_path), mode="console")
-    printer.print_message("\nAnalyzing pods in normal state.")
-
-    i = 0
-    total_number_of_log_files = sum(len(pod.logs) for pod in pods_without_errors)
-
-    for pod in pods_without_errors:
-        printer.print_message(f"\n=== Analyzing pod without errors: {pod.name} ===", print_level=2)
-
-        if not pod.logs:
-            printer.print_message(f"No log files found for pod {pod.name}\n")
-            continue
-
-        for file_name in pod.logs:
-            i += 1
-            sys.stdout.write("\033[K")
-            printer_console.print_message(f"[{i}/{total_number_of_log_files} {i/total_number_of_log_files*100:.1f}%] Processing log file: {os.path.basename(file_name)}", print_level=1, end_="\r", flush_=True)
-            with open(file_name, "r", encoding="utf-8", errors="ignore") as log_file:
-                for line in log_file:
-                    for category, patterns in error_patterns.items():
-                        if any(p in line for p in patterns):
-                            error_info = error_info_holder.format_error(line, file_name, category)
-                            error_info_holder.add_error(error_info)
-
-    return error_info_holder
-
-def custom_error_patterns(mongo_handler):
-    add_custom = input("\nDo you want to add custom error patterns? (y - default/n): ").strip().lower()
-    if add_custom not in conf['yes_list']:
-        return {}
-    temp_patterns = {}
-    while True:
-        custom_msg = input("Enter the custom error message (or press enter to stop): ").strip()
-        if not custom_msg:
-            break
-    
-        # Pre defined categories within mongodb
-        existing_patterns = mongo_handler.get_default_error_patterns()
-        existing_categories = list(existing_patterns.keys())
-        # To print nicely the categories
-        print("\nExisting categories in MongoDB:")
-        for idx, cat in enumerate(existing_categories, 1):
-            print(f"  {idx}. {cat}")
-        
-        # Create a completer
-        category_completer = WordCompleter(existing_categories, ignore_case=True)
-
-        # Prompt with autocomplete
-        selected_category = prompt("Enter a category to add this message to (or type new one): ", completer=category_completer).strip()
-
-        
-        if selected_category not in existing_categories:
-            create_new = input(f"'{selected_category}' not found. Create new category? (yes - default/n): ").strip().lower()
-            if create_new not in ['y', 'yes']:
-                continue    
-        current_patterns = existing_patterns.get(selected_category, [])
-        if custom_msg in current_patterns:
-            print("Message already exists in this category. Skipping.")
-            continue        
-        if selected_category not in temp_patterns:
-            temp_patterns[selected_category] = []
-        temp_patterns[selected_category].append(custom_msg)
-        print(f"Added to temp: [{selected_category}] -> {custom_msg}")
-    if temp_patterns:
-        pprint(temp_patterns)
-        print("\nThese patterns are temporary, used for this session only.")
-                   
-    return temp_patterns
-
-
-
-def select_option_download_upload():
-    options = {
-        "1": "download",
-        "2": "upload"
-    }
-
-    while True:
-        print("\nPlease select an action:")
-        for key, value in options.items():
-            print(f"{key}. {value.capitalize()}")
-
-        choice = input("Enter choice: ").strip()
-
-        if choice in options:
-            return options[choice]
-
-        print("❌ Invalid choice. Please try again.")
             
 def main():
     # Check if cache.json exists using the relataive path to where this script is located
@@ -167,39 +38,33 @@ def main():
 
             mongo = MongoHandler(uri=mongo_uri)
 
-            # Replace conf log_error_patterns with patterns from MongoDB
-
-            # calls the log pattern dict from mongodb, and merges it with the custom user patterns (if any)
-            
-            # TODO Check if below code can be deleted
-            # temp_user_patterns = custom_error_patterns(mongo)
-            # for cat, patterns in temp_user_patterns.items():
-            #     if cat in mongo_patterns:
-            #         mongo_patterns[cat].extend(p for p in patterns if p not in mongo_patterns[cat])
-            #     else:
-            #         mongo_patterns[cat] = patterns
-            # conf["log_error_patterns"] = mongo_patterns
             error_patterns = mongo.get_default_error_patterns()
             user_id = get_user_id_from_user(mongo)
             if user_id != "default":
                 if mongo.user_exists(user_id):
                     error_patterns = mongo.get_user_patterns(user_id)
+                else:
+                    user_will_create_new_id()
                 print("Error patterns :\n", json.dumps(error_patterns, indent=4))
                 if user_will_update_dict():
-                    match select_option_download_upload():
-                        case "download":
-                            with open("error_patterns.json", "w", encoding="utf-8") as f:
-                                json.dump(error_patterns, f, ensure_ascii=False, indent=4)
-                                print(f"Error patterns file saved to {os.path.join(os.getcwd(), 'error_patterns.json')}")
-                                logging.info(f"Error patterns file saved to {os.path.join(os.getcwd(), 'error_patterns.json')}")
-                        case "upload":
-                            user_dict_path = input("Enter the path to your JSON file: ").strip()
-                            if user_dict_has_valid_format(user_dict_path):
-                                error_patterns = load_json_from_path(user_dict_path)
-                                print("Error patterns :\n", json.dumps(error_patterns, indent=4))
-                            else:
-                                print(f"Using saved error patterns for user ID {user_id}")
-                                logging.info(f"Using saved error patterns for user ID {user_id}")
+                    while True:
+                        match select_option(DOWNLOAD_UPLOAD_OPTIPONS, tab_complete=True):
+                            case "Download":
+                                with open("error_patterns.json", "w", encoding="utf-8") as f:
+                                    json.dump(error_patterns, f, ensure_ascii=False, indent=4)
+                                    print(f"Error patterns file saved to {os.path.join(os.getcwd(), 'error_patterns.json')}")
+                                    logging.info(f"Error patterns file saved to {os.path.join(os.getcwd(), 'error_patterns.json')}")
+                            case "Upload":
+                                user_dict_path = input("Enter the path to your JSON file: ").strip()
+                                if user_dict_has_valid_format(user_dict_path):
+                                    error_patterns = load_json_from_path(user_dict_path)
+                                    print("Error patterns :\n", json.dumps(error_patterns, indent=4))
+                                else:
+                                    print(f"Using saved error patterns for user ID {user_id}")
+                                    logging.info(f"Using saved error patterns for user ID {user_id}")
+                            case "Exit":
+                                break
+                            
             else:
                 print("Error patterns :\n", json.dumps(error_patterns, indent=4))
 
@@ -208,9 +73,6 @@ def main():
     except Exception as e:
         print(f"Error loading MongoDB configuration: {e}.\nUsing default patterns from conf.json.")
         logging.error(f"Error loading MongoDB configuration: {e}. Using default patterns from conf.json.")
-
-    # TODO: Create new file other than conf.json to store error_patterns (ex. error_patterns.json)
-    # print("Error patterns :\n", json.dumps(conf["log_error_patterns"], indent=4))
 
     cache = load_cache()
 
@@ -281,7 +143,7 @@ def main():
                             pod.add_error(describe_pods_output, line.strip())
                             break
 
-    log_file_collection(namespace_path, pods_with_errors, printer, error_patterns)
+    analyze_pods_with_errors(namespace_path, pods_with_errors, printer, error_patterns)
 
     if pods_with_errors:
         print("\nPods with issues:")

@@ -1,6 +1,7 @@
 # error_info.py
 
 import os
+import sys
 import json
 
 # Custom imports
@@ -65,3 +66,73 @@ class ErrorInfoHolder:
             for container in containers_with_errors:
                 if container:
                     self.printer.print_message(f" - {container}")
+
+# Collect log file errors for each pod
+# If a log line matches a pattern, we parse it and store only unique messages ignoring timestamp
+def analyze_pods_with_errors(namespace_path, pods_with_errors, printer, error_patterns):
+    logs_dir = os.path.join(namespace_path, "logs")
+    if not os.path.exists(logs_dir):
+        printer.print_message(f"No logs folder found at {logs_dir}")
+        logging.warning(f"No logs folder found at {logs_dir}. Skipping log file collection.")
+        return
+
+    for pod in pods_with_errors:
+        printer.print_message(f"\n=== Checking logs for pod: {pod.name} ===", print_level=2)
+
+        if not pod.logs:
+            printer.print_message(f"No log files found for pod {pod.name}")
+            continue
+
+        for file_name in pod.logs:
+            log_file_path = os.path.join(logs_dir, file_name)
+            printer.print_message(f"Processing log file: {file_name}", print_level=2)
+
+            with open(log_file_path, "r", encoding="utf-8", errors="ignore") as log_file:
+                for line in log_file:
+                    for category, patterns in conf.get('log_error_patterns', {}).items():
+                        if any(p in line for p in patterns):
+                            pod.add_error_once_by_message(file_name, category, line)
+                            break
+                    
+                # pod.add_error_once_by_message(file_name, "Most Recent Record", log_file[-1].strip())
+
+def analyze_pods_without_errors(namespace_path, pods_without_errors, printer, error_patterns):
+    error_info_holder = ErrorInfoHolder(printer)
+    printer_console = Printer(os.path.basename(namespace_path), mode="console")
+    printer.print_message("\nAnalyzing pods in normal state.")
+
+    i = 0
+    total_number_of_log_files = sum(len(pod.logs) for pod in pods_without_errors)
+
+    for pod in pods_without_errors:
+        printer.print_message(f"\n=== Analyzing pod without errors: {pod.name} ===", print_level=2)
+
+        if not pod.logs:
+            printer.print_message(f"No log files found for pod {pod.name}\n")
+            continue
+
+        for file_name in pod.logs:
+            i += 1
+            sys.stdout.write("\033[K")
+            printer_console.print_message(f"[{i}/{total_number_of_log_files} {i/total_number_of_log_files*100:.1f}%] Processing log file: {os.path.basename(file_name)}", print_level=1, end_="\r", flush_=True)
+            with open(file_name, "r", encoding="utf-8", errors="ignore") as log_file:
+                for line in log_file:
+                    for category, patterns in error_patterns.items():
+                        if any(p in line for p in patterns):
+                            error_info = error_info_holder.format_error(line, file_name, category)
+                            error_info_holder.add_error(error_info)
+
+    return error_info_holder
+
+def line_matches_error_patterns(line, error_patterns, mode='any'):
+    result = False, None
+    for category, patterns in error_patterns.items():
+        if mode == 'any':
+            if any(p in line for p in patterns):
+                result = True, category
+                break
+        elif mode == 'all':
+            if all(p in line for p in patterns):
+                result = True, category
+                break
+    return result

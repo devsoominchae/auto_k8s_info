@@ -34,7 +34,6 @@ class Printer:
             match self.mode:
                 case "console":
                     print(message, end=end_, flush=flush_)
-                    self.write_to_file(message)
                 case "file":
                     self.write_to_file(message)
                 case "both":
