@@ -7,6 +7,7 @@ import json
 # Custom imports
 from utils import conf, logging, format_timestamp, parse_container_name, pluralize
 from printer import Printer
+from pod_info import PodInfo
 
 class ErrorInfo:
     def __init__(self, timestamp, message, category, container, file_name):
@@ -136,3 +137,69 @@ def line_matches_error_patterns(line, error_patterns, mode='any'):
                 result = True, category
                 break
     return result
+
+def analyze_describe_pods_output(namespace_path, pods_with_errors):
+    # Read the kubectl describe pods command output
+    describe_pods_output = os.path.join(namespace_path, 'describe', 'pods.txt')
+    if not os.path.exists(describe_pods_output):
+        print(f"The file {describe_pods_output} does not exist.")
+        logging.warning(f"The file {describe_pods_output} does not exist. Skipping error checks in describe pods output.")
+    else:
+        with open(describe_pods_output, 'r') as describe_pods_output_file:
+            describe_pods_output_lines = describe_pods_output_file.readlines()
+        # Check each line in the describe pods content and check if it contains the pod name in pods_with_errors
+        pods_with_errors_name_list = [pod.name for pod in pods_with_errors]
+
+        current_pod_name = None
+        for line in describe_pods_output_lines:
+            if line.startswith('Name:'):
+                current_pod_name = line.split()[1]
+            if current_pod_name in pods_with_errors_name_list:
+                matched, category = line_matches_error_patterns(line, conf.get("describe_pods_error_patterns", {}))
+                if matched:
+                    for pod in pods_with_errors:
+                        if pod.name == current_pod_name:
+                            pod.add_error(describe_pods_output, line.strip())
+                            break
+    return pods_with_errors
+
+def classify_pods(namespace_path, printer):
+    get_pods_output = os.path.join(namespace_path, 'get','pods.txt')
+    if not os.path.exists(get_pods_output):
+        print(f"The file {get_pods_output} does not exist.")
+        logging.error(f"The file {get_pods_output} does not exist. Exiting the program.")
+        return
+
+    with open(get_pods_output, 'r') as get_pods_output_file:
+        get_pods_output_lines = get_pods_output_file.readlines()
+
+    for i, line in enumerate(get_pods_output_lines):
+        if line.startswith("NAME"):
+            column_index = i
+            break
+
+    if 'NODE' in get_pods_output_lines[column_index]:
+        node_name_index = get_pods_output_lines[column_index].split().index('NODE')
+        fields = get_pods_output_lines[column_index].split()
+        node_name_index = fields.index('NODE')
+        reverse_node_name_index = -(len(fields) - 2 - node_name_index)
+    else:
+        print("The 'NODE' column is not present in the get pods output. Defaulting to 'unknown'.")
+        logging.warning("The 'NODE' column is not present in the get pods output. Defaulting to 'unknown'.")
+
+    pods_with_errors = []
+    pods_without_errors = []
+
+    for line in get_pods_output_lines[column_index + 1:]:
+        matched, category = line_matches_error_patterns(line, conf.get("get_pods_error_patterns", {}), "all")
+        pod_name = line.split()[0]
+        pod_node = line.split()[reverse_node_name_index] if reverse_node_name_index != -1 else "unknown"
+        if matched:
+            pod_info = PodInfo(pod_name, category, pod_node, namespace_path, printer)
+            pod_info.add_error(get_pods_output, line.strip())
+            pods_with_errors.append(pod_info)
+        elif not matched and pod_name != "NAME":
+            pod_info = PodInfo(pod_name, "No Issues", pod_node, namespace_path, printer)
+            pods_without_errors.append(pod_info)
+        
+    return pods_with_errors, pods_without_errors

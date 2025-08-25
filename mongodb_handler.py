@@ -1,5 +1,12 @@
+# mongodb_handler.py
+
+import os
+from dotenv import load_dotenv
 from pymongo import MongoClient
-from utils import logging
+
+# Custom imports
+from utils import logging, get_env_file
+
 
 class MongoHandler:
     def __init__(self, uri, db_name="log_config"):
@@ -108,3 +115,23 @@ class MongoHandler:
             "pod": pod_name,
             "log": log_data
         })
+        
+def load_mongodb():
+    try:
+        get_env_file() 
+        load_dotenv()
+        mongo_uri = os.getenv("MONGODB_URI")
+
+        if not mongo_uri:
+            print("MongoDB URI not found in environment variables.")
+            logging.error("MongoDB URI not found in environment variables.")
+        else:
+
+            mongo = MongoHandler(uri=mongo_uri)
+    
+    except Exception as e:
+        print(f"Error loading MongoDB configuration: {e}.\nUsing default patterns from conf.json.")
+        logging.error(f"Error loading MongoDB configuration: {e}. Using default patterns from conf.json.")
+        return None
+    
+    return mongo
