@@ -1,5 +1,6 @@
 # utils.py
 
+import re
 import os
 import json
 import logging
@@ -185,12 +186,7 @@ def load_json_from_path(file_path):
         print(f"File not found: {file_path}")
         return None
 
-    with open(file_path, 'r', encoding='utf-8') as f:
-        try:
-            return json.load(f)
-        except json.JSONDecodeError as e:
-            print(f"Error parsing JSON: {e}")
-            return None
+    return load_and_fix_json(file_path)
 
 def get_env_file():
     if os.path.exists('.env'):
@@ -210,3 +206,44 @@ def get_env_file():
                 f.write(chunk)
         print(f".env file downloaded successfully as {local_filename}.")
         logging.info(f".env file downloaded successfully as {local_filename}.")
+
+def escape_inner_quotes(json_string: str) -> str:
+    """
+    Escapes unescaped double quotes inside double-quoted JSON strings.
+    Example: "check "something" failed" -> "check \"something\" failed"
+    """
+    counter = [0]  # use a list to make it mutable in nested function
+
+    def replacer(match):
+        counter[0] += 1
+        if counter[0] in (2, 3):
+            return "\\\""
+        return match.group(0)
+    
+    strings_to_modify = re.findall(r'".*".*".*"', json_string)
+    modified_strings = [re.sub(r"\"", replacer, s) for s in strings_to_modify]
+
+    for i, s in enumerate(strings_to_modify):
+      json_string = json_string.replace(s, modified_strings[i])
+    return json_string
+
+
+def load_and_fix_json(file_path: str):      
+  with open(file_path, "r", encoding="utf-8") as f:
+      content = f.read()
+
+  try:
+      return json.loads(content)
+  except json.JSONDecodeError as e:
+      print(f"Initial parse failed: {e}, trying auto-fix...")
+
+  # Fix unescaped inner quotes safely
+  content = escape_inner_quotes(content)
+
+  # Remove trailing commas before } or ]
+  content = re.sub(r",(\s*[}\]])", r"\1", content)
+
+  try:
+      return json.loads(content)
+  except json.JSONDecodeError as e:
+      raise ValueError(f"Still invalid after fixes: {e}") from None
