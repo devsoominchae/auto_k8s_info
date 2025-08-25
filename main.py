@@ -8,6 +8,7 @@ from printer import Printer
 from error_info import analyze_pods_without_errors, analyze_pods_with_errors, analyze_describe_pods_output, classify_pods
 from user_inputs import get_user_id_from_user, get_case_info_dir_from_user, get_namespace_path_from_user, get_error_patterns_from_user_input
 from mongodb_handler import load_mongodb
+from thefuzz import fuzz
 
 
 
@@ -73,12 +74,51 @@ def main():
         mongo.update_user_patterns(user_id, error_patterns)
         print(f"Error patterns has been updated for user {user_id}")
         logging.info(f"Error patterns has been updated for user {user_id}")
+        
+        user_defined_dict = mongo.get_user_patterns(user_id)
+        default_log_dict = mongo.get_default_error_patterns()
+        
+        update_default_flag = False
+        new_patterns_added = []
+        
+        confirm_promotion = input("\n Do you want to update the default dictionary? (yes - default/no): ").strip()
+        
+        if confirm_promotion in conf["yes_list"]:
+        
+            for category, user_patterns_list in user_defined_dict.items():
+                
+                if category not in default_log_dict:
+                    continue
+                for user_pattern in user_patterns_list:
+                    exists_similar = any(
+                        fuzz.ratio(user_pattern, default_pattern) >= 80
+                        for default_pattern in default_log_dict.get(category, [])
+                    )
+                    
+                    if not exists_similar:
+                        default_log_dict[category].append(user_pattern)
+                        update_default_flag = True
+                        new_patterns_added.append((category, user_pattern))
+            
+            if update_default_flag:
+                mongo.update_error_patterns(default_log_dict)
+                print("\n Default log dictionary has been updated!")
+                for category, pattern in new_patterns_added:
+                    print(f" -[{category}] {pattern}")
+                logging.info("Default log dict updated with these new patterns")
+            
+            else:
+                print("\n no new patterns added")
+                logging.info("No new patterns added to default dict as they already exist") 
+        
+        else:
+            print(f"Error patterns were not updated to default log dictionary")
+        
     else:
         print(f"Error patterns for user {user_id} has not been updated.")
         logging.info(f"Error patterns for user {user_id} has not been updated.")
     print(f"Current error pattern for {user_id}:")
     print("Error patterns :\n", json.dumps(mongo.get_user_patterns(user_id), indent=4))
-
     
 
 if __name__ == "__main__":
