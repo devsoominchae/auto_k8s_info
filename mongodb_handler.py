@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from pymongo import MongoClient
 
 # Custom imports
-from utils import logging, get_env_file
+from utils import logging, get_env_file, conf
 
 
 class MongoHandler:

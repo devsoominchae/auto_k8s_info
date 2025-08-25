@@ -17,10 +17,13 @@ def main():
     logging.info("START")
     
     mongo = load_mongodb()
-    error_patterns = mongo.get_default_error_patterns()
-    user_id = get_user_id_from_user(mongo)
-    
-    error_patterns = get_error_patterns_from_user_input(user_id, mongo, error_patterns)
+    if mongo:
+        error_patterns = mongo.get_default_error_patterns()
+        user_id = get_user_id_from_user(mongo)
+        
+        error_patterns = get_error_patterns_from_user_input(user_id, mongo, error_patterns)
+    else:
+        error_patterns = conf["log_error_patterns"]
 
     cache = load_cache()
 
