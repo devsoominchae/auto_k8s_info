@@ -50,9 +50,6 @@
         ]
     },
     "log_error_patterns": {
-        "Test User": [
-            "test user"
-        ],
         "Start Sequencer Warnings": [
             "SKIP_INIT_BLOCK",
             "bypassing sequencing",
