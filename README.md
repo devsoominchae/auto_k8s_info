@@ -31,6 +31,22 @@ First you will need an unzipped sample get-k8s-info.sh output.
 ######
     python main.py
 
+### Personal Error Dictionary creation
+
+```
+If you don't have a user, please create one which is unique to previous ids shown in the menu.
+Then, use 'Download' to collect the default json file for the dictionary, and edit it as you wish.
+Afterwards, select 'Upload' to upload updated json file.
+
+Select a user by number or by user ID or enter a new user ID.
+1. jobyun
+2. sochae
+3. testuser
+4. default
+Enter choice: //ENTER UNIQUE NEW USER HERE
+```
+
+
 Sample output
 ######
     Please enter the path to the get-k8s-info output file: <PROJECT_PATH>\auto_k8s_info\sample_data\CS0287492_20250731_102025
