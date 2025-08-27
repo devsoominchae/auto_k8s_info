@@ -1,6 +1,10 @@
 # mongodb_handler.py
 
 import os
+import ssl
+import sys
+import certifi
+
 from dotenv import load_dotenv
 from pymongo import MongoClient
 
@@ -8,10 +12,22 @@ from pymongo import MongoClient
 from utils import logging, get_env_file, conf
 
 
+# Handle certifi in PyInstaller bundle
+ca_bundle = certifi.where()
+if getattr(sys, 'frozen', False):
+    # If running inside PyInstaller
+    base_path = sys._MEIPASS
+    ca_bundle = os.path.join(base_path, "certifi", "cacert.pem")
+
+print("Using CA bundle:", ca_bundle)
+
+
 class MongoHandler:
     def __init__(self, uri, db_name="log_config"):
         self.uri = uri
-        self.client = MongoClient(uri)
+        self.client = MongoClient(uri,
+                                  tls=True,
+                                tlsCAFile=ca_bundle)
         self.db = self.client[db_name]
         self.shared_config = self.db["log_error_patterns"]       # Default shared patterns
         self.user_config = self.db["user_error_patterns"]        # User-specific patterns
