@@ -16,17 +16,17 @@ from thefuzz import fuzz
 def main():
     # Check if cache.json exists using the relataive path to where this script is located
     logging.info("START")
+    cache = load_cache()
     
     mongo = load_mongodb()
     if mongo:
         error_patterns = mongo.get_default_error_patterns()
         user_id = get_user_id_from_user(mongo)
         
-        error_patterns = get_error_patterns_from_user_input(user_id, mongo, error_patterns)
+        error_patterns = get_error_patterns_from_user_input(user_id, mongo, error_patterns, cache)
     else:
         error_patterns = conf["log_error_patterns"]
 
-    cache = load_cache()
 
     case_info_dir = get_case_info_dir_from_user(cache)
 

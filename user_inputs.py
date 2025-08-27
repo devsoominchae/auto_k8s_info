@@ -49,34 +49,44 @@ def select_option(options, message_to_prompt="Please select an action:", tab_com
 
 
 def get_case_info_dir_from_user(cache):
-    saved_case_info_dir = cache.get('saved_case_info_dir', '')
-    if saved_case_info_dir:
-        print(f"Saved path to get-k8s-info output: {saved_case_info_dir}")
-        logging.info(f"Saved path to get-k8s-info output: {saved_case_info_dir}")
-        use_saved_path = remove_invalid_windows_path_chars(input("Do you want to use this saved path? (yes - default/no): ").strip().lower())
+    case_info_dir = get_user_input_via_cache(cache, 'saved_case_info_dir', "Saved path to get-k8s-info output", "Please enter the path to the get-k8s-info output file")
+
+    return case_info_dir
+
+def get_error_patterns_path_from_user(cache):
+    error_patterns_path = get_user_input_via_cache(cache, 'error_patterns', "Saved path to error patterns", "Please enter the path to the error patterns file")
+    
+    return error_patterns_path
+
+def get_user_input_via_cache(cache, target, msg_saved_cache, msg_please_enter_value):
+    cached_value = cache.get(target, '')
+    if cached_value:
+        print(f"{msg_saved_cache}: {cached_value}")
+        logging.info(f"{msg_saved_cache}: {cached_value}")
+        use_saved_path = remove_invalid_windows_path_chars(input(f"Do you want to use this cached input? (yes - default/no): ").strip().lower())
 
         if use_saved_path not in conf.get("yes_list", ["yes", "y", "Y", "Yes", "", "YES"]):
             logging.info("Not using saved path")
-            saved_case_info_dir = ""
-            case_info_dir = remove_invalid_windows_path_chars(input(f"Please enter the path to the get-k8s-info output folder: ").strip())
-            cache['saved_case_info_dir'] = case_info_dir
+            cached_value = ""
+            value = remove_invalid_windows_path_chars(input(f"{msg_please_enter_value}: ").strip())
+            cache[target] = value
             with open(conf.get("cache", "cache.json"), 'w', encoding='utf-8') as f:
                 json.dump(cache, f, indent=2)
         else:
-            case_info_dir = saved_case_info_dir
-            print(f"Using saved path: {case_info_dir}")
-            logging.info(f"Using saved path: {case_info_dir}")
+            value = cached_value
+            print(f"Using cached input: {value}")
+            logging.info(f"Using cached input: {value}")
 
     else:
         # Get user input to specify the path to the get-k8s-info output
-        logging.info("No saved path found. Asking user for input.")
-        case_info_dir = remove_invalid_windows_path_chars(input("Please enter the path to the get-k8s-info output file: ").strip())
-        logging.info(f"User provided path: {case_info_dir}")
-        cache['saved_case_info_dir'] = case_info_dir
+        logging.info(f"Nothing cached for {target}. Asking user for input.")
+        value = remove_invalid_windows_path_chars(input(f"{msg_please_enter_value}: ").strip())
+        logging.info(f"User provided {target}: {value}")
+        cache[target] = value
         with open(conf.get("cache", "cache.json"), 'w', encoding='utf-8') as f:
             json.dump(cache, f, indent=2)
 
-    return case_info_dir
+    return value
 
 def get_namespace_path_from_user(case_info_dir):
     # List the folders under kubernetes folder and let user select one
@@ -156,7 +166,7 @@ def user_will_update_dict():
     else:
         return False
 
-def get_error_patterns_from_user_input(user_id, mongo, error_patterns):
+def get_error_patterns_from_user_input(user_id, mongo, error_patterns, cache):
     if user_id != "default":
         if mongo.user_exists(user_id):
             error_patterns = mongo.get_user_patterns(user_id)
@@ -172,7 +182,7 @@ def get_error_patterns_from_user_input(user_id, mongo, error_patterns):
                             print(f"Error patterns file saved to {os.path.join(os.getcwd(), 'error_patterns.json')}")
                             logging.info(f"Error patterns file saved to {os.path.join(os.getcwd(), 'error_patterns.json')}")
                     case "Upload":
-                        user_dict_path = remove_invalid_windows_path_chars(input("Enter the path to your JSON file: ").strip())
+                        user_dict_path = get_error_patterns_path_from_user(cache)
                         if user_dict_has_valid_format(user_dict_path):
                             error_patterns = load_json_from_path(user_dict_path)
                             print("Error patterns :\n", json.dumps(error_patterns, indent=4))
