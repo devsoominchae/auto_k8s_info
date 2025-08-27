@@ -72,7 +72,7 @@ def get_case_info_dir_from_user(cache):
         logging.info("No saved path found. Asking user for input.")
         case_info_dir = remove_invalid_windows_path_chars(input("Please enter the path to the get-k8s-info output file: ").strip())
         logging.info(f"User provided path: {case_info_dir}")
-        cache.setdefault('saved_case_info_dir', case_info_dir)
+        cache['saved_case_info_dir'] = case_info_dir
         with open(conf.get("cache", "cache.json"), 'w', encoding='utf-8') as f:
             json.dump(cache, f, indent=2)
 
@@ -172,7 +172,7 @@ def get_error_patterns_from_user_input(user_id, mongo, error_patterns):
                             print(f"Error patterns file saved to {os.path.join(os.getcwd(), 'error_patterns.json')}")
                             logging.info(f"Error patterns file saved to {os.path.join(os.getcwd(), 'error_patterns.json')}")
                     case "Upload":
-                        user_dict_path = input("Enter the path to your JSON file: ").strip()
+                        user_dict_path = remove_invalid_windows_path_chars(input("Enter the path to your JSON file: ").strip())
                         if user_dict_has_valid_format(user_dict_path):
                             error_patterns = load_json_from_path(user_dict_path)
                             print("Error patterns :\n", json.dumps(error_patterns, indent=4))

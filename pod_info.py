@@ -71,7 +71,10 @@ class PodInfo:
         self.printer.print_message(f"Pod Name: {self.name}")
         self.printer.print_message(f"Status: {self.status}")
         self.printer.print_message(f"Node: {self.node}")
-        self.printer.print_message("Details:")
+        self.printer.print_message(f"Log Files:")
+        for log in self.logs:
+            self.printer.print_message(f"- {log}")
+        self.printer.print_message("\nDetails:")
         if self.errors:
             for filename, errors in self.errors.items():
                 self.printer.print_message(f"\n{pluralize(len(errors), 'Issue')} in {filename}:")

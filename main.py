@@ -81,7 +81,7 @@ def main():
         update_default_flag = False
         new_patterns_added = []
         
-        confirm_promotion = input("\n Do you want to update the default dictionary? (yes - default/no): ").strip()
+        confirm_promotion = input("\nDo you want to update the default dictionary? (yes - default/no): ").strip()
         
         if confirm_promotion in conf["yes_list"]:
         
@@ -102,13 +102,13 @@ def main():
             
             if update_default_flag:
                 mongo.update_error_patterns(default_log_dict)
-                print("\n Default log dictionary has been updated!")
+                print("\nDefault log dictionary has been updated!")
                 for category, pattern in new_patterns_added:
                     print(f" -[{category}] {pattern}")
                 logging.info("Default log dict updated with these new patterns")
             
             else:
-                print("\n no new patterns added")
+                print("\nNo new patterns added")
                 logging.info("No new patterns added to default dict as they already exist") 
         
         else:
