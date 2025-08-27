@@ -1,6 +1,7 @@
 {
-    "Test User": [
-        "test user"
+    "CAS Control Issues": [
+        "no ready CAS servers",
+        "cas-control is not ready"
     ],
     "Start Sequencer Warnings": [
         "SKIP_INIT_BLOCK",
@@ -40,7 +41,6 @@
         "error writing PEM file"
     ],
     "Certificate Errors": [
-        "CA certificate Secret already exists",
         "error generating certificates",
         "failed to create cert secret",
         "failed to write certificate file",
@@ -60,5 +60,14 @@
     "Compute Context Errors": [
         "Compute context to be used by the CAS Formats service",
         "no ready CAS servers, so cas-control is not ready"
+    ],
+    "PyConfig errors": [
+        "Error creating md5sum file"
+    ],
+    "SAS Data Quality Services Errors": [
+        "sonder-log-icu.tool.executor.failed.starting.service.log"
+    ],
+    "SAS ESP CSS Errors": [
+        "could not find a valid ESP SERVER license"
     ]
 }
