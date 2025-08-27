@@ -5,3 +5,7 @@
 *vscode*
 cache.json
 *.log
+*.exe
+*.spec
+build*
+dist*
