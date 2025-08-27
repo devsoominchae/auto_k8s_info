@@ -90,7 +90,7 @@ def analyze_pods_with_errors(namespace_path, pods_with_errors, printer, error_pa
 
             with open(log_file_path, "r", encoding="utf-8", errors="ignore") as log_file:
                 for line in log_file:
-                    for category, patterns in conf.get('log_error_patterns', {}).items():
+                    for category, patterns in error_patterns.items():
                         if any(p in line for p in patterns):
                             pod.add_error_once_by_message(file_name, category, line)
                             break
