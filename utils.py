@@ -15,7 +15,8 @@ RESTORE_CONF_FILE = 'conf_restored.json'
 CONF = {
   "cache": "cache.json",
   "cache_default": {
-    "saved_case_info_dir": ""
+    "saved_case_info_dir": "",
+    "error_patterns": ""
   },
   "output_folder": "output",
   "logging": {

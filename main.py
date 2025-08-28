@@ -40,10 +40,10 @@ def main():
     analyze_pods_with_errors(namespace_path, pods_with_errors, printer, error_patterns)
 
     if pods_with_errors:
-        print("\nPods with issues:")
+        printer.print_message(f"\nFound {len(pods_with_errors)} pods with issues:")
         logging.info(f"Found {len(pods_with_errors)} pods with issues:")
         for pod in pods_with_errors:
-            print(f"- {pod.get_pod_name()}")
+            printer.print_message(f"- {pod.get_pod_name()}")
             logging.info(f"- {pod.get_pod_name()}")
 
     if pods_with_errors:
