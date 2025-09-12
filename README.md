@@ -43,11 +43,11 @@ Instead of manually digging through pod statuses and logs, this tool helps you q
 
 ## 👷 Step by Step Guide (For your own personal dictionary!)
 
-:one: Follow the same steps up to step 4
-:two: Input a new id - this will create a personal file locally (for now)
-:three: Navigate the menu  to export the file... 
-:four: Edit the file to your liking - we kept a default dictionary for easy understanding of format 😄
-:five: Upload your file by inputting the path
-:six: Now you are ready to use your own personal dictionary for analysis!
-:seven: After analysis, it can be stored to your personal dictionary, or even upload to the main public dictionary!
+:one: Follow the same steps up to step 4  
+:two: Input a new id - this will create a personal file locally (for now)  
+:three: Navigate the menu  to export the file...  
+:four: Edit the file to your liking - we kept a default dictionary for easy understanding of format 😄  
+:five: Upload your file by inputting the path  
+:six: Now you are ready to use your own personal dictionary for analysis!  
+:seven: After analysis, it can be stored to your personal dictionary, or even upload to the main public dictionary!  
 
