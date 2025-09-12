@@ -51,3 +51,9 @@ Instead of manually digging through pod statuses and logs, this tool helps you q
 :six: Now you are ready to use your own personal dictionary for analysis!  
 :seven: After analysis, it can be stored to your personal dictionary, or even upload to the main public dictionary!  
 
+---
+
+## 😠 Still Stuck? Dont Worry...
+
+Check the demo below!
+
