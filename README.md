@@ -35,14 +35,8 @@ Instead of manually digging through pod statuses and logs, this tool helps you q
 :one: Use get-k8s-info tool to gain folder containing information of their viya 4 environment  
 :two: Make sure it is decompressed!  
 :three: Go to the releases page on the right, and download conf.json, error.patterns.json and main.exe  
-```
-⚠️ Make sure that they are all in the same path! Preferably, you could create a folder containing these three files.  
-```
 :four: Run main.exe...  
-:five: Either leave blank when asked for an input - or use an ID if you have stored a personal log dictionary. 
-```
-💭 You can create a new user if you want to store your own patterns, an empty field will use the default dictionary
-```
+:five: Either leave blank when asked for an input - or use an ID if you have stored a personal log dictionary.  
 :six: Paste the path to the folder we want to investigate!  
 :seven: Select the namespace we want to investigate!  
 8️⃣: Wait for your results - CLI shows a simplified overview, while a detailed version is stored in the namespace we investigated with the name "all_errors.json"  
