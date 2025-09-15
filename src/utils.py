@@ -13,84 +13,120 @@ import requests
 
 RESTORE_CONF_FILE = 'conf_restored.json'
 CONF = {
-  "cache": "cache.json",
-  "cache_default": {
-    "saved_case_info_dir": "",
-    "error_patterns": ""
-  },
-  "output_folder": "output",
-  "logging": {
-    "level": "INFO",
-    "format": "%(asctime)s %(levelname)s %(message)s"
-  },
-  "print_level" : 1,
-  "yes_list": [
-    "yes",
-    "y",
-    "Y",
-    "Yes",
-    "",
-    "YES"
-  ],
-  "invalid_windows_path_chars": [
-    "<",
-    ">",
-    "\"",
-    "/",
-    "|",
-    "?",
-    "*"
-  ],
-  "describe_pods_error_patterns": {
-    "Warning": [
-      "Warning"
-    ]
-  },
-  "get_pods_error_patterns": {
-    "Error": [
-      "Error"
+    "cache": "cache.json",
+    "cache_default": {
+        "saved_case_info_dir": "",
+        "error_patterns": ""
+    },
+    "max_files_to_show": 10,
+    "mongodb_conn_var_url": "http://trck1076843.trc.sas.com:8000/.env",
+    "output_timestamp_format": "%Y-%m-%d %H:%M:%S",
+    "print_level": 1,
+    "output_folder": "output",
+    "logging": {
+        "level": "INFO",
+        "format": "%(asctime)s %(levelname)s %(message)s"
+    },
+    "yes_list": [
+        "yes",
+        "y",
+        "Y",
+        "Yes",
+        "",
+        "YES"
     ],
-    "Running No Pods": [
-      "0/",
-      "Running"
+    "invalid_windows_path_chars": [
+        "<",
+        ">",
+        "\"",
+        "/",
+        "|",
+        "?",
+        "*"
     ],
-    "Hanged in Init": [
-      "Init:"
-    ],
-    "Crashed": [
-      "CrashLoopBackOff"
-    ]
-  },
-  "log_error_patterns": {
-    "CAS Control Issues": [
-      "no ready CAS servers",
-      "cas-control is not ready"
-    ],
-    "Start Sequencer Warnings": [
-      "SKIP_INIT_BLOCK",
-      "bypassing sequencing",
-      "exit code 0"
-    ],
-    "Readiness Check Failures": [
-      "check \"sas-endpoints-ready\" failed",
-      "no available addresses",
-      "endpoints have no available addresses",
-      "0 available addresses",
-      "failed readiness check"
-    ],
-    "Stalled Init Warnings": [
-      "Waiting for",
-      "POD(s) to Complete"
-    ],
-    "Authentication Failures": [
-      "Unauthorized",
-      "authentication failed",
-      "access denied",
-      "invalid credentials",
-      "token expired"
-    ]
-  }
+    "describe_pods_error_patterns": {
+        "Warning": [
+            "Warning"
+        ]
+    },
+    "get_pods_error_patterns": {
+        "Error": [
+            "Error"
+        ],
+        "Running No Pods": [
+            "0/",
+            "Running"
+        ],
+        "Hanged in Init": [
+            "Init:"
+        ],
+        "Crashed": [
+            "CrashLoopBackOff"
+        ]
+    },
+    "log_error_patterns": {
+        "Start Sequencer Warnings": [
+            "SKIP_INIT_BLOCK",
+            "bypassing sequencing",
+            "exit code 0"
+        ],
+        "Readiness Check Failures": [
+            "check \"sas-endpoints-ready\" failed",
+            "no available addresses",
+            "endpoints have no available addresses",
+            "0 available addresses",
+            "failed readiness check"
+        ],
+        "Telemetry Warnings": [
+            "OpenTelemetry support not installed",
+            "noop Open Telemetry MeterProvider",
+            "no metrics will be collected"
+        ],
+        "Stalled Init Warnings": [
+            "Waiting for",
+            "POD(s) to Complete"
+        ],
+        "Authentication Failures": [
+            "Unauthorized",
+            "authentication failed",
+            "access denied",
+            "invalid credentials",
+            "token expired"
+        ],
+        "Tool Execution Failures": [
+            "sonder-log-icu.tool.error.executing.command.log",
+            "sonder-log-icu.tool.executor.failed.running.tools.log",
+            "Service executor failed to execute successfully: exit status 1"
+        ],
+        "Certificate Write Failures": [
+            "writeAsPem failed",
+            "error writing PEM file"
+        ],
+        "Certificate Errors": [
+            "CA certificate Secret already exists",
+            "error generating certificates",
+            "failed to create cert secret",
+            "failed to write certificate file",
+            "invalid certificate configuration"
+        ],
+        "PVC Errors": [
+            "PersistentVolumeClaim is not bound",
+            "PersistentVolumeClaim is not available",
+            "PersistentVolumeClaim is in pending state",
+            "PVC pending",
+            "PVC"
+        ],
+        "FailedMount Errors": [
+            "MountVolume.SetUp failed for volume",
+            "references non-existent secret key"
+        ],
+        "Compute Context Errors": [
+            "Compute context to be used by the CAS Formats service",
+            "no ready CAS servers, so cas-control is not ready"
+        ]
+    }
 }
+
     
 
 
