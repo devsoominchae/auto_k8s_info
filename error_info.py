@@ -10,11 +10,12 @@ from printer import Printer
 from pod_info import PodInfo
 
 class ErrorInfo:
-    def __init__(self, timestamp, message, category, container, file_name):
+    def __init__(self, timestamp, message, category, container, file_name, line_number):
         self.timestamp = timestamp
         self.message = message
         self.category = category
         self.file_name = file_name
+        self.line_number = line_number
         self.container = container
 
 
@@ -33,7 +34,7 @@ class ErrorInfoHolder:
             self.added_files.add(f"{error_info.file_name}_{error_info.category}")
             self.errors[error_info.category].append(error_info)
     
-    def format_error(self, line, file_name, category):
+    def format_error(self, line, file_name, category, line_number):
         message = ""
         timestamp = ""
         container = ""
@@ -47,7 +48,7 @@ class ErrorInfoHolder:
         except json.JSONDecodeError:
                 logging.info(f"The log snippet {line} is from {file_name} is not in JSON format. Returning original message")
         
-        error_info = ErrorInfo(format_timestamp(timestamp), message, category, container, file_name)
+        error_info = ErrorInfo(format_timestamp(timestamp), message, category, container, file_name, line_number)
         return error_info
     
     def print_pods_by_error_category(self):
@@ -56,7 +57,7 @@ class ErrorInfoHolder:
             self.printer.print_message("List of files:")
             for error_info in error_infos[:conf["max_files_to_show"]]:
                 if error_info.message:
-                    self.printer.print_message(f" - {error_info.file_name} : {error_info.message}")
+                    self.printer.print_message(f" - {error_info.file_name} [{error_info.line_number}]: {error_info.message}")
             if len(error_infos) > conf["max_files_to_show"]:
                 self.printer.print_message(f" - ... and {pluralize(len(error_infos) - conf['max_files_to_show'], 'more file')}\n")
     
@@ -89,10 +90,10 @@ def analyze_pods_with_errors(namespace_path, pods_with_errors, printer, error_pa
             printer.print_message(f"Processing log file: {file_name}", print_level=2)
 
             with open(log_file_path, "r", encoding="utf-8", errors="ignore") as log_file:
-                for line in log_file:
+                for line_number, line in enumerate(log_file):
                     for category, patterns in error_patterns.items():
                         if any(p in line for p in patterns):
-                            pod.add_error_once_by_message(file_name, category, line)
+                            pod.add_error_once_by_message(file_name, category, line, line_number+1)
                             break
                     
                 # pod.add_error_once_by_message(file_name, "Most Recent Record", log_file[-1].strip())
@@ -117,10 +118,10 @@ def analyze_pods_without_errors(namespace_path, pods_without_errors, printer, er
             sys.stdout.write("\033[K")
             printer_console.print_message(f"[{i}/{total_number_of_log_files} {i/total_number_of_log_files*100:.1f}%] Processing log file: {os.path.basename(file_name)}", print_level=1, end_="\r", flush_=True)
             with open(file_name, "r", encoding="utf-8", errors="ignore") as log_file:
-                for line in log_file:
+                for line_number, line in enumerate(log_file):
                     for category, patterns in error_patterns.items():
                         if any(p in line for p in patterns):
-                            error_info = error_info_holder.format_error(line, file_name, category)
+                            error_info = error_info_holder.format_error(line, file_name, category, line_number + 1)
                             error_info_holder.add_error(error_info)
 
     return error_info_holder

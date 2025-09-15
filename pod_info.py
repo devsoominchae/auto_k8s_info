@@ -47,7 +47,7 @@ class PodInfo:
         self.errors[filename].append(error)
 
     #seems a bit redundant right now... will fix later - has issues with timestamp comparison...
-    def add_error_once_by_message(self, filename, category, line):
+    def add_error_once_by_message(self, filename, category, line, line_number):
         try:
             # Try to load the full line as JSON directly
             log_json = json.loads(line.strip())
@@ -56,14 +56,14 @@ class PodInfo:
             if message not in self.seen_messages:
                 self.seen_messages.add(message)
                 timestamp = log_json.get("timeStamp", "unknown-time")
-                formatted_error = f"[{category}] {format_timestamp(timestamp)} - {message}"
+                formatted_error = f"{line_number}: [{category}] {format_timestamp(timestamp)} - {message}"
                 self.add_error(filename, formatted_error)
 
         except json.JSONDecodeError:
             # Not JSON – fallback
             if line not in self.seen_messages:
                 self.seen_messages.add(line)
-                self.add_error(filename, f"[{category}] {line.strip()}")
+                self.add_error(filename, f"{line_number}: [{category}] {line.strip()}")
 
 
     def print_info(self):
