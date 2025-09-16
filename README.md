@@ -36,7 +36,7 @@ Instead of manually digging through pod statuses and logs, this tool helps you q
 :two: Make sure it is decompressed!  
 :three: Go to the releases page on the right, and download conf.json, error.patterns.json and main.exe  
 :four: Run main.exe...  
-:five: Leave the input blank to use the default dictionary!
+:five: Leave the input blank to use the default dictionary!  
 :six: Paste the path to the folder we want to investigate!  
 :seven: Select the namespace we want to investigate!  
 :eight: Wait for your results - CLI shows a simplified overview, while a detailed version is stored in the namespace we investigated with the name "all_errors.json"  
