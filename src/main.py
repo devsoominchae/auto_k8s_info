@@ -31,7 +31,7 @@ def main():
     case_info_dir = get_case_info_dir_from_user(cache)
 
     namespace_path = get_namespace_path_from_user(case_info_dir)
-    printer = Printer(os.path.basename(namespace_path), mode="both")
+    printer = Printer(namespace_path, mode="both")
     
     pods_with_errors, pods_without_errors = classify_pods(namespace_path, printer)
 

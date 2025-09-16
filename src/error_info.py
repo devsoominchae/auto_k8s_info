@@ -100,7 +100,7 @@ def analyze_pods_with_errors(namespace_path, pods_with_errors, printer, error_pa
 
 def analyze_pods_without_errors(namespace_path, pods_without_errors, printer, error_patterns):
     error_info_holder = ErrorInfoHolder(printer)
-    printer_console = Printer(os.path.basename(namespace_path), mode="console")
+    printer_console = Printer(namespace_path, mode="console")
     printer.print_message("\nAnalyzing pods in normal state.")
 
     i = 0

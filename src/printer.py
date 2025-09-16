@@ -12,11 +12,19 @@ DATETIME_FORMAT = "%Y%m%d_%H%M%S"
 
 
 class Printer:
-    def __init__(self, namespace, mode="both"):
-        logging.info(f"Initializing Printer with namespace: {namespace} and mode: {mode}")
+    def __init__(self, namespace_path, mode="both"):
+        namespace_path = namespace_path
+        namespace = os.path.basename(namespace_path)
+        try:
+            case_number = [i for i in namespace_path.split(os.sep) if i.startswith("CS")][0].split("_")[0] + "_"
+        except Exception as e:
+            logging.info(f"Error parsing case number from file path: {e}")
+            case_number = ""
+        
+        logging.info(f"\nInitializing Printer with \nNamespace: {namespace} \nNode: {mode} \nCase number: {case_number}")
         assert mode in PRINTER_MODE, f"Invalid printer mode: {mode}. Choose from {PRINTER_MODE}."
         self.mode = mode
-        self.file_path = f"auto_k8s_{namespace}_{datetime.now().strftime(DATETIME_FORMAT)}.txt" if mode in ["file", "both"] else None
+        self.file_path = f"auto_k8s_{case_number}{namespace}_{datetime.now().strftime(DATETIME_FORMAT)}.txt" if mode in ["file", "both"] else None
         
         if not os.path.exists(conf['output_folder']):
             os.makedirs(conf['output_folder'])
