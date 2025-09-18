@@ -20,6 +20,7 @@ CONF = {
     },
     "max_files_to_show": 10,
     "mongodb_conn_var_url": "http://trck1076843.trc.sas.com:8000/.env",
+    "user_activity_url": "http://trck1076843.trc.sas.com:8000/record",
     "output_timestamp_format": "%Y-%m-%d %H:%M:%S",
     "print_level": 1,
     "output_folder": "output",
@@ -284,3 +285,22 @@ def load_and_fix_json(file_path: str):
       return json.loads(content)
   except json.JSONDecodeError as e:
       raise ValueError(f"Still invalid after fixes: {e}") from None
+
+def record_user_activity(namespace_path):
+    user = None
+    ip = None
+    
+    try:
+        user = os.getlogin()
+    except Exception as e:
+        logging.warning(f"Get user failed. Returning None. Error: {e}")
+    
+    try:
+        ip = requests.get('https://api.ipify.org').text
+    except Exception as e:
+        logging.warning(f"Get ip failed. Returning None. Error: {e}")
+    
+    payload = {"user": user, "ip": ip, "namespace_path" : namespace_path}
+
+    response = requests.post(conf.get("user_activity_url", ""), json=payload)
+    logging.info(response.json())

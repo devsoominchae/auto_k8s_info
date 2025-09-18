@@ -3,7 +3,7 @@ import os
 import json
 
 # Custom imports
-from utils import conf, load_cache, logging
+from utils import conf, load_cache, logging, record_user_activity
 from printer import Printer
 from error_info import analyze_pods_without_errors, analyze_pods_with_errors, analyze_describe_pods_output, classify_pods
 from user_inputs import get_user_id_from_user, get_case_info_dir_from_user, get_namespace_path_from_user, get_error_patterns_from_user_input
@@ -32,6 +32,7 @@ def main():
 
     namespace_path = get_namespace_path_from_user(case_info_dir)
     printer = Printer(namespace_path, mode="both")
+    record_user_activity(namespace_path)
     
     pods_with_errors, pods_without_errors = classify_pods(namespace_path, printer)
 
