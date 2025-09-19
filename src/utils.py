@@ -18,6 +18,7 @@ CONF = {
         "saved_case_info_dir": "",
         "error_patterns": ""
     },
+    "restart_filter_threshold": 10,
     "max_files_to_show": 10,
     "mongodb_conn_var_url": "http://trck1076843.trc.sas.com:8000/.env",
     "user_activity_url": "http://trck1076843.trc.sas.com:8000/record",
@@ -48,6 +49,9 @@ CONF = {
     "describe_pods_error_patterns": {
         "Warning": [
             "Warning"
+        ],
+        "Reason": [
+            "OOMKilled"
         ]
     },
     "get_pods_error_patterns": {
@@ -66,6 +70,10 @@ CONF = {
         ]
     },
     "log_error_patterns": {
+        "CAS Control Issues": [
+            "no ready CAS servers",
+            "cas-control is not ready"
+        ],
         "Start Sequencer Warnings": [
             "SKIP_INIT_BLOCK",
             "bypassing sequencing",
@@ -104,7 +112,6 @@ CONF = {
             "error writing PEM file"
         ],
         "Certificate Errors": [
-            "CA certificate Secret already exists",
             "error generating certificates",
             "failed to create cert secret",
             "failed to write certificate file",
@@ -124,6 +131,18 @@ CONF = {
         "Compute Context Errors": [
             "Compute context to be used by the CAS Formats service",
             "no ready CAS servers, so cas-control is not ready"
+        ],
+        "PyConfig errors": [
+            "Error creating md5sum file"
+        ],
+        "SAS Data Quality Services Errors": [
+            "sonder-log-icu.tool.executor.failed.starting.service.log"
+        ],
+        "SAS ESP CSS Errors": [
+            "could not find a valid ESP SERVER license"
+        ],
+        "Consul issues": [
+            "No cluster leader"
         ]
     }
 }

@@ -69,5 +69,8 @@
     ],
     "SAS ESP CSS Errors": [
         "could not find a valid ESP SERVER license"
+    ],
+    "Consul issues": [
+        "No cluster leader"
     ]
 }
