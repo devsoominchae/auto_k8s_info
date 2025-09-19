@@ -199,7 +199,7 @@ def classify_pods(namespace_path, printer):
         
         pod_restarts = int(line_list[3])
         if pod_restarts > conf.get("restart_filter_threshold", ):
-            category = f"Restart threshold{conf.get("restart_filter_threshold", )} exceeded"
+            category = f'Restart threshold{conf.get("restart_filter_threshold", )} exceeded'
             matched = True
             
         if matched:
