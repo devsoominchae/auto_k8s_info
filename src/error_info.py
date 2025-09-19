@@ -152,7 +152,7 @@ def analyze_describe_pods_output(namespace_path, pods_with_errors):
         pods_with_errors_name_list = [pod.name for pod in pods_with_errors]
 
         current_pod_name = None
-        for line in describe_pods_output_lines:
+        for line_number, line in enumerate(describe_pods_output_lines):
             if line.startswith('Name:'):
                 current_pod_name = line.split()[1]
             if current_pod_name in pods_with_errors_name_list:
@@ -160,7 +160,7 @@ def analyze_describe_pods_output(namespace_path, pods_with_errors):
                 if matched:
                     for pod in pods_with_errors:
                         if pod.name == current_pod_name:
-                            pod.add_error(describe_pods_output, line.strip())
+                            pod.add_error(describe_pods_output, f"{line_number}: {line.strip()}")
                             break
     return pods_with_errors
 
@@ -191,13 +191,13 @@ def classify_pods(namespace_path, printer):
     pods_with_errors = []
     pods_without_errors = []
 
-    for line in get_pods_output_lines[column_index + 1:]:
+    for line_number, line in enumerate(get_pods_output_lines[column_index + 1:]):
         matched, category = line_matches_error_patterns(line, conf.get("get_pods_error_patterns", {}), "all")
         pod_name = line.split()[0]
         pod_node = line.split()[reverse_node_name_index] if reverse_node_name_index != -1 else "unknown"
         if matched:
             pod_info = PodInfo(pod_name, category, pod_node, namespace_path, printer)
-            pod_info.add_error(get_pods_output, line.strip())
+            pod_info.add_error(get_pods_output, f"{line_number}: {line.strip()}")
             pods_with_errors.append(pod_info)
         elif not matched and pod_name != "NAME":
             pod_info = PodInfo(pod_name, "No Issues", pod_node, namespace_path, printer)
