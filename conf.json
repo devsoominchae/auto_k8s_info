@@ -4,6 +4,7 @@
         "saved_case_info_dir": "",
         "error_patterns": ""
     },
+    "restart_filter_threshold": 10,
     "max_files_to_show": 10,
     "mongodb_conn_var_url": "http://trck1076843.trc.sas.com:8000/.env",
     "user_activity_url": "http://trck1076843.trc.sas.com:8000/record",
@@ -34,6 +35,9 @@
     "describe_pods_error_patterns": {
         "Warning": [
             "Warning"
+        ],
+        "Reason": [
+            "OOMKilled"
         ]
     },
     "get_pods_error_patterns": {

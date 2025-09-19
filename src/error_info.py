@@ -193,8 +193,15 @@ def classify_pods(namespace_path, printer):
 
     for line_number, line in enumerate(get_pods_output_lines[column_index + 1:]):
         matched, category = line_matches_error_patterns(line, conf.get("get_pods_error_patterns", {}), "all")
-        pod_name = line.split()[0]
-        pod_node = line.split()[reverse_node_name_index] if reverse_node_name_index != -1 else "unknown"
+        line_list = line.split()
+        pod_name = line_list[0]
+        pod_node = line_list[reverse_node_name_index] if reverse_node_name_index != -1 else "unknown"
+        
+        pod_restarts = int(line_list[3])
+        if pod_restarts > conf.get("restart_filter_threshold", ):
+            category = f"Restart threshold{conf.get("restart_filter_threshold", )} exceeded"
+            matched = True
+            
         if matched:
             pod_info = PodInfo(pod_name, category, pod_node, namespace_path, printer)
             pod_info.add_error(get_pods_output, f"{line_number}: {line.strip()}")
