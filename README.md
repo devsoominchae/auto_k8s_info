@@ -53,6 +53,12 @@ Instead of manually digging through pod statuses and logs, this tool helps you q
 
 ---
 
+## :chart_with_upwards_trend: User report in Visual Analytics
+- [auto_k8s_info Dashboard](https://trck1076843.trc.sas.com/links/resources/report?uri=%2Freports%2Freports%2F441c16cd-5be7-4070-ba67-eeda6e3c586a)
+- User ID: sasuser
+- Password: sasuser
+---
+
 ## 😠 Still Stuck? Dont Worry...
 
 Check the demo below!
