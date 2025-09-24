@@ -182,6 +182,11 @@ def format_timestamp(timestamp):
         logging.info(f"Invalid timestamp format: {timestamp}. Using original.")
         return timestamp
 
+def parse_non_json_logs(line):
+    timestamp = line.split()[0]
+    error = " ".join(line.split()[1:])
+    return timestamp, error
+
 def load_cache():
     cache = {}
     if not os.path.exists(conf.get("cache", "cache.json")):
@@ -307,19 +312,13 @@ def load_and_fix_json(file_path: str):
 
 def record_user_activity(namespace_path):
     user = None
-    ip = None
     
     try:
         user = os.getlogin()
     except Exception as e:
         logging.warning(f"Get user failed. Returning None. Error: {e}")
     
-    try:
-        ip = requests.get('https://api.ipify.org').text
-    except Exception as e:
-        logging.warning(f"Get ip failed. Returning None. Error: {e}")
-    
-    payload = {"user": user, "ip": ip, "namespace_path" : namespace_path}
+    payload = {"user": user, "namespace_path" : namespace_path}
 
     response = requests.post(conf.get("user_activity_url", ""), json=payload)
-    logging.info(response.json())
+    logging.info(f'Response from {conf.get("user_activity_url", "")}: {response}')
