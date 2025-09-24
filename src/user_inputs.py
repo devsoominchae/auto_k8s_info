@@ -10,9 +10,14 @@ from prompt_toolkit.completion import WordCompleter
 # Custom imports
 from utils import logging, conf, remove_invalid_windows_path_chars, load_json_from_path
 
-DOWNLOAD_UPLOAD_OPTIPONS = [
+DOWNLOAD_UPLOAD_OPTIPONS_NON_DEFAULT = [
     "Download",
     "Upload",
+    "Exit"
+    ]
+
+DOWNLOAD_UPLOAD_OPTIPONS_DEFAULT = [
+    "Download",
     "Exit"
     ]
 
@@ -135,7 +140,6 @@ def user_dict_has_valid_format(user_dict_path):
 def get_user_id_from_user(mongo):
     all_users = mongo.get_all_users()
     all_users.sort()
-    all_users.append("default")
     user_id = select_option(all_users, message_to_prompt="Select a user by number or by user ID or enter a new user ID.", tab_complete=True, ignore_invalid=True)
     if user_id == "default":
         print(f"Using default error patterns.")
@@ -167,32 +171,34 @@ def user_will_update_dict():
         return False
 
 def get_error_patterns_from_user_input(user_id, mongo, error_patterns, cache):
-    if user_id != "default":
-        if mongo.user_exists(user_id):
-            error_patterns = mongo.get_user_patterns(user_id)
-        else:
-            user_will_create_new_id(mongo, user_id)
-        print("Error patterns :\n", json.dumps(error_patterns, indent=4))
-        if user_will_update_dict():
-            while True:
-                match select_option(DOWNLOAD_UPLOAD_OPTIPONS, tab_complete=True):
-                    case "Download":
-                        with open("error_patterns.json", "w", encoding="utf-8") as f:
-                            json.dump(error_patterns, f, ensure_ascii=False, indent=4)
-                            print(f"Error patterns file saved to {os.path.join(os.getcwd(), 'error_patterns.json')}")
-                            logging.info(f"Error patterns file saved to {os.path.join(os.getcwd(), 'error_patterns.json')}")
-                    case "Upload":
-                        user_dict_path = get_error_patterns_path_from_user(cache)
-                        if user_dict_has_valid_format(user_dict_path):
-                            error_patterns = load_json_from_path(user_dict_path)
-                            print("Error patterns :\n", json.dumps(error_patterns, indent=4))
-                        else:
-                            print(f"Using saved error patterns for user ID {user_id}")
-                            logging.info(f"Using saved error patterns for user ID {user_id}")
-                    case "Exit":
-                        break
-                    
+    if user_id == "default":
+        option = DOWNLOAD_UPLOAD_OPTIPONS_DEFAULT
     else:
-        print("Error patterns :\n", json.dumps(error_patterns, indent=4))
+        option = DOWNLOAD_UPLOAD_OPTIPONS_NON_DEFAULT
+        
+    if mongo.user_exists(user_id):
+        error_patterns = mongo.get_user_patterns(user_id)
+    else:
+        user_will_create_new_id(mongo, user_id)
+    print("Error patterns :\n", json.dumps(error_patterns, indent=4))
+    if user_will_update_dict():
+        while True:
+            match select_option(option, tab_complete=True):
+                case "Download":
+                    with open("error_patterns.json", "w", encoding="utf-8") as f:
+                        json.dump(error_patterns, f, ensure_ascii=False, indent=4)
+                        print(f"Error patterns file saved to {os.path.join(os.getcwd(), 'error_patterns.json')}")
+                        logging.info(f"Error patterns file saved to {os.path.join(os.getcwd(), 'error_patterns.json')}")
+                case "Upload":
+                    user_dict_path = get_error_patterns_path_from_user(cache)
+                    if user_dict_has_valid_format(user_dict_path):
+                        error_patterns = load_json_from_path(user_dict_path)
+                        print("Error patterns :\n", json.dumps(error_patterns, indent=4))
+                    else:
+                        print(f"Using saved error patterns for user ID {user_id}")
+                        logging.info(f"Using saved error patterns for user ID {user_id}")
+                case "Exit":
+                    break
+
     
     return error_patterns
