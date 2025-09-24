@@ -70,7 +70,11 @@ def main():
     error_info_holder.print_pods_by_error_category()
     error_info_holder.print_containers_by_error_category()
     
-    confirm_custom_patterns = input("\nDo you want to permanently save the custom error patterns you used? (yes - default/no): ").strip()
+    if user_id != "default":
+        confirm_custom_patterns = input("\nDo you want to permanently save the custom error patterns you used? (yes - default/no): ").strip()
+    else:
+        confirm_custom_patterns = "n"
+        
     if confirm_custom_patterns in conf["yes_list"]:
         mongo.update_user_patterns(user_id, error_patterns)
         print(f"Error patterns has been updated for user {user_id}")
