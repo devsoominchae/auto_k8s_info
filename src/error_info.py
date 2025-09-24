@@ -48,7 +48,7 @@ class ErrorInfoHolder:
         except json.JSONDecodeError:
                 logging.info(f"The log snippet {line} is from {file_name} is not in JSON format. Returning original message")
         
-        error_info = ErrorInfo(format_timestamp(timestamp, line), message, category, container, file_name, line_number)
+        error_info = ErrorInfo(format_timestamp(timestamp), message, category, container, file_name, line_number)
         return error_info
     
     def print_pods_by_error_category(self):

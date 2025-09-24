@@ -74,7 +74,8 @@
         "could not find a valid ESP SERVER license"
     ],
     "Bootstrap Errors": [
-        "Error bootstrapping resources: Service Unavailable"
+        "Error bootstrapping resources:",
+        "The bootstrap request failed:"
     ],
     "JSON Errors": [
         "JSONDecodeError"

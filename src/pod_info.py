@@ -56,7 +56,7 @@ class PodInfo:
             if message not in self.seen_messages:
                 self.seen_messages.add(message)
                 timestamp = log_json.get("timeStamp", "unknown-time")
-                formatted_error = f"{line_number}: [{category}] {format_timestamp(timestamp, line)} - {message}"
+                formatted_error = f"{line_number}: [{category}] {format_timestamp(timestamp)} - {message}"
                 self.add_error(filename, formatted_error)
 
         except json.JSONDecodeError:
@@ -64,7 +64,7 @@ class PodInfo:
             if line not in self.seen_messages:
                 timestamp, error = parse_non_json_logs(line.strip())
                 self.seen_messages.add(line)
-                self.add_error(filename, f"{line_number}: [{category}] {format_timestamp(timestamp, line)} {error}")
+                self.add_error(filename, f"{line_number}: [{category}] {format_timestamp(timestamp)} {error}")
     
 
 

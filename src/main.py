@@ -21,6 +21,7 @@ def main():
     mongo = load_mongodb()
     if mongo:
         error_patterns = mongo.get_default_error_patterns()
+        mongo.update_user_patterns("default", error_patterns)
         user_id = get_user_id_from_user(mongo)
         
         error_patterns = get_error_patterns_from_user_input(user_id, mongo, error_patterns, cache)
