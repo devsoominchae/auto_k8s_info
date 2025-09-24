@@ -30,7 +30,7 @@ Instead of manually digging through pod statuses and logs, this tool helps you q
 
 ---
 
-## ⚙️ Step by Step Guide (For default dictionary usage)
+## ⚙️ How to use the default dictionary
 
 :one: Use get-k8s-info tool to gain folder containing information of their viya 4 environment  
 :two: Make sure it is decompressed!  
@@ -41,11 +41,11 @@ Instead of manually digging through pod statuses and logs, this tool helps you q
 :seven: Select the namespace we want to investigate!  
 :eight: Wait for your results - CLI shows a simplified overview, while a detailed version is stored in the namespace we investigated with the name "all_errors.json"  
 
-## 👷 Step by Step Guide (For your own personal dictionary!)
+## 👷 How to use your own personal dictionary
 
 :one: Follow the same steps up to step 4  
 :two: Input a new id - this will create a personal file locally (for now)  
-:three: Navigate the menu  to export the file...  
+:three: Navigate the menu to export the file...  
 :four: Edit the file to your liking - we kept a default dictionary for easy understanding of format 😄  
 :five: Upload your file by inputting the path  
 :six: Now you are ready to use your own personal dictionary for analysis!  
