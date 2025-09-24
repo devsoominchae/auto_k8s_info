@@ -42,13 +42,13 @@ class ErrorInfoHolder:
             # Try to load the full line as JSON directly
             log_json = json.loads(line.strip())
             message = log_json.get("message", log_json.get("messageKey", line.strip()))
-            timestamp = log_json.get("timeStamp", "unknown-time")
+            timestamp = log_json.get("timeStamp") or log_json.get("ts") or "unknown-time"
             container = parse_container_name(file_name)
 
         except json.JSONDecodeError:
                 logging.info(f"The log snippet {line} is from {file_name} is not in JSON format. Returning original message")
         
-        error_info = ErrorInfo(format_timestamp(timestamp), message, category, container, file_name, line_number)
+        error_info = ErrorInfo(format_timestamp(timestamp, line), message, category, container, file_name, line_number)
         return error_info
     
     def print_pods_by_error_category(self):
