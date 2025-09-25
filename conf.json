@@ -13,7 +13,9 @@
     "output_folder": "output",
     "logging": {
         "level": "INFO",
-        "format": "%(asctime)s %(levelname)s %(message)s"
+        "format": "%(asctime)s %(levelname)s %(message)s",
+        "retention_days": 1,
+        "file_name": "auto_k8s_info.log"
     },
     "yes_list": [
         "yes",

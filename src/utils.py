@@ -6,6 +6,7 @@ import json
 import logging
 import inflect
 import requests
+import datetime
 
 # Custom imports
 
@@ -225,16 +226,48 @@ def load_logging_level():
                 logging.warning(f"Unknown logging level: {conf['logging']['level']}. Defaulting to INFO.")
     return logging.INFO  # Default level if not specified
 
-
 # Configure logging
 logging.basicConfig(
     level=load_logging_level(),
     format=conf.get('logging', {}).get('format', "%(asctime)s %(levelname)s %(message)s"),
     # format=conf['logging']['format'],
     handlers=[
-        logging.FileHandler('auto_k8s_info.log', encoding='utf-8')  # Log to file
+        logging.FileHandler(conf.get('logging', {}).get('file_name', "auto_k8s_info.log"), encoding='utf-8')  # Log to file
     ]
 )
+
+def manage_log_retention():   
+    log_file_path = conf.get('logging', {}).get('file_name', "auto_k8s_info.log")
+    retention_days = conf.get('logging', {}).get("retention_days", 7)
+
+    # Calculate the cutoff date
+    cutoff_date = datetime.datetime.now() - datetime.timedelta(days=retention_days)
+
+    # Read and filter log lines
+    cutoff_date_passed = False
+    filtered_lines = []
+    if os.path.exists(log_file_path):
+        with open(log_file_path, "r") as file:
+            for line in file:
+                try:
+                    # Assuming log lines start with 'YYYY-MM-DD HH:MM:SS'
+                    timestamp_str = line[:19]
+                    timestamp = datetime.datetime.strptime(timestamp_str, "%Y-%m-%d %H:%M:%S")
+                    if timestamp >= cutoff_date:
+                        cutoff_date_passed = True
+                    if cutoff_date_passed:
+                        filtered_lines.append(line)
+                except ValueError:
+                    # Keep lines that don't start with a timestamp
+                    if cutoff_date_passed:
+                        filtered_lines.append(line)
+
+    # Overwrite the log file with filtered lines
+    with open(log_file_path, "w") as file:
+        file.writelines(filtered_lines)
+
+    print(f"Log file cleaned. Entries older than {pluralize(retention_days, 'day')}, before {cutoff_date}, have been removed.")
+    logging.info(f"Log file cleaned. Entries older than {pluralize(retention_days, 'day')}, before {cutoff_date}, have been removed.")
 
 def remove_invalid_windows_path_chars(filename):
     invalid_chars = conf.get('invalid_windows_path_chars', ["<", ">", "\"", "/", "|", "?", "*"])

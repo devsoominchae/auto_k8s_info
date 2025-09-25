@@ -3,19 +3,18 @@ import os
 import json
 
 # Custom imports
-from utils import conf, load_cache, logging, record_user_activity
+from utils import conf, load_cache, logging, record_user_activity, manage_log_retention
 from printer import Printer
 from error_info import analyze_pods_without_errors, analyze_pods_with_errors, analyze_describe_pods_output, classify_pods
 from user_inputs import get_user_id_from_user, get_case_info_dir_from_user, get_namespace_path_from_user, get_error_patterns_from_user_input
 from mongodb_handler import load_mongodb
 from thefuzz import fuzz
 
-
-
             
 def main():
     # Check if cache.json exists using the relataive path to where this script is located
     logging.info("START")
+    manage_log_retention()
     cache = load_cache()
     
     mongo = load_mongodb()
