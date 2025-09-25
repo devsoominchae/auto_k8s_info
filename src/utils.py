@@ -28,7 +28,9 @@ CONF = {
     "output_folder": "output",
     "logging": {
         "level": "INFO",
-        "format": "%(asctime)s %(levelname)s %(message)s"
+        "format": "%(asctime)s %(levelname)s %(message)s",
+        "retention_days": 1,
+        "file_name": "auto_k8s_info.log"
     },
     "yes_list": [
         "yes",
@@ -71,81 +73,97 @@ CONF = {
         ]
     },
     "log_error_patterns": {
-        "CAS Control Issues": [
-            "no ready CAS servers",
-            "cas-control is not ready"
-        ],
-        "Start Sequencer Warnings": [
-            "SKIP_INIT_BLOCK",
-            "bypassing sequencing",
-            "exit code 0"
-        ],
-        "Readiness Check Failures": [
-            "check \"sas-endpoints-ready\" failed",
-            "no available addresses",
-            "endpoints have no available addresses",
-            "0 available addresses",
-            "failed readiness check"
-        ],
-        "Telemetry Warnings": [
-            "OpenTelemetry support not installed",
-            "noop Open Telemetry MeterProvider",
-            "no metrics will be collected"
-        ],
-        "Stalled Init Warnings": [
-            "Waiting for",
-            "POD(s) to Complete"
-        ],
-        "Authentication Failures": [
-            "Unauthorized",
-            "authentication failed",
-            "access denied",
-            "invalid credentials",
-            "token expired"
-        ],
-        "Tool Execution Failures": [
-            "sonder-log-icu.tool.error.executing.command.log",
-            "sonder-log-icu.tool.executor.failed.running.tools.log",
-            "Service executor failed to execute successfully: exit status 1"
-        ],
-        "Certificate Write Failures": [
-            "writeAsPem failed",
-            "error writing PEM file"
-        ],
-        "Certificate Errors": [
-            "error generating certificates",
-            "failed to create cert secret",
-            "failed to write certificate file",
-            "invalid certificate configuration"
-        ],
-        "PVC Errors": [
-            "PersistentVolumeClaim is not bound",
-            "PersistentVolumeClaim is not available",
-            "PersistentVolumeClaim is in pending state",
-            "PVC pending",
-            "PVC"
-        ],
-        "FailedMount Errors": [
-            "MountVolume.SetUp failed for volume",
-            "references non-existent secret key"
-        ],
-        "Compute Context Errors": [
-            "Compute context to be used by the CAS Formats service",
-            "no ready CAS servers, so cas-control is not ready"
-        ],
-        "PyConfig errors": [
-            "Error creating md5sum file"
-        ],
-        "SAS Data Quality Services Errors": [
-            "sonder-log-icu.tool.executor.failed.starting.service.log"
-        ],
-        "SAS ESP CSS Errors": [
-            "could not find a valid ESP SERVER license"
-        ],
-        "Consul issues": [
-            "No cluster leader"
-        ]
-    }
+    "CAS Control Issues": [
+        "no ready CAS servers",
+        "cas-control is not ready",
+        "Unable to lookup CAS server cas-gp-default.  Response code 404 received"
+    ],
+    "Start Sequencer Warnings": [
+        "SKIP_INIT_BLOCK",
+        "bypassing sequencing",
+        "exit code 0"
+    ],
+    "Readiness Check Failures": [
+        "check \"sas-endpoints-ready\" failed",
+        "no available addresses",
+        "endpoints have no available addresses",
+        "0 available addresses",
+        "failed readiness check"
+    ],
+    "Telemetry Warnings": [
+        "OpenTelemetry support not installed",
+        "noop Open Telemetry MeterProvider",
+        "no metrics will be collected"
+    ],
+    "Stalled Init Warnings": [
+        "Waiting for",
+        "POD(s) to Complete"
+    ],
+    "Authentication Failures": [
+        "Unauthorized",
+        "authentication failed",
+        "access denied",
+        "invalid credentials",
+        "token expired"
+    ],
+    "Tool Execution Failures": [
+        "sonder-log-icu.tool.error.executing.command.log",
+        "sonder-log-icu.tool.executor.failed.running.tools.log",
+        "Service executor failed to execute successfully: exit status 1"
+    ],
+    "Certificate Write Failures": [
+        "writeAsPem failed",
+        "error writing PEM file"
+    ],
+    "Certificate Errors": [
+        "CA certificate Secret already exists",
+        "error generating certificates",
+        "failed to create cert secret",
+        "failed to write certificate file",
+        "invalid certificate configuration"
+    ],
+    "PVC Errors": [
+        "PersistentVolumeClaim is not bound",
+        "PersistentVolumeClaim is not available",
+        "PersistentVolumeClaim is in pending state",
+        "PVC pending",
+        "PVC"
+    ],
+    "FailedMount Errors": [
+        "MountVolume.SetUp failed for volume",
+        "references non-existent secret key"
+    ],
+    "Compute Context Errors": [
+        "Compute context to be used by the CAS Formats service",
+        "no ready CAS servers, so cas-control is not ready"
+    ],
+    "Timeouts": [
+        "Request timed out",
+        "Connection timed out"
+    ],
+    "PyConfig errors": [
+        "Error creating md5sum file"
+    ],
+    "SAS ESP CSS Errors": [
+        "could not find a valid ESP SERVER license"
+    ],
+    "Bootstrap Errors": [
+        "Error bootstrapping resources:",
+        "The bootstrap request failed:"
+    ],
+    "JSON Errors": [
+        "JSONDecodeError"
+    ],
+    "Token Errors": [
+        "Failed to obtain dedicated tokens"
+    ],
+    "Security Constraint Errors": [
+        "is forbidden: unable to validate against any security context constraint"
+    ],
+    "Consul issues": [
+        "No cluster leader"
+    ]
+}
 }
 
     
