@@ -35,11 +35,40 @@ Instead of manually digging through pod statuses and logs, this tool helps you q
 :one: Use get-k8s-info tool to gain folder containing information of their viya 4 environment  
 :two: Make sure it is decompressed!  
 :three: Go to the releases page on the right, and download conf.json, error.patterns.json and main.exe  
-:four: Run main.exe...  
-:five: Leave the input blank to use the default dictionary!  
-:six: Paste the path to the folder we want to investigate!  
-:seven: Select the namespace we want to investigate!  
-:eight: Wait for your results - CLI shows a simplified overview, while a detailed version is stored in the namespace we investigated with the name "all_errors.json"  
+:four: Run main.exe
+######
+    > .\main.exe
+:five: Leave the input blank to use the default dictionary!
+######
+    Select a user by number or by user ID or enter a new user ID.
+    1. jobyun
+    2. sochae
+    3. default
+    Enter choice:
+    Username must be longer than 5 characters. Current input: 
+    Username :  
+    Length : 0 
+    Using default error patterns.
+    Error patterns :
+     {
+     ...
+:six: Paste the path to the folder we want to investigate!
+######
+    Please enter the path to the get-k8s-info output file: C:\auto_k8s_info\get_k8s_info\CS0305203_20250910_163413
+:seven: Select the namespace we want to investigate!
+######
+    Available folders under kubernetes:
+    1. cert-manager
+    2. clusterwide
+    3. ingress-nginx
+    4. kube-system
+    5. logging
+    6. monitoring
+    7. nfs-client
+    8. sasviya4
+    Enter choice: 8
+    Your choice: sasviya4
+:eight: Wait for your results - CLI shows a simplified overview, while a detailed version is stored in the namespace we investigated with the name "all_errors.json" or in the "output" folder with the format auto_k8s_CASENUMBER_NAMESPACE_YYYYMMDD_HHMMSS.txt
 
 ## 👷 How to use your own personal dictionary
 
