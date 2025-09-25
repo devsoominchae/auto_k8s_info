@@ -17,6 +17,10 @@
         "retention_days": 1,
         "file_name": "auto_k8s_info.log"
     },
+    "cleaner": {
+        "ip_address": true,
+        "port": true
+    },
     "yes_list": [
         "yes",
         "y",

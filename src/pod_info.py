@@ -6,6 +6,7 @@ import json
 # Custom imports
 from utils import format_timestamp, logging, pluralize, parse_non_json_logs
 from printer import Printer
+from cleaner import clean_log
 
 
 class PodInfo:
@@ -51,7 +52,7 @@ class PodInfo:
         try:
             # Try to load the full line as JSON directly
             log_json = json.loads(line.strip())
-            message = log_json.get("message", log_json.get("messageKey", line.strip()))
+            message = clean_log(log_json.get("message", log_json.get("messageKey", line.strip())))
 
             if message not in self.seen_messages:
                 self.seen_messages.add(message)
@@ -61,9 +62,10 @@ class PodInfo:
 
         except json.JSONDecodeError:
             # Not JSON – fallback
-            if line not in self.seen_messages:
-                timestamp, error = parse_non_json_logs(line.strip())
-                self.seen_messages.add(line)
+            timestamp, error = parse_non_json_logs(line.strip())
+            error = clean_log(error)
+            if error not in self.seen_messages:
+                self.seen_messages.add(error)
                 self.add_error(filename, f"{line_number}: [{category}] {format_timestamp(timestamp)} {error}")
     
 
