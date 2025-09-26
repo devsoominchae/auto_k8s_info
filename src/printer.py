@@ -16,7 +16,7 @@ class Printer:
         namespace_path = namespace_path
         namespace = os.path.basename(namespace_path)
         try:
-            case_number = [i for i in namespace_path.split(os.sep) if i.startswith("CS")][0].split("_")[0] + "_"
+            case_number = [i for i in namespace_path.split(os.sep) if i.startswith("CS")][0].split("_")[0]
         except Exception as e:
             logging.info(f"Error parsing case number from file path: {e}")
             case_number = ""
@@ -24,7 +24,8 @@ class Printer:
         logging.info(f"\nInitializing Printer with \nNamespace: {namespace} \nNode: {mode} \nCase number: {case_number}")
         assert mode in PRINTER_MODE, f"Invalid printer mode: {mode}. Choose from {PRINTER_MODE}."
         self.mode = mode
-        self.file_path = f"auto_k8s_{case_number}{namespace}_{datetime.now().strftime(DATETIME_FORMAT)}.txt" if mode in ["file", "both"] else None
+        os.makedirs(os.path.join("output", case_number), exist_ok=True)
+        self.file_path = os.path.join(case_number, f"auto_k8s_{namespace}_{datetime.now().strftime(DATETIME_FORMAT)}.txt") if mode in ["file", "both"] else None
         
         if not os.path.exists(conf['output_folder']):
             os.makedirs(conf['output_folder'])
