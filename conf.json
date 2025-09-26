@@ -67,6 +67,9 @@
             "cas-control is not ready",
             "Unable to lookup CAS server cas-gp-default.  Response code 404 received"
         ],
+        "CAS Worker Issues": [
+            "TKCASTAB_GENERIC_TKIOE_FAIL"
+        ],
         "Start Sequencer Warnings": [
             "SKIP_INIT_BLOCK",
             "bypassing sequencing",
@@ -84,16 +87,13 @@
             "noop Open Telemetry MeterProvider",
             "no metrics will be collected"
         ],
-        "Stalled Init Warnings": [
-            "Waiting for",
-            "POD(s) to Complete"
-        ],
         "Authentication Failures": [
             "Unauthorized",
             "authentication failed",
             "access denied",
             "invalid credentials",
-            "token expired"
+            "token expired",
+            "password authentication failed"
         ],
         "Tool Execution Failures": [
             "sonder-log-icu.tool.error.executing.command.log",
@@ -102,7 +102,8 @@
         ],
         "Certificate Write Failures": [
             "writeAsPem failed",
-            "error writing PEM file"
+            "error writing PEM file",
+            "failed to decode pem block"
         ],
         "Certificate Errors": [
             "CA certificate Secret already exists",
@@ -115,8 +116,7 @@
             "PersistentVolumeClaim is not bound",
             "PersistentVolumeClaim is not available",
             "PersistentVolumeClaim is in pending state",
-            "PVC pending",
-            "PVC"
+            "PVC pending"
         ],
         "FailedMount Errors": [
             "MountVolume.SetUp failed for volume",
@@ -151,6 +151,9 @@
         ],
         "Consul issues": [
             "No cluster leader"
+        ],
+        "TLS Handshake errors": [
+            "http: TLS handshake timeout"
         ]
     }
 }
