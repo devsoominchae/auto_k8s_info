@@ -5,7 +5,8 @@ import sys
 import json
 
 # Custom imports
-from utils import conf, logging, format_timestamp, parse_container_name, pluralize
+from utils import conf, logging, format_timestamp, parse_container_name, pluralize, parse_non_json_logs
+from cleaner import clean_log
 from printer import Printer
 from pod_info import PodInfo
 
@@ -37,16 +38,16 @@ class ErrorInfoHolder:
     def format_error(self, line, file_name, category, line_number):
         message = ""
         timestamp = ""
-        container = ""
+        container = parse_container_name(file_name)
         try:
             # Try to load the full line as JSON directly
             log_json = json.loads(line.strip())
-            message = log_json.get("message", log_json.get("messageKey", line.strip()))
+            message = clean_log(log_json.get("message", log_json.get("messageKey", line.strip())))
             timestamp = log_json.get("timeStamp") or log_json.get("ts") or "unknown-time"
-            container = parse_container_name(file_name)
 
         except json.JSONDecodeError:
                 logging.info(f"The log snippet {line} is from {file_name} is not in JSON format. Returning original message")
+                timestamp, message = parse_non_json_logs(line.strip())
         
         error_info = ErrorInfo(format_timestamp(timestamp), message, category, container, file_name, line_number)
         return error_info
@@ -90,10 +91,10 @@ def analyze_pods_with_errors(namespace_path, pods_with_errors, printer, error_pa
             printer.print_message(f"Processing log file: {file_name}", print_level=2)
 
             with open(log_file_path, "r", encoding="utf-8", errors="ignore") as log_file:
-                for line_number, line in enumerate(log_file):
+                for line_number, line in enumerate(log_file, start=1):
                     for category, patterns in error_patterns.items():
                         if any(p in line for p in patterns):
-                            pod.add_error_once_by_message(file_name, category, line, line_number+1)
+                            pod.add_error_once_by_message(file_name, category, line, line_number)
                             break
                     
                 # pod.add_error_once_by_message(file_name, "Most Recent Record", log_file[-1].strip())
@@ -117,11 +118,13 @@ def analyze_pods_without_errors(namespace_path, pods_without_errors, printer, er
             i += 1
             sys.stdout.write("\033[K")
             printer_console.print_message(f"[{i}/{total_number_of_log_files} {i/total_number_of_log_files*100:.1f}%] Processing log file: {os.path.basename(file_name)}", print_level=1, end_="\r", flush_=True)
+            if file_name.endswith("sas-rabbitmq-server-0_sas-start-sequencer.log"):
+                pass
             with open(file_name, "r", encoding="utf-8", errors="ignore") as log_file:
-                for line_number, line in enumerate(log_file):
+                for line_number, line in enumerate(log_file, start=1):
                     for category, patterns in error_patterns.items():
                         if any(p in line for p in patterns):
-                            error_info = error_info_holder.format_error(line, file_name, category, line_number + 1)
+                            error_info = error_info_holder.format_error(line, file_name, category, line_number)
                             error_info_holder.add_error(error_info)
 
     return error_info_holder
@@ -152,7 +155,7 @@ def analyze_describe_pods_output(namespace_path, pods_with_errors):
         pods_with_errors_name_list = [pod.name for pod in pods_with_errors]
 
         current_pod_name = None
-        for line_number, line in enumerate(describe_pods_output_lines):
+        for line_number, line in enumerate(describe_pods_output_lines, start=1):
             if line.startswith('Name:'):
                 current_pod_name = line.split()[1]
             if current_pod_name in pods_with_errors_name_list:
@@ -160,7 +163,7 @@ def analyze_describe_pods_output(namespace_path, pods_with_errors):
                 if matched:
                     for pod in pods_with_errors:
                         if pod.name == current_pod_name:
-                            pod.add_error(describe_pods_output, f"{line_number}: {line.strip()}")
+                            pod.add_error(describe_pods_output, f"{line_number}: {clean_log(line.strip())}")
                             break
     return pods_with_errors
 
@@ -191,7 +194,7 @@ def classify_pods(namespace_path, printer):
     pods_with_errors = []
     pods_without_errors = []
 
-    for line_number, line in enumerate(get_pods_output_lines[column_index + 1:]):
+    for line_number, line in enumerate(get_pods_output_lines[column_index + 1:], start=column_index + 2):
         matched, category = line_matches_error_patterns(line, conf.get("get_pods_error_patterns", {}), "all")
         line_list = line.split()
         pod_name = line_list[0]

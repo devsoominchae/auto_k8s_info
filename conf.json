@@ -43,7 +43,11 @@
             "Warning"
         ],
         "Reason": [
-            "OOMKilled"
+            "OOMKilled",
+            "OutOfcpu"
+        ],
+        "Pod rejected": [
+            "Pod was rejected: Node didn't have enough resource:"
         ]
     },
     "get_pods_error_patterns": {
@@ -53,6 +57,9 @@
         "Running No Pods": [
             "0/",
             "Running"
+        ],
+        "Out of CPU": [
+            "OutOfcpu"
         ],
         "Hanged in Init": [
             "Init:"

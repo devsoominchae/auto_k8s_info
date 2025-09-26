@@ -91,5 +91,12 @@
     ],
     "TLS Handshake errors": [
         "http: TLS handshake timeout"
+    ],
+    "RabbitMQ issues": [
+        "Error on AMQP connection",
+        "reason: {{badmatch,{error,noproc}},",
+        "reason: reached_max_restart_intensity",
+        "errorContext: child_terminated",
+        "errorContext: shutdown"
     ]
 }

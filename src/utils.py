@@ -33,8 +33,8 @@ CONF = {
         "file_name": "auto_k8s_info.log"
     },
     "cleaner": {
-        "ip_address": true,
-        "port": true
+        "ip_address": True,
+        "port": True
     },
     "yes_list": [
         "yes",
@@ -58,7 +58,8 @@ CONF = {
             "Warning"
         ],
         "Reason": [
-            "OOMKilled"
+            "OOMKilled",
+            "OutOfcpu"
         ]
     },
     "get_pods_error_patterns": {
@@ -68,6 +69,10 @@ CONF = {
         "Running No Pods": [
             "0/",
             "Running"
+        ],
+        "Out of CPU": [
+            "0/",
+            "OutOfcpu"
         ],
         "Hanged in Init": [
             "Init:"
@@ -81,6 +86,9 @@ CONF = {
             "no ready CAS servers",
             "cas-control is not ready",
             "Unable to lookup CAS server cas-gp-default.  Response code 404 received"
+        ],
+        "CAS Worker Issues": [
+            "TKCASTAB_GENERIC_TKIOE_FAIL"
         ],
         "Start Sequencer Warnings": [
             "SKIP_INIT_BLOCK",
@@ -99,16 +107,13 @@ CONF = {
             "noop Open Telemetry MeterProvider",
             "no metrics will be collected"
         ],
-        "Stalled Init Warnings": [
-            "Waiting for",
-            "POD(s) to Complete"
-        ],
         "Authentication Failures": [
             "Unauthorized",
             "authentication failed",
             "access denied",
             "invalid credentials",
-            "token expired"
+            "token expired",
+            "password authentication failed"
         ],
         "Tool Execution Failures": [
             "sonder-log-icu.tool.error.executing.command.log",
@@ -117,7 +122,8 @@ CONF = {
         ],
         "Certificate Write Failures": [
             "writeAsPem failed",
-            "error writing PEM file"
+            "error writing PEM file",
+            "failed to decode pem block"
         ],
         "Certificate Errors": [
             "CA certificate Secret already exists",
@@ -130,8 +136,7 @@ CONF = {
             "PersistentVolumeClaim is not bound",
             "PersistentVolumeClaim is not available",
             "PersistentVolumeClaim is in pending state",
-            "PVC pending",
-            "PVC"
+            "PVC pending"
         ],
         "FailedMount Errors": [
             "MountVolume.SetUp failed for volume",
@@ -166,11 +171,12 @@ CONF = {
         ],
         "Consul issues": [
             "No cluster leader"
+        ],
+        "TLS Handshake errors": [
+            "http: TLS handshake timeout"
         ]
     }
 }
-
-    
 
 
 def get_conf():
@@ -288,8 +294,10 @@ def manage_log_retention():
     with open(log_file_path, "w") as file:
         file.writelines(filtered_lines)
 
-    print(f"Log file cleaned. Entries older than {pluralize(retention_days, 'day')}, before {cutoff_date}, have been removed.")
-    logging.info(f"Log file cleaned. Entries older than {pluralize(retention_days, 'day')}, before {cutoff_date}, have been removed.")
+    formatted_cutoff_date = cutoff_date.strftime(conf.get("output_timestamp_format", "%Y-%m-%d %H:%M:%S"))
+    
+    print(f"Log file cleaned. Entries older than {pluralize(retention_days, 'day')}, before {formatted_cutoff_date}, have been removed.")
+    logging.info(f"Log file cleaned. Entries older than {pluralize(retention_days, 'day')}, before {formatted_cutoff_date}, have been removed.")
 
 def remove_invalid_windows_path_chars(filename):
     invalid_chars = conf.get('invalid_windows_path_chars', ["<", ">", "\"", "/", "|", "?", "*"])
