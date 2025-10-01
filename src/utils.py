@@ -214,21 +214,6 @@ p = inflect.engine()
 def pluralize(count, word):
     return f"{count} {p.plural(word, count)}"
 
-def format_timestamp(timestamp):
-    """Format a timestamp string to a more readable format."""
-    try:
-        from datetime import datetime
-        dt = datetime.fromisoformat(timestamp)
-        return dt.strftime(conf.get("output_timestamp_format", "%Y-%m-%d %H:%M:%S"))
-    except ValueError:
-        logging.info(f"Invalid timestamp format: {timestamp}. Using original.")
-        return timestamp
-
-def parse_non_json_logs(line):
-    timestamp = line.split()[0]
-    error = " ".join(line.split()[1:])
-    return timestamp, error
-
 def load_cache():
     cache = {}
     if not os.path.exists(conf.get("cache", "cache.json")):

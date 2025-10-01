@@ -4,9 +4,10 @@ import os
 import json
 
 # Custom imports
-from utils import format_timestamp, logging, pluralize, parse_non_json_logs
+from utils import logging, pluralize
 from printer import Printer
 from cleaner import clean_log
+from error_message import format_timestamp, parse_non_json_logs, get_full_error_message
 
 
 class PodInfo:
@@ -52,7 +53,7 @@ class PodInfo:
         try:
             # Try to load the full line as JSON directly
             log_json = json.loads(line.strip())
-            message = clean_log(f'{log_json.get("message")} {log_json.get("messageKey", line.strip())}')
+            message = clean_log(get_full_error_message(line))
 
             if message not in self.seen_messages:
                 self.seen_messages.add(message)

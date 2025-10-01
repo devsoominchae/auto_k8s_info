@@ -5,10 +5,11 @@ import sys
 import json
 
 # Custom imports
-from utils import conf, logging, format_timestamp, parse_container_name, pluralize, parse_non_json_logs
+from utils import conf, logging, parse_container_name, pluralize
 from cleaner import clean_log
 from printer import Printer
 from pod_info import PodInfo
+from error_message import format_timestamp, parse_non_json_logs, get_full_error_message
 
 class ErrorInfo:
     def __init__(self, timestamp, message, category, container, file_name, line_number):
@@ -42,7 +43,7 @@ class ErrorInfoHolder:
         try:
             # Try to load the full line as JSON directly
             log_json = json.loads(line.strip())
-            message = clean_log(f'{log_json.get("message")} {log_json.get("messageKey", line.strip())}')
+            message = clean_log(get_full_error_message(line))
             timestamp = log_json.get("timeStamp") or log_json.get("ts") or "unknown-time"
 
         except json.JSONDecodeError:
