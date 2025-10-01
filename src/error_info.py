@@ -203,8 +203,9 @@ def classify_pods(namespace_path, printer):
         pod_node = line_list[reverse_node_name_index] if reverse_node_name_index != -1 else "unknown"
         
         pod_restarts = int(line_list[3])
-        if pod_restarts > conf.get("restart_filter_threshold", ):
-            category = f'Restart threshold({conf.get("restart_filter_threshold", )}) exceeded'
+        pod_restart_filter_threshold = get_pod_restart_filter_threshold(pod_name)
+        if pod_restarts > pod_restart_filter_threshold:
+            category = f'Restart threshold({pod_restart_filter_threshold}) exceeded'
             matched = True
             
         if matched:
@@ -216,3 +217,9 @@ def classify_pods(namespace_path, printer):
             pods_without_errors.append(pod_info)
         
     return pods_with_errors, pods_without_errors
+
+def get_pod_restart_filter_threshold(pod_name):
+    for pod_name_key, threshold in conf.get("restart_filter_threshold", {}).items():
+        if pod_name.startswith(pod_name_key):
+            return threshold
+    return conf.get("restart_filter_threshold", {}).get("default", 10)
