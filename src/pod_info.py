@@ -52,7 +52,7 @@ class PodInfo:
         try:
             # Try to load the full line as JSON directly
             log_json = json.loads(line.strip())
-            message = clean_log(log_json.get("message", log_json.get("messageKey", line.strip())))
+            message = clean_log(f'{log_json.get("message")} {log_json.get("messageKey", line.strip())}')
 
             if message not in self.seen_messages:
                 self.seen_messages.add(message)

@@ -42,7 +42,7 @@ class ErrorInfoHolder:
         try:
             # Try to load the full line as JSON directly
             log_json = json.loads(line.strip())
-            message = clean_log(log_json.get("message", log_json.get("messageKey", line.strip())))
+            message = clean_log(f'{log_json.get("message")} {log_json.get("messageKey", line.strip())}')
             timestamp = log_json.get("timeStamp") or log_json.get("ts") or "unknown-time"
 
         except json.JSONDecodeError:
@@ -168,6 +168,8 @@ def analyze_describe_pods_output(namespace_path, pods_with_errors):
     return pods_with_errors
 
 def classify_pods(namespace_path, printer):
+    column_index = 0
+    reverse_node_name_index = 0 
     get_pods_output = os.path.join(namespace_path, 'get','pods.txt')
     if not os.path.exists(get_pods_output):
         print(f"The file {get_pods_output} does not exist.")
