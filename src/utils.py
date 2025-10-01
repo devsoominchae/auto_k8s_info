@@ -19,7 +19,7 @@ CONF = {
         "saved_case_info_dir": "",
         "error_patterns": ""
     },
-    "restart_filter_threshold": 10,
+    "restart_filter_threshold": 3,
     "max_files_to_show": 10,
     "mongodb_conn_var_url": "http://trck1076843.trc.sas.com:8000/.env",
     "user_activity_url": "http://trck1076843.trc.sas.com:8000/record",
@@ -59,7 +59,11 @@ CONF = {
         ],
         "Reason": [
             "OOMKilled",
-            "OutOfcpu"
+            "OutOfcpu",
+            "Error"
+        ],
+        "Pod rejected": [
+            "Pod was rejected: Node didn't have enough resource:"
         ]
     },
     "get_pods_error_patterns": {
@@ -71,7 +75,6 @@ CONF = {
             "Running"
         ],
         "Out of CPU": [
-            "0/",
             "OutOfcpu"
         ],
         "Hanged in Init": [
@@ -174,6 +177,16 @@ CONF = {
         ],
         "TLS Handshake errors": [
             "http: TLS handshake timeout"
+        ],
+        "RabbitMQ issues": [
+            "Error on AMQP connection",
+            "reason: {{badmatch,{error,noproc}},",
+            "reason: reached_max_restart_intensity",
+            "errorContext: child_terminated",
+            "errorContext: shutdown"
+        ],
+        "Workload Orchestrator issues": [
+            "SGMGM_MSG_MANAGER_JOB_KILLED"
         ]
     }
 }
