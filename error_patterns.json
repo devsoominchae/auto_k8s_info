@@ -8,21 +8,12 @@
     "CAS Worker Issues": [
         "TKCASTAB_GENERIC_TKIOE_FAIL"
     ],
-    "Start Sequencer Warnings": [
-        "SKIP_INIT_BLOCK",
-        "bypassing sequencing"
-    ],
     "Readiness Check Failures": [
         "check \"sas-endpoints-ready\" failed",
         "no available addresses",
         "endpoints have no available addresses",
         "0 available addresses",
         "failed readiness check"
-    ],
-    "Telemetry Warnings": [
-        "OpenTelemetry support not installed",
-        "noop Open Telemetry MeterProvider",
-        "no metrics will be collected"
     ],
     "Authentication Failures": [
         "Unauthorized",
@@ -43,7 +34,6 @@
         "failed to decode pem block"
     ],
     "Certificate Errors": [
-        "CA certificate Secret already exists",
         "error generating certificates",
         "failed to create cert secret",
         "failed to write certificate file",
