@@ -4,6 +4,7 @@ from utils import conf
 
 IP_ADDRESS_PATTERN = r'\b(?:(?:25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)\.){3}(?:25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)\b'
 PORT_PATTERN = r':([1-9]\d{0,4})\b'
+JOB_NUMBER_PATTERN = r'(The job\s*")\d+(" has been terminated through the REST API\.)'
 
 
 def clean_ip_address(line):    
@@ -15,9 +16,14 @@ def clean_port(line):
     text_with_port_replaced = re.sub(PORT_PATTERN, ':PORT', line)
     return text_with_port_replaced
 
+def clean_job_number(line):
+    text_with_job_number_replaced = re.sub(JOB_NUMBER_PATTERN, 'The job "JOB_NUMBER" has been terminated through the REST API', line)
+    return text_with_job_number_replaced    
+
 CLEANER_FUNC_DICT = {
     "ip_address" : clean_ip_address,
-    "port" : clean_port
+    "port" : clean_port,
+    "job_number": clean_job_number
 }
 
 def get_full_cleaners():
