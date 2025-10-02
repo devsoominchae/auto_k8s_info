@@ -9,3 +9,4 @@ cache.json
 *.spec
 build*
 dist*
+test.py
