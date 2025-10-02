@@ -51,7 +51,7 @@ class PodInfo:
     def add_error_once_by_message(self, filename, category, line, line_number):
         try:
             log_json = json.loads(line.strip())
-            raw_message = log_json.get("message", log_json.get("messageKey", line.strip()))
+            raw_message = get_full_error_message(line)
             timestamp = log_json.get("timeStamp", "unknown-time")
         except json.JSONDecodeError:
             timestamp, raw_message = parse_non_json_logs(line.strip())
