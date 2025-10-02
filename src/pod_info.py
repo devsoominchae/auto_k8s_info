@@ -6,7 +6,7 @@ import json
 # Custom imports
 from utils import logging, pluralize
 from printer import Printer
-from cleaner import clean_log
+from cleaner import clean_log, normalize_logs
 from error_message import format_timestamp, parse_non_json_logs, get_full_error_message
 
 
@@ -18,7 +18,7 @@ class PodInfo:
         self.namespace_path = namespace_path
         self.errors = {}
         self.logs = []
-        self.seen_messages = set()  # For filtering duplicates
+        self.seen_messages = {}
         self.printer = printer
         self.get_log_files()
         
@@ -48,27 +48,29 @@ class PodInfo:
             self.errors[filename] = []
         self.errors[filename].append(error)
 
-    #seems a bit redundant right now... will fix later - has issues with timestamp comparison...
     def add_error_once_by_message(self, filename, category, line, line_number):
         try:
-            # Try to load the full line as JSON directly
             log_json = json.loads(line.strip())
-            message = clean_log(get_full_error_message(line))
-
-            if message not in self.seen_messages:
-                self.seen_messages.add(message)
-                timestamp = log_json.get("timeStamp", "unknown-time")
-                formatted_error = f"{line_number}: [{category}] {format_timestamp(timestamp)} - {message}"
-                self.add_error(filename, formatted_error)
-
+            raw_message = log_json.get("message", log_json.get("messageKey", line.strip()))
+            timestamp = log_json.get("timeStamp", "unknown-time")
         except json.JSONDecodeError:
-            # Not JSON – fallback
-            timestamp, error = parse_non_json_logs(line.strip())
-            error = clean_log(error)
-            if error not in self.seen_messages:
-                self.seen_messages.add(error)
-                self.add_error(filename, f"{line_number}: [{category}] {format_timestamp(timestamp)} {error}")
-    
+            timestamp, raw_message = parse_non_json_logs(line.strip())
+
+        # normalize
+        cleaned = clean_log(raw_message)
+        dedup_key = normalize_logs(cleaned)  # strips timestamp/dynamic parts
+
+        # prints timestamp
+        formatted_error = f"{line_number}: [{category}] {format_timestamp(timestamp)} - {cleaned}"
+
+        existing = self.seen_messages.get(dedup_key)
+
+        # If timestamp is new it is changed
+        if not existing or timestamp > existing[0]:
+            self.seen_messages[dedup_key] = (timestamp, formatted_error)
+
+        # Always rebuild the file's error list from seen_messages
+        self.errors[filename] = [entry[1] for entry in self.seen_messages.values()]
 
 
     def print_info(self):

@@ -37,3 +37,11 @@ def clean_log(line):
         line = cleaner(line)
     
     return line
+
+def normalize_logs(message: str) -> str:
+    message = re.sub(r"retry=\d+s", "retry=Xs", message)
+    message = re.sub(r"url=/[^\s]+", "url=/X", message)
+    message = re.sub(r"from=IP_ADDRESS:PORT", "from=IP_ADDRESS:PORT", message)
+    message = re.sub(r"\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}", "DATETIME", message)
+    message = re.sub(r"\s+", " ", message)
+    return message.strip()
