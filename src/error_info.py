@@ -59,7 +59,7 @@ class ErrorInfoHolder:
             self.printer.print_message("List of files:")
             for error_info in error_infos[:conf["max_files_to_show"]]:
                 if error_info.message:
-                    self.printer.print_message(f" - {error_info.file_name} [{error_info.line_number}]: {error_info.message}")
+                    self.printer.print_message(f" - {error_info.file_name}:{error_info.line_number} : {error_info.message}")
             if len(error_infos) > conf["max_files_to_show"]:
                 self.printer.print_message(f" - ... and {pluralize(len(error_infos) - conf['max_files_to_show'], 'more file')}\n")
     
