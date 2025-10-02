@@ -19,7 +19,11 @@ CONF = {
         "saved_case_info_dir": "",
         "error_patterns": ""
     },
-    "restart_filter_threshold": 3,
+    "restart_filter_threshold": {
+        "default": 3,
+        "sas-workload-orchestrator": 1,
+        "sas-analytics-execution": 2
+    },
     "max_files_to_show": 10,
     "mongodb_conn_var_url": "http://trck1076843.trc.sas.com:8000/.env",
     "user_activity_url": "http://trck1076843.trc.sas.com:8000/record",
@@ -34,7 +38,8 @@ CONF = {
     },
     "cleaner": {
         "ip_address": True,
-        "port": True
+        "port": True,
+        "job_number": True
     },
     "yes_list": [
         "yes",
@@ -88,15 +93,15 @@ CONF = {
         "CAS Control Issues": [
             "no ready CAS servers",
             "cas-control is not ready",
-            "Unable to lookup CAS server cas-gp-default.  Response code 404 received"
+            "Unable to lookup CAS server cas-gp-default.  Response code 404 received",
+            "Deleting failed ControllerPod"
         ],
         "CAS Worker Issues": [
             "TKCASTAB_GENERIC_TKIOE_FAIL"
         ],
         "Start Sequencer Warnings": [
             "SKIP_INIT_BLOCK",
-            "bypassing sequencing",
-            "exit code 0"
+            "bypassing sequencing"
         ],
         "Readiness Check Failures": [
             "check \"sas-endpoints-ready\" failed",

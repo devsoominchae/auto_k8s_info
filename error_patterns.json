@@ -2,15 +2,15 @@
     "CAS Control Issues": [
         "no ready CAS servers",
         "cas-control is not ready",
-        "Unable to lookup CAS server cas-gp-default.  Response code 404 received"
+        "Unable to lookup CAS server cas-gp-default.  Response code 404 received",
+        "Deleting failed ControllerPod"
     ],
     "CAS Worker Issues": [
         "TKCASTAB_GENERIC_TKIOE_FAIL"
     ],
     "Start Sequencer Warnings": [
         "SKIP_INIT_BLOCK",
-        "bypassing sequencing",
-        "exit code 0"
+        "bypassing sequencing"
     ],
     "Readiness Check Failures": [
         "check \"sas-endpoints-ready\" failed",
