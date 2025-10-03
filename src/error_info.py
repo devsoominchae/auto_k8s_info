@@ -6,7 +6,7 @@ import json
 
 # Custom imports
 from utils import conf, logging, parse_container_name, pluralize
-from cleaner import clean_log
+from cleaner import clean_log, normalize_logs
 from printer import Printer
 from pod_info import PodInfo
 from error_message import format_timestamp, parse_non_json_logs, get_full_error_message
@@ -26,16 +26,23 @@ class ErrorInfoHolder:
         self.errors = {}
         self.added_files = set()
         self.printer = printer
+        self.seen_messages = {}
         
     
     def add_error(self, error_info):
-        if error_info.category not in self.errors:
-            self.errors[error_info.category] = []
+        # normalize
+        dedup_key = f"{normalize_logs(error_info.message)}_{error_info.file_name}"  # strips timestamp/dynamic parts
 
-        if f"{error_info.file_name}_{error_info.category}" not in self.added_files:
-            self.added_files.add(f"{error_info.file_name}_{error_info.category}")
-            self.errors[error_info.category].append(error_info)
-    
+        existing = self.seen_messages.get(dedup_key)
+
+        # If timestamp is new it is changed
+        if not existing or error_info.timestamp > existing[0]:
+            self.seen_messages[dedup_key] = (error_info.timestamp, error_info)
+
+        # Always rebuild the file's error list from seen_messages
+        self.errors[error_info.category] = [entry[1] for entry in self.seen_messages.values() if entry[1].category == error_info.category]
+        print()
+        
     def format_error(self, line, file_name, category, line_number):
         message = ""
         timestamp = ""
