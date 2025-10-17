@@ -91,4 +91,4 @@ Instead of manually digging through pod statuses and logs, this tool helps you q
 ## 😠 Still Stuck? Dont Worry...
 
 Check the demo below!  
-- [Basic demo for auto k8s tool[(https://youtu.be/hWbZIx9A_Lg)
+- [Basic demo for auto k8s tool](https://youtu.be/hWbZIx9A_Lg)
