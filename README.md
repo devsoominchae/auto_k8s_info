@@ -91,4 +91,4 @@ Instead of manually digging through pod statuses and logs, this tool helps you q
 ## 😠 Still Stuck? Dont Worry...
 
 Check the demo below!  
-https://sasoffice365-my.sharepoint.com/:f:/g/personal/joonho_byun_sas_com/Ev0EFL7HsqxKhJsKjlTuVYEBwYPavLJ-lvUqhgcVGuDuvQ?tdid=6d462bee-34a9-4bda-8a13-4e39fc46a7df
+- [Basic demo for auto k8s tool[(https://youtu.be/hWbZIx9A_Lg)
