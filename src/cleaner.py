@@ -5,6 +5,9 @@ from utils import conf
 IP_ADDRESS_PATTERN = r'\b(?:(?:25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)\.){3}(?:25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)\b'
 PORT_PATTERN = r':([1-9]\d{0,4})\b'
 JOB_NUMBER_PATTERN = r'(The job\s*")\d+(" has been terminated through the REST API\.)'
+JOB_ID_PATTERN = r"(?<=job ID ')\d+(?=')"
+POD_ID_PATTERN = r'-([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})-'
+JOB_ID_PATTERN_AFTER_POD_ID = r'-POD_ID-\b(?:0|[1-9]\d{0,3})\b\"'
 
 
 def clean_ip_address(line):    
@@ -20,10 +23,26 @@ def clean_job_number(line):
     text_with_job_number_replaced = re.sub(JOB_NUMBER_PATTERN, 'The job "JOB_NUMBER" has been terminated through the REST API', line)
     return text_with_job_number_replaced    
 
+def clean_job_id(line):
+    text_with_job_id_replaced = re.sub(JOB_ID_PATTERN, 'job ID \'JOB_ID\'', line)
+    return text_with_job_id_replaced 
+
+def clean_pod_id(line):
+    text_with_pod_id_replaced = re.sub(POD_ID_PATTERN, "-POD_ID-", line)
+    return text_with_pod_id_replaced 
+
+def clean_job_id_after_pod_id(line):
+    text_with_job_id_after_pod_id_replaced = re.sub(JOB_ID_PATTERN_AFTER_POD_ID, "-POD_ID-JOB_ID", line)
+    return text_with_job_id_after_pod_id_replaced 
+
+
 CLEANER_FUNC_DICT = {
     "ip_address" : clean_ip_address,
     "port" : clean_port,
-    "job_number": clean_job_number
+    "job_number": clean_job_number,
+    "job_id" : clean_job_id,
+    "pod_id" : clean_pod_id,
+    "job_id_after_pod_id" : clean_job_id_after_pod_id
 }
 
 def get_full_cleaners():
