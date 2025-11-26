@@ -39,7 +39,10 @@ CONF = {
     "cleaner": {
         "ip_address": True,
         "port": True,
-        "job_number": True
+        "job_number": True,
+        "job_id": True,
+        "pod_id": True,
+        "job_id_after_pod_id": True
     },
     "yes_list": [
         "yes",
@@ -181,7 +184,15 @@ CONF = {
             "errorContext: shutdown"
         ],
         "Workload Orchestrator issues": [
-            "SGMGM_MSG_MANAGER_JOB_KILLED"
+            "SGMGM_MSG_MANAGER_JOB_KILLED",
+            "failed: Connection refused"
+        ],
+        "Invalid Scope": [
+            "InvalidScopeException"
+        ],
+        "Launcher Errors": [
+            "Forbidden: not usable by user or serviceaccount",
+            "A Kubernetes REST API request failed on node"
         ]
     }
 }
