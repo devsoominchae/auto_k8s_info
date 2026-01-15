@@ -80,13 +80,6 @@ Instead of manually digging through pod statuses and logs, this tool helps you q
 :six: Now you are ready to use your own personal dictionary for analysis!  
 :seven: After analysis, it can be stored to your personal dictionary, or even upload to the main public dictionary!  
 
----
-
-## :chart_with_upwards_trend: User report in Visual Analytics
-- [auto_k8s_info Dashboard](https://trck1076843.trc.sas.com/SASVisualAnalytics/?reportUri=%2Freports%2Freports%2F6770e85c-7f57-413b-9783-cd43a2ce759c&reportViewOnly=true&reportContextBar=false&pageNavigation=false&sas-welcome=false)
-- User ID: sasuser
-- Password: sasuser
----
 
 ## 😠 Still Stuck? Dont Worry...
 
